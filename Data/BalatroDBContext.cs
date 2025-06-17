@@ -385,7 +385,7 @@ public partial class BalatroDBContext : IdentityDbContext<ApplicationUser>
 
             entity.Property(e => e.IdVoucher).HasColumnName("idVoucher");
             entity.Property(e => e.DescriptionVoucher)
-                .IsRequired()
+                .IsRequired() 
                 .HasMaxLength(200)
                 .HasColumnName("descriptionVoucher");
             entity.Property(e => e.NameVoucher)
@@ -394,6 +394,8 @@ public partial class BalatroDBContext : IdentityDbContext<ApplicationUser>
                 .HasColumnName("nameVoucher");
             entity.Property(e => e.PriceVoucher).HasColumnName("priceVoucher");
             entity.Property(e => e.StateVoucher).HasColumnName("stateVoucher");
+
+
         });
 
         OnModelCreatingPartial(modelBuilder);
