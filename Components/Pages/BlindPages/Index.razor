@@ -1,0 +1,40 @@
+﻿@page "/blinds"
+@using Microsoft.EntityFrameworkCore
+@using Microsoft.AspNetCore.Components.QuickGrid
+@using BalatroWikiApp.Models
+@using BalatroWikiApp.Models
+@implements IAsyncDisposable
+@inject IDbContextFactory<BalatroWikiApp.Models.BalatroDBContext> DbFactory
+
+<PageTitle>Index</PageTitle>
+
+<h1>Index</h1>
+
+<p>
+    <a href="blinds/create">Create New</a>
+</p>
+
+<QuickGrid Class="table" Items="context.Blinds">
+    <PropertyColumn Property="blind => blind.NameBlind" />
+    <PropertyColumn Property="blind => blind.AnteBlind" />
+    <PropertyColumn Property="blind => blind.DescriptionBlind" />
+    <PropertyColumn Property="blind => blind.EffectBlind" />
+    <PropertyColumn Property="blind => blind.RewardBlind" />
+
+    <TemplateColumn Context="blind">
+        <a href="@($"blinds/edit?idblind={blind.IdBlind}")">Edit</a> |
+        <a href="@($"blinds/details?idblind={blind.IdBlind}")">Details</a> |
+        <a href="@($"blinds/delete?idblind={blind.IdBlind}")">Delete</a>
+    </TemplateColumn>
+</QuickGrid>
+
+@code {
+    private BalatroDBContext context = default!;
+
+    protected override void OnInitialized()
+    {
+        context = DbFactory.CreateDbContext();
+    }
+
+    public async ValueTask DisposeAsync() => await context.DisposeAsync();
+}

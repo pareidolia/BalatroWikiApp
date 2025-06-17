@@ -1,0 +1,109 @@
+﻿@page "/blinds/edit"
+@using Microsoft.EntityFrameworkCore
+@using BalatroWikiApp.Models
+@inject IDbContextFactory<BalatroWikiApp.Models.BalatroDBContext> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Edit</PageTitle>
+
+<h1>Edit</h1>
+
+<h2>Blind</h2>
+<hr />
+@if (Blind is null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-4">
+            <EditForm method="post" Model="Blind" OnValidSubmit="UpdateBlind" FormName="edit" Enhance>
+                <DataAnnotationsValidator />
+                <ValidationSummary role="alert"/>
+                <input type="hidden" name="Blind.IdBlind" value="@Blind.IdBlind" />
+                <div class="mb-3">
+                    <label for="nameblind" class="form-label">NameBlind:</label>
+                    <InputText id="nameblind" @bind-Value="Blind.NameBlind" class="form-control" />
+                    <ValidationMessage For="() => Blind.NameBlind" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="anteblind" class="form-label">AnteBlind:</label>
+                    <InputNumber id="anteblind" @bind-Value="Blind.AnteBlind" class="form-control" />
+                    <ValidationMessage For="() => Blind.AnteBlind" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="descriptionblind" class="form-label">DescriptionBlind:</label>
+                    <InputText id="descriptionblind" @bind-Value="Blind.DescriptionBlind" class="form-control" />
+                    <ValidationMessage For="() => Blind.DescriptionBlind" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="effectblind" class="form-label">EffectBlind:</label>
+                    <InputText id="effectblind" @bind-Value="Blind.EffectBlind" class="form-control" />
+                    <ValidationMessage For="() => Blind.EffectBlind" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="rewardblind" class="form-label">RewardBlind:</label>
+                    <InputNumber id="rewardblind" @bind-Value="Blind.RewardBlind" class="form-control" />
+                    <ValidationMessage For="() => Blind.RewardBlind" class="text-danger" />
+                </div>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </EditForm>
+        </div>
+    </div>
+}
+
+<div>
+    <a href="/blinds">Back to List</a>
+</div>
+
+@code {
+    [SupplyParameterFromQuery]
+    private int IdBlind { get; set; }
+
+    [SupplyParameterFromForm]
+    private Blind? Blind { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var context = DbFactory.CreateDbContext();
+        Blind ??= await context.Blinds.FirstOrDefaultAsync(m => m.IdBlind == IdBlind);
+
+        if (Blind is null)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+    }
+
+    // To protect from overposting attacks, enable the specific properties you want to bind to.
+    // For more information, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
+    private async Task UpdateBlind()
+    {
+        using var context = DbFactory.CreateDbContext();
+        context.Attach(Blind!).State = EntityState.Modified;
+
+        try
+        {
+            await context.SaveChangesAsync();
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            if (!BlindExists(Blind!.IdBlind))
+            {
+                NavigationManager.NavigateTo("notfound");
+            }
+            else
+            {
+                throw;
+            }
+        }
+
+        NavigationManager.NavigateTo("/blinds");
+    }
+
+    private bool BlindExists(int idblind)
+    {
+        using var context = DbFactory.CreateDbContext();
+        return context.Blinds.Any(e => e.IdBlind == idblind);
+    }
+}
