@@ -1,0 +1,101 @@
+﻿{
+   "CodeGenerationMode": 4,
+   "ContextClassName": "BalatroDBContext",
+   "ContextNamespace": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": false,
+   "ModelNamespace": null,
+   "OutputContextPath": null,
+   "OutputPath": "Models",
+   "PreserveCasingWithRegex": true,
+   "ProjectRootNamespace": "BalatroWikiApp",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 2,
+   "SelectedToBeGenerated": 0,
+   "T4TemplatePath": null,
+   "Tables": [
+      {
+         "Name": "blinds",
+         "ObjectType": 0
+      },
+      {
+         "Name": "boosterpack",
+         "ObjectType": 0
+      },
+      {
+         "Name": "cards",
+         "ObjectType": 0
+      },
+      {
+         "Name": "decks",
+         "ObjectType": 0
+      },
+      {
+         "Name": "editions",
+         "ObjectType": 0
+      },
+      {
+         "Name": "enhancedcards",
+         "ObjectType": 0
+      },
+      {
+         "Name": "jokers",
+         "ObjectType": 0
+      },
+      {
+         "Name": "planetcard",
+         "ObjectType": 0
+      },
+      {
+         "Name": "seals",
+         "ObjectType": 0
+      },
+      {
+         "Name": "spectralcard",
+         "ObjectType": 0
+      },
+      {
+         "Name": "sticker",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tags",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tarotcard",
+         "ObjectType": 0
+      },
+      {
+         "Name": "vouchers",
+         "ObjectType": 0
+      }
+   ],
+   "UiHint": null,
+   "UncountableWords": null,
+   "UseAsyncStoredProcedureCalls": true,
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": false,
+   "UseDatabaseNamesForRoutines": true,
+   "UseDateOnlyTimeOnly": true,
+   "UseDbContextSplitting": false,
+   "UseDecimalDataAnnotationForSprocResult": true,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": false,
+   "UseHierarchyId": false,
+   "UseInflector": true,
+   "UseInternalAccessModifiersForSprocsAndFunctions": false,
+   "UseLegacyPluralizer": false,
+   "UseManyToManyEntity": false,
+   "UseNoDefaultConstructor": false,
+   "UseNoNavigations": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": false,
+   "UsePrefixNavigationNaming": false,
+   "UseSchemaFolders": false,
+   "UseSchemaNamespaces": false,
+   "UseSpatial": false,
+   "UseT4": false,
+   "UseT4Split": false
+}
