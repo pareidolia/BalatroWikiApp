@@ -398,7 +398,7 @@ public partial class BalatroDBContext : IdentityDbContext<ApplicationUser>
 
         OnModelCreatingPartial(modelBuilder);
 
-        base.OnModelCreating(modelBuilder);
+        base.OnModelCreating(modelBuilder); 
     }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
