@@ -1,0 +1,41 @@
+﻿@page "/boosterpacks"
+@using Microsoft.EntityFrameworkCore
+@using Microsoft.AspNetCore.Components.QuickGrid
+@using BalatroWikiApp.Models
+@using BalatroWikiApp.Models
+@implements IAsyncDisposable
+@inject IDbContextFactory<BalatroWikiApp.Models.BalatroDBContext> DbFactory
+
+<PageTitle>Index</PageTitle>
+
+<h1>Index</h1>
+
+<p>
+    <a href="boosterpacks/create">Create New</a>
+</p>
+
+<QuickGrid Class="table" Items="context.Boosterpacks">
+    <PropertyColumn Property="boosterpack => boosterpack.NamePack" />
+    <PropertyColumn Property="boosterpack => boosterpack.NumberPack" />
+    <PropertyColumn Property="boosterpack => boosterpack.NumberChoices" />
+    <PropertyColumn Property="boosterpack => boosterpack.NumberProposition" />
+    <PropertyColumn Property="boosterpack => boosterpack.DescriptionPack" />
+    <PropertyColumn Property="boosterpack => boosterpack.PricePack" />
+
+    <TemplateColumn Context="boosterpack">
+        <a href="@($"boosterpacks/edit?idjoker={boosterpack.IdJoker}")">Edit</a> |
+        <a href="@($"boosterpacks/details?idjoker={boosterpack.IdJoker}")">Details</a> |
+        <a href="@($"boosterpacks/delete?idjoker={boosterpack.IdJoker}")">Delete</a>
+    </TemplateColumn>
+</QuickGrid>
+
+@code {
+    private BalatroDBContext context = default!;
+
+    protected override void OnInitialized()
+    {
+        context = DbFactory.CreateDbContext();
+    }
+
+    public async ValueTask DisposeAsync() => await context.DisposeAsync();
+}

@@ -1,0 +1,69 @@
+﻿@page "/boosterpacks/create"
+@using Microsoft.EntityFrameworkCore
+@using BalatroWikiApp.Models
+@inject IDbContextFactory<BalatroWikiApp.Models.BalatroDBContext> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Create</PageTitle>
+
+<h1>Create</h1>
+
+<h2>Boosterpack</h2>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <EditForm method="post" Model="Boosterpack" OnValidSubmit="AddBoosterpack" FormName="create" Enhance>
+            <DataAnnotationsValidator />
+            <ValidationSummary class="text-danger" role="alert"/>
+            <div class="mb-3">
+                <label for="namepack" class="form-label">NamePack:</label> 
+                <InputText id="namepack" @bind-Value="Boosterpack.NamePack" class="form-control" /> 
+                <ValidationMessage For="() => Boosterpack.NamePack" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="numberpack" class="form-label">NumberPack:</label> 
+                <InputNumber id="numberpack" @bind-Value="Boosterpack.NumberPack" class="form-control" /> 
+                <ValidationMessage For="() => Boosterpack.NumberPack" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="numberchoices" class="form-label">NumberChoices:</label> 
+                <InputNumber id="numberchoices" @bind-Value="Boosterpack.NumberChoices" class="form-control" /> 
+                <ValidationMessage For="() => Boosterpack.NumberChoices" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="numberproposition" class="form-label">NumberProposition:</label> 
+                <InputNumber id="numberproposition" @bind-Value="Boosterpack.NumberProposition" class="form-control" /> 
+                <ValidationMessage For="() => Boosterpack.NumberProposition" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="descriptionpack" class="form-label">DescriptionPack:</label> 
+                <InputText id="descriptionpack" @bind-Value="Boosterpack.DescriptionPack" class="form-control" /> 
+                <ValidationMessage For="() => Boosterpack.DescriptionPack" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="pricepack" class="form-label">PricePack:</label> 
+                <InputNumber id="pricepack" @bind-Value="Boosterpack.PricePack" class="form-control" /> 
+                <ValidationMessage For="() => Boosterpack.PricePack" class="text-danger" /> 
+            </div>        
+            <button type="submit" class="btn btn-primary">Create</button>
+        </EditForm>
+    </div>
+</div>
+
+<div>
+    <a href="/boosterpacks">Back to List</a>
+</div>
+
+@code {
+    [SupplyParameterFromForm]
+    private Boosterpack Boosterpack { get; set; } = new();
+
+    // To protect from overposting attacks, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
+    private async Task AddBoosterpack()
+    {
+        using var context = DbFactory.CreateDbContext();
+        context.Boosterpacks.Add(Boosterpack);
+        await context.SaveChangesAsync();
+        NavigationManager.NavigateTo("/boosterpacks");
+    }
+}
