@@ -16,19 +16,17 @@
             <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
                 <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
             </NavLink>
-        </div>
-
-        <div class="nav-item px-3"> 
-            <NavLink class="nav-link" href="counter">
-                <span class="bi bi-gem-nav-menu" aria-hidden="true"></span> Joker Page
-            </NavLink>
-        </div>
-
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="auth">
-                <span class="bi bi-lock-nav-menu" aria-hidden="true"></span> Auth Required
-            </NavLink>
-        </div>
+        </div>  
+        
+        <AuthorizeView>
+            <Authorized>
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="auth">
+                        <span class="bi bi-lock-nav-menu" aria-hidden="true"></span> Auth Required
+                    </NavLink>
+                </div>
+            </Authorized>
+        </AuthorizeView>
 
         <AuthorizeView>
             <Authorized>
@@ -59,6 +57,146 @@
                     </NavLink>
                 </div>
             </NotAuthorized>
+        </AuthorizeView>
+
+        <AuthorizeView>
+            <Authorized>
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="blinds">
+                        <span class="bi bi-gem-nav-menu" aria-hidden="true"></span> Blinds
+                    </NavLink>
+                </div>
+            </Authorized>
+        </AuthorizeView>
+
+        <AuthorizeView>
+            <Authorized>
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="boosterpacks">
+                        <span class="bi bi-gem-nav-menu" aria-hidden="true"></span> Booster Packs
+                    </NavLink>
+                </div>
+            </Authorized>
+        </AuthorizeView>
+
+        <AuthorizeView>
+            <Authorized>
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="cards">
+                        <span class="bi bi-gem-nav-menu" aria-hidden="true"></span> Cards
+                    </NavLink>
+                </div>
+            </Authorized>
+        </AuthorizeView>
+
+        <AuthorizeView>
+            <Authorized>
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="decks">
+                        <span class="bi bi-gem-nav-menu" aria-hidden="true"></span> Decks
+                    </NavLink>
+                </div>
+            </Authorized>
+        </AuthorizeView>
+
+        <AuthorizeView>
+            <Authorized>
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="editions">
+                        <span class="bi bi-gem-nav-menu" aria-hidden="true"></span> Edition
+                    </NavLink>
+                </div>
+            </Authorized>
+        </AuthorizeView>
+
+        <AuthorizeView>
+            <Authorized>
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="enhancedcards">
+                        <span class="bi bi-gem-nav-menu" aria-hidden="true"></span> Enhanced Cards
+                    </NavLink>
+                </div>
+            </Authorized>
+        </AuthorizeView>
+
+        <AuthorizeView>
+            <Authorized>
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="jokers">
+                        <span class="bi bi-gem-nav-menu" aria-hidden="true"></span> Jokers
+                    </NavLink>
+                </div>
+            </Authorized>
+        </AuthorizeView>
+
+        <AuthorizeView>
+            <Authorized>
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="planetcards">
+                        <span class="bi bi-gem-nav-menu" aria-hidden="true"></span> Planet Card
+                    </NavLink>
+                </div>
+            </Authorized>
+        </AuthorizeView>
+
+        <AuthorizeView>
+            <Authorized>
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="seals">
+                        <span class="bi bi-gem-nav-menu" aria-hidden="true"></span> Seals
+                    </NavLink>
+                </div>
+            </Authorized>
+        </AuthorizeView>
+
+        <AuthorizeView>
+            <Authorized>
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="spectralcards">
+                        <span class="bi bi-gem-nav-menu" aria-hidden="true"></span> Spectral Cards
+                    </NavLink>
+                </div>
+            </Authorized>
+        </AuthorizeView>
+
+        <AuthorizeView>
+            <Authorized>
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="stickers">
+                        <span class="bi bi-gem-nav-menu" aria-hidden="true"></span> Stickers
+                    </NavLink>
+                </div>
+            </Authorized>
+        </AuthorizeView>
+
+        <AuthorizeView>
+            <Authorized>
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="tags">
+                        <span class="bi bi-gem-nav-menu" aria-hidden="true"></span> Tags
+                    </NavLink>
+                </div>
+            </Authorized>
+        </AuthorizeView>
+
+        <AuthorizeView>
+            <Authorized>
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="tarotcards">
+                        <span class="bi bi-gem-nav-menu" aria-hidden="true"></span> Tarot Cards
+                    </NavLink>
+                </div>
+            </Authorized>
+        </AuthorizeView>
+
+        <AuthorizeView>
+            <Authorized>
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="vouchers">
+                        <span class="bi bi-gem-nav-menu" aria-hidden="true"></span> Vouchers
+                    </NavLink>
+                </div>
+            </Authorized>
         </AuthorizeView>
     </nav>
 </div>
