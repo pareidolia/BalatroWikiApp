@@ -1,0 +1,99 @@
+﻿@page "/stickers/edit"
+@using Microsoft.EntityFrameworkCore
+@using BalatroWikiApp.Models
+@inject IDbContextFactory<BalatroWikiApp.Models.BalatroDBContext> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Edit</PageTitle>
+
+<h1>Edit</h1>
+
+<h2>Sticker</h2>
+<hr />
+@if (Sticker is null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-4">
+            <EditForm method="post" Model="Sticker" OnValidSubmit="UpdateSticker" FormName="edit" Enhance>
+                <DataAnnotationsValidator />
+                <ValidationSummary role="alert"/>
+                <input type="hidden" name="Sticker.IdSticker" value="@Sticker.IdSticker" />
+                <div class="mb-3">
+                    <label for="namesticker" class="form-label">NameSticker:</label>
+                    <InputText id="namesticker" @bind-Value="Sticker.NameSticker" class="form-control" />
+                    <ValidationMessage For="() => Sticker.NameSticker" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="descriptionsticker" class="form-label">DescriptionSticker:</label>
+                    <InputText id="descriptionsticker" @bind-Value="Sticker.DescriptionSticker" class="form-control" />
+                    <ValidationMessage For="() => Sticker.DescriptionSticker" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="effectsticker" class="form-label">EffectSticker:</label>
+                    <InputText id="effectsticker" @bind-Value="Sticker.EffectSticker" class="form-control" />
+                    <ValidationMessage For="() => Sticker.EffectSticker" class="text-danger" />
+                </div>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </EditForm>
+        </div>
+    </div>
+}
+
+<div>
+    <a href="/stickers">Back to List</a>
+</div>
+
+@code {
+    [SupplyParameterFromQuery]
+    private int IdSticker { get; set; }
+
+    [SupplyParameterFromForm]
+    private Sticker? Sticker { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var context = DbFactory.CreateDbContext();
+        Sticker ??= await context.Stickers.FirstOrDefaultAsync(m => m.IdSticker == IdSticker);
+
+        if (Sticker is null)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+    }
+
+    // To protect from overposting attacks, enable the specific properties you want to bind to.
+    // For more information, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
+    private async Task UpdateSticker()
+    {
+        using var context = DbFactory.CreateDbContext();
+        context.Attach(Sticker!).State = EntityState.Modified;
+
+        try
+        {
+            await context.SaveChangesAsync();
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            if (!StickerExists(Sticker!.IdSticker))
+            {
+                NavigationManager.NavigateTo("notfound");
+            }
+            else
+            {
+                throw;
+            }
+        }
+
+        NavigationManager.NavigateTo("/stickers");
+    }
+
+    private bool StickerExists(int idsticker)
+    {
+        using var context = DbFactory.CreateDbContext();
+        return context.Stickers.Any(e => e.IdSticker == idsticker);
+    }
+}

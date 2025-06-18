@@ -1,0 +1,50 @@
+﻿@page "/cards/details"
+@using Microsoft.EntityFrameworkCore
+@using BalatroWikiApp.Models
+@inject IDbContextFactory<BalatroWikiApp.Models.BalatroDBContext> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Details</PageTitle>
+
+<h1>Details</h1>
+
+<div>
+    <h2>Card</h2>
+    <hr />
+    @if (card is null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else {
+        <dl class="row">
+            <dt class="col-sm-2">NameCard</dt>
+            <dd class="col-sm-10">@card.NameCard</dd>
+            <dt class="col-sm-2">FamilyCard</dt>
+            <dd class="col-sm-10">@card.FamilyCard</dd>
+            <dt class="col-sm-2">IsEnhanced</dt>
+            <dd class="col-sm-10">@card.IsEnhanced</dd>
+        </dl>
+        <div>
+            <a href="@($"/cards/edit?numcard={card.NumCard}")">Edit</a> |
+            <a href="@($"/cards")">Back to List</a>
+        </div>
+    }
+</div>
+
+@code {
+    private Card? card;
+
+    [SupplyParameterFromQuery]
+    private int NumCard { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var context = DbFactory.CreateDbContext();
+        card = await context.Cards.FirstOrDefaultAsync(m => m.NumCard == NumCard);
+
+        if (card is null)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+    }
+}

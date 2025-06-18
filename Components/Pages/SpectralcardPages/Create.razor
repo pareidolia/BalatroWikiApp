@@ -1,0 +1,49 @@
+﻿@page "/spectralcards/create"
+@using Microsoft.EntityFrameworkCore
+@using BalatroWikiApp.Models
+@inject IDbContextFactory<BalatroWikiApp.Models.BalatroDBContext> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Create</PageTitle>
+
+<h1>Create</h1>
+
+<h2>Spectralcard</h2>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <EditForm method="post" Model="Spectralcard" OnValidSubmit="AddSpectralcard" FormName="create" Enhance>
+            <DataAnnotationsValidator />
+            <ValidationSummary class="text-danger" role="alert"/>
+            <div class="mb-3">
+                <label for="namespectral" class="form-label">NameSpectral:</label> 
+                <InputText id="namespectral" @bind-Value="Spectralcard.NameSpectral" class="form-control" /> 
+                <ValidationMessage For="() => Spectralcard.NameSpectral" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="effectspectral" class="form-label">EffectSpectral:</label> 
+                <InputText id="effectspectral" @bind-Value="Spectralcard.EffectSpectral" class="form-control" /> 
+                <ValidationMessage For="() => Spectralcard.EffectSpectral" class="text-danger" /> 
+            </div>        
+            <button type="submit" class="btn btn-primary">Create</button>
+        </EditForm>
+    </div>
+</div>
+
+<div>
+    <a href="/spectralcards">Back to List</a>
+</div>
+
+@code {
+    [SupplyParameterFromForm]
+    private Spectralcard Spectralcard { get; set; } = new();
+
+    // To protect from overposting attacks, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
+    private async Task AddSpectralcard()
+    {
+        using var context = DbFactory.CreateDbContext();
+        context.Spectralcards.Add(Spectralcard);
+        await context.SaveChangesAsync();
+        NavigationManager.NavigateTo("/spectralcards");
+    }
+}

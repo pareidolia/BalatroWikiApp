@@ -1,0 +1,54 @@
+﻿@page "/stickers/create"
+@using Microsoft.EntityFrameworkCore
+@using BalatroWikiApp.Models
+@inject IDbContextFactory<BalatroWikiApp.Models.BalatroDBContext> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Create</PageTitle>
+
+<h1>Create</h1>
+
+<h2>Sticker</h2>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <EditForm method="post" Model="Sticker" OnValidSubmit="AddSticker" FormName="create" Enhance>
+            <DataAnnotationsValidator />
+            <ValidationSummary class="text-danger" role="alert"/>
+            <div class="mb-3">
+                <label for="namesticker" class="form-label">NameSticker:</label> 
+                <InputText id="namesticker" @bind-Value="Sticker.NameSticker" class="form-control" /> 
+                <ValidationMessage For="() => Sticker.NameSticker" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="descriptionsticker" class="form-label">DescriptionSticker:</label> 
+                <InputText id="descriptionsticker" @bind-Value="Sticker.DescriptionSticker" class="form-control" /> 
+                <ValidationMessage For="() => Sticker.DescriptionSticker" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="effectsticker" class="form-label">EffectSticker:</label> 
+                <InputText id="effectsticker" @bind-Value="Sticker.EffectSticker" class="form-control" /> 
+                <ValidationMessage For="() => Sticker.EffectSticker" class="text-danger" /> 
+            </div>        
+            <button type="submit" class="btn btn-primary">Create</button>
+        </EditForm>
+    </div>
+</div>
+
+<div>
+    <a href="/stickers">Back to List</a>
+</div>
+
+@code {
+    [SupplyParameterFromForm]
+    private Sticker Sticker { get; set; } = new();
+
+    // To protect from overposting attacks, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
+    private async Task AddSticker()
+    {
+        using var context = DbFactory.CreateDbContext();
+        context.Stickers.Add(Sticker);
+        await context.SaveChangesAsync();
+        NavigationManager.NavigateTo("/stickers");
+    }
+}

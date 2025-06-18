@@ -1,0 +1,49 @@
+﻿@page "/editions/create"
+@using Microsoft.EntityFrameworkCore
+@using BalatroWikiApp.Models
+@inject IDbContextFactory<BalatroWikiApp.Models.BalatroDBContext> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Create</PageTitle>
+
+<h1>Create</h1>
+
+<h2>Edition</h2>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <EditForm method="post" Model="Edition" OnValidSubmit="AddEdition" FormName="create" Enhance>
+            <DataAnnotationsValidator />
+            <ValidationSummary class="text-danger" role="alert"/>
+            <div class="mb-3">
+                <label for="nameedition" class="form-label">NameEdition:</label> 
+                <InputText id="nameedition" @bind-Value="Edition.NameEdition" class="form-control" /> 
+                <ValidationMessage For="() => Edition.NameEdition" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="effectedition" class="form-label">EffectEdition:</label> 
+                <InputText id="effectedition" @bind-Value="Edition.EffectEdition" class="form-control" /> 
+                <ValidationMessage For="() => Edition.EffectEdition" class="text-danger" /> 
+            </div>        
+            <button type="submit" class="btn btn-primary">Create</button>
+        </EditForm>
+    </div>
+</div>
+
+<div>
+    <a href="/editions">Back to List</a>
+</div>
+
+@code {
+    [SupplyParameterFromForm]
+    private Edition Edition { get; set; } = new();
+
+    // To protect from overposting attacks, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
+    private async Task AddEdition()
+    {
+        using var context = DbFactory.CreateDbContext();
+        context.Editions.Add(Edition);
+        await context.SaveChangesAsync();
+        NavigationManager.NavigateTo("/editions");
+    }
+}

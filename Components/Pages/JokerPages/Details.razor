@@ -1,0 +1,58 @@
+﻿@page "/jokers/details"
+@using Microsoft.EntityFrameworkCore
+@using BalatroWikiApp.Models
+@inject IDbContextFactory<BalatroWikiApp.Models.BalatroDBContext> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Details</PageTitle>
+
+<h1>Details</h1>
+
+<div>
+    <h2>Joker</h2>
+    <hr />
+    @if (joker is null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else {
+        <dl class="row">
+            <dt class="col-sm-2">NameJoker</dt>
+            <dd class="col-sm-10">@joker.NameJoker</dd>
+            <dt class="col-sm-2">RarityJoker</dt>
+            <dd class="col-sm-10">@joker.RarityJoker</dd>
+            <dt class="col-sm-2">PriceJoker</dt>
+            <dd class="col-sm-10">@joker.PriceJoker</dd>
+            <dt class="col-sm-2">TypeJoker</dt>
+            <dd class="col-sm-10">@joker.TypeJoker</dd>
+            <dt class="col-sm-2">DescriptionJoker</dt>
+            <dd class="col-sm-10">@joker.DescriptionJoker</dd>
+            <dt class="col-sm-2">SizeJoker</dt>
+            <dd class="col-sm-10">@joker.SizeJoker</dd>
+            <dt class="col-sm-2">HasFaceJoker</dt>
+            <dd class="col-sm-10">@joker.HasFaceJoker</dd>
+        </dl>
+        <div>
+            <a href="@($"/jokers/edit?idjoker={joker.IdJoker}")">Edit</a> |
+            <a href="@($"/jokers")">Back to List</a>
+        </div>
+    }
+</div>
+
+@code {
+    private Joker? joker;
+
+    [SupplyParameterFromQuery]
+    private int IdJoker { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var context = DbFactory.CreateDbContext();
+        joker = await context.Jokers.FirstOrDefaultAsync(m => m.IdJoker == IdJoker);
+
+        if (joker is null)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+    }
+}

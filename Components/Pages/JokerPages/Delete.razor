@@ -1,0 +1,79 @@
+﻿@page "/jokers/delete"
+@using Microsoft.EntityFrameworkCore
+@using BalatroWikiApp.Models
+@inject IDbContextFactory<BalatroWikiApp.Models.BalatroDBContext> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Delete</PageTitle>
+
+<h1>Delete</h1>
+
+<p>Are you sure you want to delete this?</p>
+<div>
+    <h2>Joker</h2>
+    <hr />
+    @if (joker is null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else {
+        <dl class="row">
+            <dt class="col-sm-2">NameJoker</dt>
+            <dd class="col-sm-10">@joker.NameJoker</dd>
+        </dl>
+        <dl class="row">
+            <dt class="col-sm-2">RarityJoker</dt>
+            <dd class="col-sm-10">@joker.RarityJoker</dd>
+        </dl>
+        <dl class="row">
+            <dt class="col-sm-2">PriceJoker</dt>
+            <dd class="col-sm-10">@joker.PriceJoker</dd>
+        </dl>
+        <dl class="row">
+            <dt class="col-sm-2">TypeJoker</dt>
+            <dd class="col-sm-10">@joker.TypeJoker</dd>
+        </dl>
+        <dl class="row">
+            <dt class="col-sm-2">DescriptionJoker</dt>
+            <dd class="col-sm-10">@joker.DescriptionJoker</dd>
+        </dl>
+        <dl class="row">
+            <dt class="col-sm-2">SizeJoker</dt>
+            <dd class="col-sm-10">@joker.SizeJoker</dd>
+        </dl>
+        <dl class="row">
+            <dt class="col-sm-2">HasFaceJoker</dt>
+            <dd class="col-sm-10">@joker.HasFaceJoker</dd>
+        </dl>
+        <EditForm method="post" Model="joker" OnValidSubmit="DeleteJoker" FormName="delete" Enhance>
+            <button type="submit" class="btn btn-danger" disabled="@(joker is null)">Delete</button> |
+            <a href="/jokers">Back to List</a>
+        </EditForm>
+    }
+</div>
+
+@code {
+    private Joker? joker;
+
+    [SupplyParameterFromQuery]
+    private int IdJoker { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var context = DbFactory.CreateDbContext();
+        joker = await context.Jokers.FirstOrDefaultAsync(m => m.IdJoker == IdJoker);
+
+        if (joker is null)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+    }
+
+    private async Task DeleteJoker()
+    {
+        using var context = DbFactory.CreateDbContext();
+        context.Jokers.Remove(joker!);
+        await context.SaveChangesAsync();
+        NavigationManager.NavigateTo("/jokers");
+    }
+}

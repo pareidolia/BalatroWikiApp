@@ -1,0 +1,38 @@
+﻿@page "/seals"
+@using Microsoft.EntityFrameworkCore
+@using Microsoft.AspNetCore.Components.QuickGrid
+@using BalatroWikiApp.Models
+@using BalatroWikiApp.Models
+@implements IAsyncDisposable
+@inject IDbContextFactory<BalatroWikiApp.Models.BalatroDBContext> DbFactory
+
+<PageTitle>Index</PageTitle>
+
+<h1>Index</h1>
+
+<p>
+    <a href="seals/create">Create New</a>
+</p>
+
+<QuickGrid Class="table" Items="context.Seals">
+    <PropertyColumn Property="seal => seal.NameSeal" />
+    <PropertyColumn Property="seal => seal.EffectSeal" />
+    <PropertyColumn Property="seal => seal.TypeSeal" />
+
+    <TemplateColumn Context="seal">
+        <a href="@($"seals/edit?idseal={seal.IdSeal}")">Edit</a> |
+        <a href="@($"seals/details?idseal={seal.IdSeal}")">Details</a> |
+        <a href="@($"seals/delete?idseal={seal.IdSeal}")">Delete</a>
+    </TemplateColumn>
+</QuickGrid>
+
+@code {
+    private BalatroDBContext context = default!;
+
+    protected override void OnInitialized()
+    {
+        context = DbFactory.CreateDbContext();
+    }
+
+    public async ValueTask DisposeAsync() => await context.DisposeAsync();
+}

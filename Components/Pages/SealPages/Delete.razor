@@ -1,0 +1,63 @@
+﻿@page "/seals/delete"
+@using Microsoft.EntityFrameworkCore
+@using BalatroWikiApp.Models
+@inject IDbContextFactory<BalatroWikiApp.Models.BalatroDBContext> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Delete</PageTitle>
+
+<h1>Delete</h1>
+
+<p>Are you sure you want to delete this?</p>
+<div>
+    <h2>Seal</h2>
+    <hr />
+    @if (seal is null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else {
+        <dl class="row">
+            <dt class="col-sm-2">NameSeal</dt>
+            <dd class="col-sm-10">@seal.NameSeal</dd>
+        </dl>
+        <dl class="row">
+            <dt class="col-sm-2">EffectSeal</dt>
+            <dd class="col-sm-10">@seal.EffectSeal</dd>
+        </dl>
+        <dl class="row">
+            <dt class="col-sm-2">TypeSeal</dt>
+            <dd class="col-sm-10">@seal.TypeSeal</dd>
+        </dl>
+        <EditForm method="post" Model="seal" OnValidSubmit="DeleteSeal" FormName="delete" Enhance>
+            <button type="submit" class="btn btn-danger" disabled="@(seal is null)">Delete</button> |
+            <a href="/seals">Back to List</a>
+        </EditForm>
+    }
+</div>
+
+@code {
+    private Seal? seal;
+
+    [SupplyParameterFromQuery]
+    private int IdSeal { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var context = DbFactory.CreateDbContext();
+        seal = await context.Seals.FirstOrDefaultAsync(m => m.IdSeal == IdSeal);
+
+        if (seal is null)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+    }
+
+    private async Task DeleteSeal()
+    {
+        using var context = DbFactory.CreateDbContext();
+        context.Seals.Remove(seal!);
+        await context.SaveChangesAsync();
+        NavigationManager.NavigateTo("/seals");
+    }
+}

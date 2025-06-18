@@ -1,0 +1,48 @@
+﻿@page "/editions/details"
+@using Microsoft.EntityFrameworkCore
+@using BalatroWikiApp.Models
+@inject IDbContextFactory<BalatroWikiApp.Models.BalatroDBContext> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Details</PageTitle>
+
+<h1>Details</h1>
+
+<div>
+    <h2>Edition</h2>
+    <hr />
+    @if (edition is null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else {
+        <dl class="row">
+            <dt class="col-sm-2">NameEdition</dt>
+            <dd class="col-sm-10">@edition.NameEdition</dd>
+            <dt class="col-sm-2">EffectEdition</dt>
+            <dd class="col-sm-10">@edition.EffectEdition</dd>
+        </dl>
+        <div>
+            <a href="@($"/editions/edit?idedition={edition.IdEdition}")">Edit</a> |
+            <a href="@($"/editions")">Back to List</a>
+        </div>
+    }
+</div>
+
+@code {
+    private Edition? edition;
+
+    [SupplyParameterFromQuery]
+    private int IdEdition { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var context = DbFactory.CreateDbContext();
+        edition = await context.Editions.FirstOrDefaultAsync(m => m.IdEdition == IdEdition);
+
+        if (edition is null)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+    }
+}

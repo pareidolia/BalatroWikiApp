@@ -1,0 +1,50 @@
+﻿@page "/stickers/details"
+@using Microsoft.EntityFrameworkCore
+@using BalatroWikiApp.Models
+@inject IDbContextFactory<BalatroWikiApp.Models.BalatroDBContext> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Details</PageTitle>
+
+<h1>Details</h1>
+
+<div>
+    <h2>Sticker</h2>
+    <hr />
+    @if (sticker is null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else {
+        <dl class="row">
+            <dt class="col-sm-2">NameSticker</dt>
+            <dd class="col-sm-10">@sticker.NameSticker</dd>
+            <dt class="col-sm-2">DescriptionSticker</dt>
+            <dd class="col-sm-10">@sticker.DescriptionSticker</dd>
+            <dt class="col-sm-2">EffectSticker</dt>
+            <dd class="col-sm-10">@sticker.EffectSticker</dd>
+        </dl>
+        <div>
+            <a href="@($"/stickers/edit?idsticker={sticker.IdSticker}")">Edit</a> |
+            <a href="@($"/stickers")">Back to List</a>
+        </div>
+    }
+</div>
+
+@code {
+    private Sticker? sticker;
+
+    [SupplyParameterFromQuery]
+    private int IdSticker { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var context = DbFactory.CreateDbContext();
+        sticker = await context.Stickers.FirstOrDefaultAsync(m => m.IdSticker == IdSticker);
+
+        if (sticker is null)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+    }
+}
