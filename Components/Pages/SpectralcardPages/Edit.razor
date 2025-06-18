@@ -1,0 +1,94 @@
+﻿@page "/spectralcards/edit"
+@using Microsoft.EntityFrameworkCore
+@using BalatroWikiApp.Models
+@inject IDbContextFactory<BalatroWikiApp.Models.BalatroDBContext> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Edit</PageTitle>
+
+<h1>Edit</h1>
+
+<h2>Spectralcard</h2>
+<hr />
+@if (Spectralcard is null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-4">
+            <EditForm method="post" Model="Spectralcard" OnValidSubmit="UpdateSpectralcard" FormName="edit" Enhance>
+                <DataAnnotationsValidator />
+                <ValidationSummary role="alert"/>
+                <input type="hidden" name="Spectralcard.IdSpectral" value="@Spectralcard.IdSpectral" />
+                <div class="mb-3">
+                    <label for="namespectral" class="form-label">NameSpectral:</label>
+                    <InputText id="namespectral" @bind-Value="Spectralcard.NameSpectral" class="form-control" />
+                    <ValidationMessage For="() => Spectralcard.NameSpectral" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="effectspectral" class="form-label">EffectSpectral:</label>
+                    <InputText id="effectspectral" @bind-Value="Spectralcard.EffectSpectral" class="form-control" />
+                    <ValidationMessage For="() => Spectralcard.EffectSpectral" class="text-danger" />
+                </div>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </EditForm>
+        </div>
+    </div>
+}
+
+<div>
+    <a href="/spectralcards">Back to List</a>
+</div>
+
+@code {
+    [SupplyParameterFromQuery]
+    private int IdSpectral { get; set; }
+
+    [SupplyParameterFromForm]
+    private Spectralcard? Spectralcard { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var context = DbFactory.CreateDbContext();
+        Spectralcard ??= await context.Spectralcards.FirstOrDefaultAsync(m => m.IdSpectral == IdSpectral);
+
+        if (Spectralcard is null)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+    }
+
+    // To protect from overposting attacks, enable the specific properties you want to bind to.
+    // For more information, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
+    private async Task UpdateSpectralcard()
+    {
+        using var context = DbFactory.CreateDbContext();
+        context.Attach(Spectralcard!).State = EntityState.Modified;
+
+        try
+        {
+            await context.SaveChangesAsync();
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            if (!SpectralcardExists(Spectralcard!.IdSpectral))
+            {
+                NavigationManager.NavigateTo("notfound");
+            }
+            else
+            {
+                throw;
+            }
+        }
+
+        NavigationManager.NavigateTo("/spectralcards");
+    }
+
+    private bool SpectralcardExists(int idspectral)
+    {
+        using var context = DbFactory.CreateDbContext();
+        return context.Spectralcards.Any(e => e.IdSpectral == idspectral);
+    }
+}

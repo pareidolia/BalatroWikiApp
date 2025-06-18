@@ -1,0 +1,94 @@
+﻿@page "/planetcards/edit"
+@using Microsoft.EntityFrameworkCore
+@using BalatroWikiApp.Models
+@inject IDbContextFactory<BalatroWikiApp.Models.BalatroDBContext> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Edit</PageTitle>
+
+<h1>Edit</h1>
+
+<h2>Planetcard</h2>
+<hr />
+@if (Planetcard is null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-4">
+            <EditForm method="post" Model="Planetcard" OnValidSubmit="UpdatePlanetcard" FormName="edit" Enhance>
+                <DataAnnotationsValidator />
+                <ValidationSummary role="alert"/>
+                <input type="hidden" name="Planetcard.IdPlanet" value="@Planetcard.IdPlanet" />
+                <div class="mb-3">
+                    <label for="nameplanet" class="form-label">NamePlanet:</label>
+                    <InputText id="nameplanet" @bind-Value="Planetcard.NamePlanet" class="form-control" />
+                    <ValidationMessage For="() => Planetcard.NamePlanet" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="handplanet" class="form-label">HandPlanet:</label>
+                    <InputText id="handplanet" @bind-Value="Planetcard.HandPlanet" class="form-control" />
+                    <ValidationMessage For="() => Planetcard.HandPlanet" class="text-danger" />
+                </div>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </EditForm>
+        </div>
+    </div>
+}
+
+<div>
+    <a href="/planetcards">Back to List</a>
+</div>
+
+@code {
+    [SupplyParameterFromQuery]
+    private int IdPlanet { get; set; }
+
+    [SupplyParameterFromForm]
+    private Planetcard? Planetcard { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var context = DbFactory.CreateDbContext();
+        Planetcard ??= await context.Planetcards.FirstOrDefaultAsync(m => m.IdPlanet == IdPlanet);
+
+        if (Planetcard is null)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+    }
+
+    // To protect from overposting attacks, enable the specific properties you want to bind to.
+    // For more information, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
+    private async Task UpdatePlanetcard()
+    {
+        using var context = DbFactory.CreateDbContext();
+        context.Attach(Planetcard!).State = EntityState.Modified;
+
+        try
+        {
+            await context.SaveChangesAsync();
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            if (!PlanetcardExists(Planetcard!.IdPlanet))
+            {
+                NavigationManager.NavigateTo("notfound");
+            }
+            else
+            {
+                throw;
+            }
+        }
+
+        NavigationManager.NavigateTo("/planetcards");
+    }
+
+    private bool PlanetcardExists(int idplanet)
+    {
+        using var context = DbFactory.CreateDbContext();
+        return context.Planetcards.Any(e => e.IdPlanet == idplanet);
+    }
+}

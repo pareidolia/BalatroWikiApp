@@ -1,0 +1,54 @@
+﻿@page "/enhancedcards/create"
+@using Microsoft.EntityFrameworkCore
+@using BalatroWikiApp.Models
+@inject IDbContextFactory<BalatroWikiApp.Models.BalatroDBContext> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Create</PageTitle>
+
+<h1>Create</h1>
+
+<h2>Enhancedcard</h2>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <EditForm method="post" Model="Enhancedcard" OnValidSubmit="AddEnhancedcard" FormName="create" Enhance>
+            <DataAnnotationsValidator />
+            <ValidationSummary class="text-danger" role="alert"/>
+            <div class="mb-3">
+                <label for="nameenhanced" class="form-label">NameEnhanced:</label> 
+                <InputText id="nameenhanced" @bind-Value="Enhancedcard.NameEnhanced" class="form-control" /> 
+                <ValidationMessage For="() => Enhancedcard.NameEnhanced" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="effectenhanced" class="form-label">EffectEnhanced:</label> 
+                <InputText id="effectenhanced" @bind-Value="Enhancedcard.EffectEnhanced" class="form-control" /> 
+                <ValidationMessage For="() => Enhancedcard.EffectEnhanced" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="typeenhanced" class="form-label">TypeEnhanced:</label> 
+                <InputText id="typeenhanced" @bind-Value="Enhancedcard.TypeEnhanced" class="form-control" /> 
+                <ValidationMessage For="() => Enhancedcard.TypeEnhanced" class="text-danger" /> 
+            </div>        
+            <button type="submit" class="btn btn-primary">Create</button>
+        </EditForm>
+    </div>
+</div>
+
+<div>
+    <a href="/enhancedcards">Back to List</a>
+</div>
+
+@code {
+    [SupplyParameterFromForm]
+    private Enhancedcard Enhancedcard { get; set; } = new();
+
+    // To protect from overposting attacks, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
+    private async Task AddEnhancedcard()
+    {
+        using var context = DbFactory.CreateDbContext();
+        context.Enhancedcards.Add(Enhancedcard);
+        await context.SaveChangesAsync();
+        NavigationManager.NavigateTo("/enhancedcards");
+    }
+}

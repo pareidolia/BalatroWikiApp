@@ -1,0 +1,74 @@
+﻿@page "/jokers/create"
+@using Microsoft.EntityFrameworkCore
+@using BalatroWikiApp.Models
+@inject IDbContextFactory<BalatroWikiApp.Models.BalatroDBContext> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Create</PageTitle>
+
+<h1>Create</h1>
+
+<h2>Joker</h2>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <EditForm method="post" Model="Joker" OnValidSubmit="AddJoker" FormName="create" Enhance>
+            <DataAnnotationsValidator />
+            <ValidationSummary class="text-danger" role="alert"/>
+            <div class="mb-3">
+                <label for="namejoker" class="form-label">NameJoker:</label> 
+                <InputText id="namejoker" @bind-Value="Joker.NameJoker" class="form-control" /> 
+                <ValidationMessage For="() => Joker.NameJoker" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="rarityjoker" class="form-label">RarityJoker:</label> 
+                <InputText id="rarityjoker" @bind-Value="Joker.RarityJoker" class="form-control" /> 
+                <ValidationMessage For="() => Joker.RarityJoker" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="pricejoker" class="form-label">PriceJoker:</label> 
+                <InputNumber id="pricejoker" @bind-Value="Joker.PriceJoker" class="form-control" /> 
+                <ValidationMessage For="() => Joker.PriceJoker" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="typejoker" class="form-label">TypeJoker:</label> 
+                <InputText id="typejoker" @bind-Value="Joker.TypeJoker" class="form-control" /> 
+                <ValidationMessage For="() => Joker.TypeJoker" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="descriptionjoker" class="form-label">DescriptionJoker:</label> 
+                <InputText id="descriptionjoker" @bind-Value="Joker.DescriptionJoker" class="form-control" /> 
+                <ValidationMessage For="() => Joker.DescriptionJoker" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="sizejoker" class="form-label">SizeJoker:</label> 
+                <InputNumber id="sizejoker" @bind-Value="Joker.SizeJoker" class="form-control" /> 
+                <ValidationMessage For="() => Joker.SizeJoker" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="hasfacejoker" class="form-label">HasFaceJoker:</label> 
+                <InputCheckbox id="hasfacejoker" @bind-Value="Joker.HasFaceJoker" class="form-check-input" /> 
+                <ValidationMessage For="() => Joker.HasFaceJoker" class="text-danger" /> 
+            </div>        
+            <button type="submit" class="btn btn-primary">Create</button>
+        </EditForm>
+    </div>
+</div>
+
+<div>
+    <a href="/jokers">Back to List</a>
+</div>
+
+@code {
+    [SupplyParameterFromForm]
+    private Joker Joker { get; set; } = new();
+
+    // To protect from overposting attacks, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
+    private async Task AddJoker()
+    {
+        using var context = DbFactory.CreateDbContext();
+        context.Jokers.Add(Joker);
+        await context.SaveChangesAsync();
+        NavigationManager.NavigateTo("/jokers");
+    }
+}

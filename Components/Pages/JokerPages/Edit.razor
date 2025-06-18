@@ -1,0 +1,119 @@
+﻿@page "/jokers/edit"
+@using Microsoft.EntityFrameworkCore
+@using BalatroWikiApp.Models
+@inject IDbContextFactory<BalatroWikiApp.Models.BalatroDBContext> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Edit</PageTitle>
+
+<h1>Edit</h1>
+
+<h2>Joker</h2>
+<hr />
+@if (Joker is null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-4">
+            <EditForm method="post" Model="Joker" OnValidSubmit="UpdateJoker" FormName="edit" Enhance>
+                <DataAnnotationsValidator />
+                <ValidationSummary role="alert"/>
+                <input type="hidden" name="Joker.IdJoker" value="@Joker.IdJoker" />
+                <div class="mb-3">
+                    <label for="namejoker" class="form-label">NameJoker:</label>
+                    <InputText id="namejoker" @bind-Value="Joker.NameJoker" class="form-control" />
+                    <ValidationMessage For="() => Joker.NameJoker" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="rarityjoker" class="form-label">RarityJoker:</label>
+                    <InputText id="rarityjoker" @bind-Value="Joker.RarityJoker" class="form-control" />
+                    <ValidationMessage For="() => Joker.RarityJoker" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="pricejoker" class="form-label">PriceJoker:</label>
+                    <InputNumber id="pricejoker" @bind-Value="Joker.PriceJoker" class="form-control" />
+                    <ValidationMessage For="() => Joker.PriceJoker" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="typejoker" class="form-label">TypeJoker:</label>
+                    <InputText id="typejoker" @bind-Value="Joker.TypeJoker" class="form-control" />
+                    <ValidationMessage For="() => Joker.TypeJoker" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="descriptionjoker" class="form-label">DescriptionJoker:</label>
+                    <InputText id="descriptionjoker" @bind-Value="Joker.DescriptionJoker" class="form-control" />
+                    <ValidationMessage For="() => Joker.DescriptionJoker" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="sizejoker" class="form-label">SizeJoker:</label>
+                    <InputNumber id="sizejoker" @bind-Value="Joker.SizeJoker" class="form-control" />
+                    <ValidationMessage For="() => Joker.SizeJoker" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="hasfacejoker" class="form-label">HasFaceJoker:</label>
+                    <InputCheckbox id="hasfacejoker" @bind-Value="Joker.HasFaceJoker" class="form-check-input" />
+                    <ValidationMessage For="() => Joker.HasFaceJoker" class="text-danger" />
+                </div>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </EditForm>
+        </div>
+    </div>
+}
+
+<div>
+    <a href="/jokers">Back to List</a>
+</div>
+
+@code {
+    [SupplyParameterFromQuery]
+    private int IdJoker { get; set; }
+
+    [SupplyParameterFromForm]
+    private Joker? Joker { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var context = DbFactory.CreateDbContext();
+        Joker ??= await context.Jokers.FirstOrDefaultAsync(m => m.IdJoker == IdJoker);
+
+        if (Joker is null)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+    }
+
+    // To protect from overposting attacks, enable the specific properties you want to bind to.
+    // For more information, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
+    private async Task UpdateJoker()
+    {
+        using var context = DbFactory.CreateDbContext();
+        context.Attach(Joker!).State = EntityState.Modified;
+
+        try
+        {
+            await context.SaveChangesAsync();
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            if (!JokerExists(Joker!.IdJoker))
+            {
+                NavigationManager.NavigateTo("notfound");
+            }
+            else
+            {
+                throw;
+            }
+        }
+
+        NavigationManager.NavigateTo("/jokers");
+    }
+
+    private bool JokerExists(int idjoker)
+    {
+        using var context = DbFactory.CreateDbContext();
+        return context.Jokers.Any(e => e.IdJoker == idjoker);
+    }
+}

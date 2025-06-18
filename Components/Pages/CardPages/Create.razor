@@ -1,0 +1,54 @@
+﻿@page "/cards/create"
+@using Microsoft.EntityFrameworkCore
+@using BalatroWikiApp.Models
+@inject IDbContextFactory<BalatroWikiApp.Models.BalatroDBContext> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Create</PageTitle>
+
+<h1>Create</h1>
+
+<h2>Card</h2>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <EditForm method="post" Model="Card" OnValidSubmit="AddCard" FormName="create" Enhance>
+            <DataAnnotationsValidator />
+            <ValidationSummary class="text-danger" role="alert"/>
+            <div class="mb-3">
+                <label for="namecard" class="form-label">NameCard:</label> 
+                <InputText id="namecard" @bind-Value="Card.NameCard" class="form-control" /> 
+                <ValidationMessage For="() => Card.NameCard" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="familycard" class="form-label">FamilyCard:</label> 
+                <InputText id="familycard" @bind-Value="Card.FamilyCard" class="form-control" /> 
+                <ValidationMessage For="() => Card.FamilyCard" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="isenhanced" class="form-label">IsEnhanced:</label> 
+                <InputCheckbox id="isenhanced" @bind-Value="Card.IsEnhanced" class="form-check-input" /> 
+                <ValidationMessage For="() => Card.IsEnhanced" class="text-danger" /> 
+            </div>        
+            <button type="submit" class="btn btn-primary">Create</button>
+        </EditForm>
+    </div>
+</div>
+
+<div>
+    <a href="/cards">Back to List</a>
+</div>
+
+@code {
+    [SupplyParameterFromForm]
+    private Card Card { get; set; } = new();
+
+    // To protect from overposting attacks, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
+    private async Task AddCard()
+    {
+        using var context = DbFactory.CreateDbContext();
+        context.Cards.Add(Card);
+        await context.SaveChangesAsync();
+        NavigationManager.NavigateTo("/cards");
+    }
+}

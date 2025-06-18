@@ -1,0 +1,37 @@
+﻿@page "/editions"
+@using Microsoft.EntityFrameworkCore
+@using Microsoft.AspNetCore.Components.QuickGrid
+@using BalatroWikiApp.Models
+@using BalatroWikiApp.Models
+@implements IAsyncDisposable
+@inject IDbContextFactory<BalatroWikiApp.Models.BalatroDBContext> DbFactory
+
+<PageTitle>Index</PageTitle>
+
+<h1>Index</h1>
+
+<p>
+    <a href="editions/create">Create New</a>
+</p>
+
+<QuickGrid Class="table" Items="context.Editions">
+    <PropertyColumn Property="edition => edition.NameEdition" />
+    <PropertyColumn Property="edition => edition.EffectEdition" />
+
+    <TemplateColumn Context="edition">
+        <a href="@($"editions/edit?idedition={edition.IdEdition}")">Edit</a> |
+        <a href="@($"editions/details?idedition={edition.IdEdition}")">Details</a> |
+        <a href="@($"editions/delete?idedition={edition.IdEdition}")">Delete</a>
+    </TemplateColumn>
+</QuickGrid>
+
+@code {
+    private BalatroDBContext context = default!;
+
+    protected override void OnInitialized()
+    {
+        context = DbFactory.CreateDbContext();
+    }
+
+    public async ValueTask DisposeAsync() => await context.DisposeAsync();
+}

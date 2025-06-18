@@ -1,0 +1,37 @@
+﻿@page "/planetcards"
+@using Microsoft.EntityFrameworkCore
+@using Microsoft.AspNetCore.Components.QuickGrid
+@using BalatroWikiApp.Models
+@using BalatroWikiApp.Models
+@implements IAsyncDisposable
+@inject IDbContextFactory<BalatroWikiApp.Models.BalatroDBContext> DbFactory
+
+<PageTitle>Index</PageTitle>
+
+<h1>Index</h1>
+
+<p>
+    <a href="planetcards/create">Create New</a>
+</p>
+
+<QuickGrid Class="table" Items="context.Planetcards">
+    <PropertyColumn Property="planetcard => planetcard.NamePlanet" />
+    <PropertyColumn Property="planetcard => planetcard.HandPlanet" />
+
+    <TemplateColumn Context="planetcard">
+        <a href="@($"planetcards/edit?idplanet={planetcard.IdPlanet}")">Edit</a> |
+        <a href="@($"planetcards/details?idplanet={planetcard.IdPlanet}")">Details</a> |
+        <a href="@($"planetcards/delete?idplanet={planetcard.IdPlanet}")">Delete</a>
+    </TemplateColumn>
+</QuickGrid>
+
+@code {
+    private BalatroDBContext context = default!;
+
+    protected override void OnInitialized()
+    {
+        context = DbFactory.CreateDbContext();
+    }
+
+    public async ValueTask DisposeAsync() => await context.DisposeAsync();
+}

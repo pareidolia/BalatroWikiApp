@@ -1,0 +1,50 @@
+﻿@page "/enhancedcards/details"
+@using Microsoft.EntityFrameworkCore
+@using BalatroWikiApp.Models
+@inject IDbContextFactory<BalatroWikiApp.Models.BalatroDBContext> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Details</PageTitle>
+
+<h1>Details</h1>
+
+<div>
+    <h2>Enhancedcard</h2>
+    <hr />
+    @if (enhancedcard is null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else {
+        <dl class="row">
+            <dt class="col-sm-2">NameEnhanced</dt>
+            <dd class="col-sm-10">@enhancedcard.NameEnhanced</dd>
+            <dt class="col-sm-2">EffectEnhanced</dt>
+            <dd class="col-sm-10">@enhancedcard.EffectEnhanced</dd>
+            <dt class="col-sm-2">TypeEnhanced</dt>
+            <dd class="col-sm-10">@enhancedcard.TypeEnhanced</dd>
+        </dl>
+        <div>
+            <a href="@($"/enhancedcards/edit?idenhanced={enhancedcard.IdEnhanced}")">Edit</a> |
+            <a href="@($"/enhancedcards")">Back to List</a>
+        </div>
+    }
+</div>
+
+@code {
+    private Enhancedcard? enhancedcard;
+
+    [SupplyParameterFromQuery]
+    private int IdEnhanced { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var context = DbFactory.CreateDbContext();
+        enhancedcard = await context.Enhancedcards.FirstOrDefaultAsync(m => m.IdEnhanced == IdEnhanced);
+
+        if (enhancedcard is null)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+    }
+}

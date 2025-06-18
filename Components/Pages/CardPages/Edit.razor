@@ -1,0 +1,99 @@
+﻿@page "/cards/edit"
+@using Microsoft.EntityFrameworkCore
+@using BalatroWikiApp.Models
+@inject IDbContextFactory<BalatroWikiApp.Models.BalatroDBContext> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Edit</PageTitle>
+
+<h1>Edit</h1>
+
+<h2>Card</h2>
+<hr />
+@if (Card is null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-4">
+            <EditForm method="post" Model="Card" OnValidSubmit="UpdateCard" FormName="edit" Enhance>
+                <DataAnnotationsValidator />
+                <ValidationSummary role="alert"/>
+                <input type="hidden" name="Card.NumCard" value="@Card.NumCard" />
+                <div class="mb-3">
+                    <label for="namecard" class="form-label">NameCard:</label>
+                    <InputText id="namecard" @bind-Value="Card.NameCard" class="form-control" />
+                    <ValidationMessage For="() => Card.NameCard" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="familycard" class="form-label">FamilyCard:</label>
+                    <InputText id="familycard" @bind-Value="Card.FamilyCard" class="form-control" />
+                    <ValidationMessage For="() => Card.FamilyCard" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="isenhanced" class="form-label">IsEnhanced:</label>
+                    <InputCheckbox id="isenhanced" @bind-Value="Card.IsEnhanced" class="form-check-input" />
+                    <ValidationMessage For="() => Card.IsEnhanced" class="text-danger" />
+                </div>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </EditForm>
+        </div>
+    </div>
+}
+
+<div>
+    <a href="/cards">Back to List</a>
+</div>
+
+@code {
+    [SupplyParameterFromQuery]
+    private int NumCard { get; set; }
+
+    [SupplyParameterFromForm]
+    private Card? Card { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var context = DbFactory.CreateDbContext();
+        Card ??= await context.Cards.FirstOrDefaultAsync(m => m.NumCard == NumCard);
+
+        if (Card is null)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+    }
+
+    // To protect from overposting attacks, enable the specific properties you want to bind to.
+    // For more information, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
+    private async Task UpdateCard()
+    {
+        using var context = DbFactory.CreateDbContext();
+        context.Attach(Card!).State = EntityState.Modified;
+
+        try
+        {
+            await context.SaveChangesAsync();
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            if (!CardExists(Card!.NumCard))
+            {
+                NavigationManager.NavigateTo("notfound");
+            }
+            else
+            {
+                throw;
+            }
+        }
+
+        NavigationManager.NavigateTo("/cards");
+    }
+
+    private bool CardExists(int numcard)
+    {
+        using var context = DbFactory.CreateDbContext();
+        return context.Cards.Any(e => e.NumCard == numcard);
+    }
+}

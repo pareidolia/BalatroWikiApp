@@ -1,0 +1,59 @@
+﻿@page "/editions/delete"
+@using Microsoft.EntityFrameworkCore
+@using BalatroWikiApp.Models
+@inject IDbContextFactory<BalatroWikiApp.Models.BalatroDBContext> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Delete</PageTitle>
+
+<h1>Delete</h1>
+
+<p>Are you sure you want to delete this?</p>
+<div>
+    <h2>Edition</h2>
+    <hr />
+    @if (edition is null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else {
+        <dl class="row">
+            <dt class="col-sm-2">NameEdition</dt>
+            <dd class="col-sm-10">@edition.NameEdition</dd>
+        </dl>
+        <dl class="row">
+            <dt class="col-sm-2">EffectEdition</dt>
+            <dd class="col-sm-10">@edition.EffectEdition</dd>
+        </dl>
+        <EditForm method="post" Model="edition" OnValidSubmit="DeleteEdition" FormName="delete" Enhance>
+            <button type="submit" class="btn btn-danger" disabled="@(edition is null)">Delete</button> |
+            <a href="/editions">Back to List</a>
+        </EditForm>
+    }
+</div>
+
+@code {
+    private Edition? edition;
+
+    [SupplyParameterFromQuery]
+    private int IdEdition { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var context = DbFactory.CreateDbContext();
+        edition = await context.Editions.FirstOrDefaultAsync(m => m.IdEdition == IdEdition);
+
+        if (edition is null)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+    }
+
+    private async Task DeleteEdition()
+    {
+        using var context = DbFactory.CreateDbContext();
+        context.Editions.Remove(edition!);
+        await context.SaveChangesAsync();
+        NavigationManager.NavigateTo("/editions");
+    }
+}

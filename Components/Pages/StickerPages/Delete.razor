@@ -1,0 +1,63 @@
+﻿@page "/stickers/delete"
+@using Microsoft.EntityFrameworkCore
+@using BalatroWikiApp.Models
+@inject IDbContextFactory<BalatroWikiApp.Models.BalatroDBContext> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Delete</PageTitle>
+
+<h1>Delete</h1>
+
+<p>Are you sure you want to delete this?</p>
+<div>
+    <h2>Sticker</h2>
+    <hr />
+    @if (sticker is null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else {
+        <dl class="row">
+            <dt class="col-sm-2">NameSticker</dt>
+            <dd class="col-sm-10">@sticker.NameSticker</dd>
+        </dl>
+        <dl class="row">
+            <dt class="col-sm-2">DescriptionSticker</dt>
+            <dd class="col-sm-10">@sticker.DescriptionSticker</dd>
+        </dl>
+        <dl class="row">
+            <dt class="col-sm-2">EffectSticker</dt>
+            <dd class="col-sm-10">@sticker.EffectSticker</dd>
+        </dl>
+        <EditForm method="post" Model="sticker" OnValidSubmit="DeleteSticker" FormName="delete" Enhance>
+            <button type="submit" class="btn btn-danger" disabled="@(sticker is null)">Delete</button> |
+            <a href="/stickers">Back to List</a>
+        </EditForm>
+    }
+</div>
+
+@code {
+    private Sticker? sticker;
+
+    [SupplyParameterFromQuery]
+    private int IdSticker { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var context = DbFactory.CreateDbContext();
+        sticker = await context.Stickers.FirstOrDefaultAsync(m => m.IdSticker == IdSticker);
+
+        if (sticker is null)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+    }
+
+    private async Task DeleteSticker()
+    {
+        using var context = DbFactory.CreateDbContext();
+        context.Stickers.Remove(sticker!);
+        await context.SaveChangesAsync();
+        NavigationManager.NavigateTo("/stickers");
+    }
+}

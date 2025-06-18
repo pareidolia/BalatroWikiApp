@@ -1,0 +1,59 @@
+﻿@page "/vouchers/create"
+@using Microsoft.EntityFrameworkCore
+@using BalatroWikiApp.Models
+@inject IDbContextFactory<BalatroWikiApp.Models.BalatroDBContext> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Create</PageTitle>
+
+<h1>Create</h1>
+
+<h2>Voucher</h2>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <EditForm method="post" Model="Voucher" OnValidSubmit="AddVoucher" FormName="create" Enhance>
+            <DataAnnotationsValidator />
+            <ValidationSummary class="text-danger" role="alert"/>
+            <div class="mb-3">
+                <label for="namevoucher" class="form-label">NameVoucher:</label> 
+                <InputText id="namevoucher" @bind-Value="Voucher.NameVoucher" class="form-control" /> 
+                <ValidationMessage For="() => Voucher.NameVoucher" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="descriptionvoucher" class="form-label">DescriptionVoucher:</label> 
+                <InputText id="descriptionvoucher" @bind-Value="Voucher.DescriptionVoucher" class="form-control" /> 
+                <ValidationMessage For="() => Voucher.DescriptionVoucher" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="pricevoucher" class="form-label">PriceVoucher:</label> 
+                <InputNumber id="pricevoucher" @bind-Value="Voucher.PriceVoucher" class="form-control" /> 
+                <ValidationMessage For="() => Voucher.PriceVoucher" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="statevoucher" class="form-label">StateVoucher:</label> 
+                <InputCheckbox id="statevoucher" @bind-Value="Voucher.StateVoucher" class="form-check-input" /> 
+                <ValidationMessage For="() => Voucher.StateVoucher" class="text-danger" /> 
+            </div>        
+            <button type="submit" class="btn btn-primary">Create</button>
+        </EditForm>
+    </div>
+</div>
+
+<div>
+    <a href="/vouchers">Back to List</a>
+</div>
+
+@code {
+    [SupplyParameterFromForm]
+    private Voucher Voucher { get; set; } = new();
+
+    // To protect from overposting attacks, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
+    private async Task AddVoucher()
+    {
+        using var context = DbFactory.CreateDbContext();
+        context.Vouchers.Add(Voucher);
+        await context.SaveChangesAsync();
+        NavigationManager.NavigateTo("/vouchers");
+    }
+}
