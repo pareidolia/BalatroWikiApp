@@ -2,16 +2,33 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace BalatroWikiApp.Models;
 
+[Table("seals")]
+[MySqlCharSet("utf8mb3")]
+[MySqlCollation("utf8mb3_general_ci")]
 public partial class Seal
 {
+    [Key]
+    [Column("idSeal")]
     public int IdSeal { get; set; }
 
+    [Required]
+    [Column("nameSeal")]
+    [StringLength(20)]
     public string NameSeal { get; set; }
 
+    [Required]
+    [Column("effectSeal")]
+    [StringLength(20)]
     public string EffectSeal { get; set; }
 
+    [Required]
+    [Column("typeSeal")]
+    [StringLength(20)]
     public string TypeSeal { get; set; }
 }

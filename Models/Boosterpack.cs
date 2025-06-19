@@ -2,36 +2,72 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace BalatroWikiApp.Models;
 
+[PrimaryKey("IdJoker", "IdTarot", "IdSpectral", "NumCard")]
+[Table("boosterpack")]
+[Index("NumCard", Name = "fk_card")]
+[Index("IdSpectral", Name = "fk_spectral")]
+[Index("IdTarot", Name = "fk_tarot")]
+[MySqlCharSet("utf8mb3")]
+[MySqlCollation("utf8mb3_general_ci")]
 public partial class Boosterpack
 {
+    [Key]
+    [Column("idJoker")]
     public int IdJoker { get; set; }
 
+    [Key]
+    [Column("idTarot")]
     public int IdTarot { get; set; }
 
+    [Key]
+    [Column("idSpectral")]
     public int IdSpectral { get; set; }
 
+    [Key]
+    [Column("numCard")]
     public int NumCard { get; set; }
 
+    [Required]
+    [Column("namePack")]
+    [StringLength(50)]
     public string NamePack { get; set; }
 
+    [Column("numberPack")]
     public int NumberPack { get; set; }
 
+    [Column("numberChoices")]
     public int NumberChoices { get; set; }
 
+    [Column("numberProposition")]
     public int NumberProposition { get; set; }
 
+    [Required]
+    [Column("descriptionPack")]
+    [StringLength(200)]
     public string DescriptionPack { get; set; }
 
+    [Column("pricePack")]
     public int PricePack { get; set; }
 
+    [ForeignKey("IdJoker")]
+    [InverseProperty("Boosterpacks")]
     public virtual Joker IdJokerNavigation { get; set; }
 
+    [ForeignKey("IdSpectral")]
+    [InverseProperty("Boosterpacks")]
     public virtual Spectralcard IdSpectralNavigation { get; set; }
 
+    [ForeignKey("IdTarot")]
+    [InverseProperty("Boosterpacks")]
     public virtual Tarotcard IdTarotNavigation { get; set; }
 
+    [ForeignKey("NumCard")]
+    [InverseProperty("Boosterpacks")]
     public virtual Card NumCardNavigation { get; set; }
 }

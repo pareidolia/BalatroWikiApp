@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BalatroWikiApp.Migrations
 {
     [DbContext(typeof(BalatroDBContext))]
-    [Migration("20250617084635_InitialCreate")]
+    [Migration("20250619061902_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -129,7 +129,7 @@ namespace BalatroWikiApp.Migrations
                     b.HasKey("IdBlind")
                         .HasName("PRIMARY");
 
-                    b.ToTable("blinds", (string)null);
+                    b.ToTable("blinds");
 
                     MySqlEntityTypeBuilderExtensions.HasCharSet(b, "utf8mb3");
                     MySqlEntityTypeBuilderExtensions.UseCollation(b, "utf8mb3_general_ci");
@@ -191,7 +191,7 @@ namespace BalatroWikiApp.Migrations
 
                     b.HasIndex(new[] { "IdTarot" }, "fk_tarot");
 
-                    b.ToTable("boosterpack", (string)null);
+                    b.ToTable("boosterpack");
 
                     MySqlEntityTypeBuilderExtensions.HasCharSet(b, "utf8mb3");
                     MySqlEntityTypeBuilderExtensions.UseCollation(b, "utf8mb3_general_ci");
@@ -225,7 +225,7 @@ namespace BalatroWikiApp.Migrations
                     b.HasKey("NumCard")
                         .HasName("PRIMARY");
 
-                    b.ToTable("cards", (string)null);
+                    b.ToTable("cards");
 
                     MySqlEntityTypeBuilderExtensions.HasCharSet(b, "utf8mb3");
                     MySqlEntityTypeBuilderExtensions.UseCollation(b, "utf8mb3_general_ci");
@@ -253,7 +253,7 @@ namespace BalatroWikiApp.Migrations
                     b.HasKey("IdDeck")
                         .HasName("PRIMARY");
 
-                    b.ToTable("decks", (string)null);
+                    b.ToTable("decks");
 
                     MySqlEntityTypeBuilderExtensions.HasCharSet(b, "utf8mb3");
                     MySqlEntityTypeBuilderExtensions.UseCollation(b, "utf8mb3_general_ci");
@@ -283,7 +283,7 @@ namespace BalatroWikiApp.Migrations
                     b.HasKey("IdEdition")
                         .HasName("PRIMARY");
 
-                    b.ToTable("editions", (string)null);
+                    b.ToTable("editions");
 
                     MySqlEntityTypeBuilderExtensions.HasCharSet(b, "utf8mb3");
                     MySqlEntityTypeBuilderExtensions.UseCollation(b, "utf8mb3_general_ci");
@@ -319,7 +319,7 @@ namespace BalatroWikiApp.Migrations
                     b.HasKey("IdEnhanced")
                         .HasName("PRIMARY");
 
-                    b.ToTable("enhancedcards", (string)null);
+                    b.ToTable("enhancedcards");
 
                     MySqlEntityTypeBuilderExtensions.HasCharSet(b, "utf8mb3");
                     MySqlEntityTypeBuilderExtensions.UseCollation(b, "utf8mb3_general_ci");
@@ -372,7 +372,7 @@ namespace BalatroWikiApp.Migrations
                     b.HasKey("IdJoker")
                         .HasName("PRIMARY");
 
-                    b.ToTable("jokers", (string)null);
+                    b.ToTable("jokers");
 
                     MySqlEntityTypeBuilderExtensions.HasCharSet(b, "utf8mb3");
                     MySqlEntityTypeBuilderExtensions.UseCollation(b, "utf8mb3_general_ci");
@@ -402,7 +402,7 @@ namespace BalatroWikiApp.Migrations
                     b.HasKey("IdPlanet")
                         .HasName("PRIMARY");
 
-                    b.ToTable("planetcard", (string)null);
+                    b.ToTable("planetcard");
 
                     MySqlEntityTypeBuilderExtensions.HasCharSet(b, "utf8mb3");
                     MySqlEntityTypeBuilderExtensions.UseCollation(b, "utf8mb3_general_ci");
@@ -438,7 +438,7 @@ namespace BalatroWikiApp.Migrations
                     b.HasKey("IdSeal")
                         .HasName("PRIMARY");
 
-                    b.ToTable("seals", (string)null);
+                    b.ToTable("seals");
 
                     MySqlEntityTypeBuilderExtensions.HasCharSet(b, "utf8mb3");
                     MySqlEntityTypeBuilderExtensions.UseCollation(b, "utf8mb3_general_ci");
@@ -468,7 +468,7 @@ namespace BalatroWikiApp.Migrations
                     b.HasKey("IdSpectral")
                         .HasName("PRIMARY");
 
-                    b.ToTable("spectralcard", (string)null);
+                    b.ToTable("spectralcard");
 
                     MySqlEntityTypeBuilderExtensions.HasCharSet(b, "utf8mb3");
                     MySqlEntityTypeBuilderExtensions.UseCollation(b, "utf8mb3_general_ci");
@@ -504,7 +504,7 @@ namespace BalatroWikiApp.Migrations
                     b.HasKey("IdSticker")
                         .HasName("PRIMARY");
 
-                    b.ToTable("sticker", (string)null);
+                    b.ToTable("sticker");
 
                     MySqlEntityTypeBuilderExtensions.HasCharSet(b, "utf8mb3");
                     MySqlEntityTypeBuilderExtensions.UseCollation(b, "utf8mb3_general_ci");
@@ -534,7 +534,7 @@ namespace BalatroWikiApp.Migrations
                     b.HasKey("IdTag")
                         .HasName("PRIMARY");
 
-                    b.ToTable("tags", (string)null);
+                    b.ToTable("tags");
 
                     MySqlEntityTypeBuilderExtensions.HasCharSet(b, "utf8mb3");
                     MySqlEntityTypeBuilderExtensions.UseCollation(b, "utf8mb3_general_ci");
@@ -564,7 +564,7 @@ namespace BalatroWikiApp.Migrations
                     b.HasKey("IdTarot")
                         .HasName("PRIMARY");
 
-                    b.ToTable("tarotcard", (string)null);
+                    b.ToTable("tarotcard");
 
                     MySqlEntityTypeBuilderExtensions.HasCharSet(b, "utf8mb3");
                     MySqlEntityTypeBuilderExtensions.UseCollation(b, "utf8mb3_general_ci");
@@ -602,7 +602,7 @@ namespace BalatroWikiApp.Migrations
                     b.HasKey("IdVoucher")
                         .HasName("PRIMARY");
 
-                    b.ToTable("vouchers", (string)null);
+                    b.ToTable("vouchers");
 
                     MySqlEntityTypeBuilderExtensions.HasCharSet(b, "utf8mb3");
                     MySqlEntityTypeBuilderExtensions.UseCollation(b, "utf8mb3_general_ci");

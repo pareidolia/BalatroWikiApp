@@ -2,26 +2,49 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace BalatroWikiApp.Models;
 
+[Table("jokers")]
+[MySqlCharSet("utf8mb3")]
+[MySqlCollation("utf8mb3_general_ci")]
 public partial class Joker
 {
+    [Key]
+    [Column("idJoker")]
     public int IdJoker { get; set; }
 
+    [Required]
+    [Column("nameJoker")]
+    [StringLength(30)]
     public string NameJoker { get; set; }
 
+    [Required]
+    [Column("rarityJoker")]
+    [StringLength(30)]
     public string RarityJoker { get; set; }
 
+    [Column("priceJoker")]
     public int PriceJoker { get; set; }
 
+    [Column("typeJoker")]
+    [StringLength(20)]
     public string TypeJoker { get; set; }
 
+    [Column("descriptionJoker")]
+    [StringLength(200)]
     public string DescriptionJoker { get; set; }
 
+    [Column("sizeJoker")]
+    [Precision(3, 2)]
     public decimal? SizeJoker { get; set; }
 
+    [Column("hasFaceJoker")]
     public bool HasFaceJoker { get; set; }
 
+    [InverseProperty("IdJokerNavigation")]
     public virtual ICollection<Boosterpack> Boosterpacks { get; set; } = new List<Boosterpack>();
 }

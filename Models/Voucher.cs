@@ -2,18 +2,34 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace BalatroWikiApp.Models;
 
+[Table("vouchers")]
+[MySqlCharSet("utf8mb3")]
+[MySqlCollation("utf8mb3_general_ci")]
 public partial class Voucher
 {
+    [Key]
+    [Column("idVoucher")]
     public int IdVoucher { get; set; }
 
+    [Required]
+    [Column("nameVoucher")]
+    [StringLength(50)]
     public string NameVoucher { get; set; }
 
+    [Required]
+    [Column("descriptionVoucher")]
+    [StringLength(200)]
     public string DescriptionVoucher { get; set; }
 
+    [Column("priceVoucher")]
     public int PriceVoucher { get; set; }
 
+    [Column("stateVoucher")]
     public bool StateVoucher { get; set; }
 }

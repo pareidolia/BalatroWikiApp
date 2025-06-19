@@ -2,14 +2,28 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace BalatroWikiApp.Models;
 
+[Table("editions")]
+[MySqlCharSet("utf8mb3")]
+[MySqlCollation("utf8mb3_general_ci")]
 public partial class Edition
 {
+    [Key]
+    [Column("idEdition")]
     public int IdEdition { get; set; }
 
+    [Required]
+    [Column("nameEdition")]
+    [StringLength(50)]
     public string NameEdition { get; set; }
 
+    [Required]
+    [Column("effectEdition")]
+    [StringLength(50)]
     public string EffectEdition { get; set; }
 }
