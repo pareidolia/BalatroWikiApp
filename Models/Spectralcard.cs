@@ -2,16 +2,31 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace BalatroWikiApp.Models;
 
+[Table("spectralcard")]
+[MySqlCharSet("utf8mb3")]
+[MySqlCollation("utf8mb3_general_ci")]
 public partial class Spectralcard
 {
+    [Key]
+    [Column("idSpectral")]
     public int IdSpectral { get; set; }
 
+    [Required]
+    [Column("nameSpectral")]
+    [StringLength(50)]
     public string NameSpectral { get; set; }
 
+    [Required]
+    [Column("effectSpectral")]
+    [StringLength(200)]
     public string EffectSpectral { get; set; }
 
+    [InverseProperty("IdSpectralNavigation")]
     public virtual ICollection<Boosterpack> Boosterpacks { get; set; } = new List<Boosterpack>();
 }

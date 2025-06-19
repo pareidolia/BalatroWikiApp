@@ -2,16 +2,31 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace BalatroWikiApp.Models;
 
+[Table("tarotcard")]
+[MySqlCharSet("utf8mb3")]
+[MySqlCollation("utf8mb3_general_ci")]
 public partial class Tarotcard
 {
+    [Key]
+    [Column("idTarot")]
     public int IdTarot { get; set; }
 
+    [Required]
+    [Column("nameTarot")]
+    [StringLength(50)]
     public string NameTarot { get; set; }
 
+    [Required]
+    [Column("effectTarot")]
+    [StringLength(50)]
     public string EffectTarot { get; set; }
 
+    [InverseProperty("IdTarotNavigation")]
     public virtual ICollection<Boosterpack> Boosterpacks { get; set; } = new List<Boosterpack>();
 }

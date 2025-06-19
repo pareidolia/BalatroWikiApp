@@ -2,14 +2,28 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace BalatroWikiApp.Models;
 
+[Table("tags")]
+[MySqlCharSet("utf8mb3")]
+[MySqlCollation("utf8mb3_general_ci")]
 public partial class Tag
 {
+    [Key]
+    [Column("idTag")]
     public int IdTag { get; set; }
 
+    [Required]
+    [Column("nameTag")]
+    [StringLength(50)]
     public string NameTag { get; set; }
 
+    [Required]
+    [Column("effectTag")]
+    [StringLength(200)]
     public string EffectTag { get; set; }
 }

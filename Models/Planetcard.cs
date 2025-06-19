@@ -2,14 +2,28 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace BalatroWikiApp.Models;
 
+[Table("planetcard")]
+[MySqlCharSet("utf8mb3")]
+[MySqlCollation("utf8mb3_general_ci")]
 public partial class Planetcard
 {
+    [Key]
+    [Column("idPlanet")]
     public int IdPlanet { get; set; }
 
+    [Required]
+    [Column("namePlanet")]
+    [StringLength(50)]
     public string NamePlanet { get; set; }
 
+    [Required]
+    [Column("handPlanet")]
+    [StringLength(50)]
     public string HandPlanet { get; set; }
 }

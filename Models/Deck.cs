@@ -2,14 +2,26 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace BalatroWikiApp.Models;
 
+[Table("decks")]
+[MySqlCharSet("utf8mb3")]
+[MySqlCollation("utf8mb3_general_ci")]
 public partial class Deck
 {
+    [Key]
+    [Column("idDeck")]
     public int IdDeck { get; set; }
 
+    [Column("nameDeck")]
+    [StringLength(50)]
     public string NameDeck { get; set; }
 
+    [Column("descriptionDeck")]
+    [StringLength(200)]
     public string DescriptionDeck { get; set; }
 }

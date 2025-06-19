@@ -2,20 +2,39 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace BalatroWikiApp.Models;
 
+[Table("blinds")]
+[MySqlCharSet("utf8mb3")]
+[MySqlCollation("utf8mb3_general_ci")]
 public partial class Blind
 {
+    [Key]
+    [Column("idBlind")]
     public int IdBlind { get; set; }
 
+    [Required]
+    [Column("nameBlind")]
+    [StringLength(50)]
     public string NameBlind { get; set; }
 
+    [Column("anteBlind")]
     public int AnteBlind { get; set; }
 
+    [Required]
+    [Column("descriptionBlind")]
+    [StringLength(200)]
     public string DescriptionBlind { get; set; }
 
+    [Required]
+    [Column("effectBlind")]
+    [StringLength(50)]
     public string EffectBlind { get; set; }
 
+    [Column("rewardBlind")]
     public int RewardBlind { get; set; }
 }

@@ -2,16 +2,33 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace BalatroWikiApp.Models;
 
+[Table("enhancedcards")]
+[MySqlCharSet("utf8mb3")]
+[MySqlCollation("utf8mb3_general_ci")]
 public partial class Enhancedcard
 {
+    [Key]
+    [Column("idEnhanced")]
     public int IdEnhanced { get; set; }
 
+    [Required]
+    [Column("nameEnhanced")]
+    [StringLength(50)]
     public string NameEnhanced { get; set; }
 
+    [Required]
+    [Column("effectEnhanced")]
+    [StringLength(50)]
     public string EffectEnhanced { get; set; }
 
+    [Required]
+    [Column("typeEnhanced")]
+    [StringLength(20)]
     public string TypeEnhanced { get; set; }
 }

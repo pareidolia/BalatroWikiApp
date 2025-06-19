@@ -2,16 +2,33 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace BalatroWikiApp.Models;
 
+[Table("sticker")]
+[MySqlCharSet("utf8mb3")]
+[MySqlCollation("utf8mb3_general_ci")]
 public partial class Sticker
 {
+    [Key]
+    [Column("idSticker")]
     public int IdSticker { get; set; }
 
+    [Required]
+    [Column("nameSticker")]
+    [StringLength(50)]
     public string NameSticker { get; set; }
 
+    [Required]
+    [Column("descriptionSticker")]
+    [StringLength(200)]
     public string DescriptionSticker { get; set; }
 
+    [Required]
+    [Column("effectSticker")]
+    [StringLength(50)]
     public string EffectSticker { get; set; }
 }
