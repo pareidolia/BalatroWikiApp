@@ -21,15 +21,15 @@ else
             <EditForm method="post" Model="Tarotcard" OnValidSubmit="UpdateTarotcard" FormName="edit" Enhance>
                 <DataAnnotationsValidator />
                 <ValidationSummary role="alert"/>
-                <input type="hidden" name="Tarotcard.IdTarot" value="@Tarotcard.IdTarot" />
+                <input type="hidden" name="Tarotcard.Id" value="@Tarotcard.Id" />
                 <div class="mb-3">
                     <label for="nametarot" class="form-label">NameTarot:</label>
-                    <InputText id="nametarot" @bind-Value="Tarotcard.NameTarot" class="form-control" />
+                    <InputText id="nametarot" @bind-Value="Tarotcard.NameTarot" class="form-control" aria-required="true"/>
                     <ValidationMessage For="() => Tarotcard.NameTarot" class="text-danger" />
                 </div>
                 <div class="mb-3">
                     <label for="effecttarot" class="form-label">EffectTarot:</label>
-                    <InputText id="effecttarot" @bind-Value="Tarotcard.EffectTarot" class="form-control" />
+                    <InputText id="effecttarot" @bind-Value="Tarotcard.EffectTarot" class="form-control" aria-required="true"/>
                     <ValidationMessage For="() => Tarotcard.EffectTarot" class="text-danger" />
                 </div>
                 <button type="submit" class="btn btn-primary">Save</button>
@@ -44,7 +44,7 @@ else
 
 @code {
     [SupplyParameterFromQuery]
-    private int IdTarot { get; set; }
+    private int Id { get; set; }
 
     [SupplyParameterFromForm]
     private Tarotcard? Tarotcard { get; set; }
@@ -52,7 +52,7 @@ else
     protected override async Task OnInitializedAsync()
     {
         using var context = DbFactory.CreateDbContext();
-        Tarotcard ??= await context.Tarotcards.FirstOrDefaultAsync(m => m.IdTarot == IdTarot);
+        Tarotcard ??= await context.Tarotcards.FirstOrDefaultAsync(m => m.Id == Id);
 
         if (Tarotcard is null)
         {
@@ -73,7 +73,7 @@ else
         }
         catch (DbUpdateConcurrencyException)
         {
-            if (!TarotcardExists(Tarotcard!.IdTarot))
+            if (!TarotcardExists(Tarotcard!.Id))
             {
                 NavigationManager.NavigateTo("notfound");
             }
@@ -86,9 +86,9 @@ else
         NavigationManager.NavigateTo("/tarotcards");
     }
 
-    private bool TarotcardExists(int idtarot)
+    private bool TarotcardExists(int id)
     {
         using var context = DbFactory.CreateDbContext();
-        return context.Tarotcards.Any(e => e.IdTarot == idtarot);
+        return context.Tarotcards.Any(e => e.Id == id);
     }
 }

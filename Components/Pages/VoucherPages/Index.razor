@@ -1,8 +1,7 @@
 ﻿@page "/vouchers"
-@using Microsoft.AspNetCore.Authorization
-@attribute [Authorize]
 @using Microsoft.EntityFrameworkCore
 @using Microsoft.AspNetCore.Components.QuickGrid
+@using BalatroWikiApp.Models
 @using BalatroWikiApp.Models
 @implements IAsyncDisposable
 @inject IDbContextFactory<BalatroWikiApp.Models.BalatroDBContext> DbFactory
@@ -22,9 +21,9 @@
     <PropertyColumn Property="voucher => voucher.StateVoucher" />
 
     <TemplateColumn Context="voucher">
-        <a href="@($"vouchers/edit?idvoucher={voucher.IdVoucher}")">Edit</a> |
-        <a href="@($"vouchers/details?idvoucher={voucher.IdVoucher}")">Details</a> |
-        <a href="@($"vouchers/delete?idvoucher={voucher.IdVoucher}")">Delete</a>
+        <a href="@($"vouchers/edit?id={voucher.Id}")">Edit</a> |
+        <a href="@($"vouchers/details?id={voucher.Id}")">Details</a> |
+        <a href="@($"vouchers/delete?id={voucher.Id}")">Delete</a>
     </TemplateColumn>
 </QuickGrid>
 

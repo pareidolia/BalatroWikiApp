@@ -17,12 +17,12 @@
             <ValidationSummary class="text-danger" role="alert"/>
             <div class="mb-3">
                 <label for="nameedition" class="form-label">NameEdition:</label> 
-                <InputText id="nameedition" @bind-Value="Edition.NameEdition" class="form-control" /> 
+                <InputText id="nameedition" @bind-Value="Edition.NameEdition" class="form-control" aria-required="true"/> 
                 <ValidationMessage For="() => Edition.NameEdition" class="text-danger" /> 
             </div>        
             <div class="mb-3">
                 <label for="effectedition" class="form-label">EffectEdition:</label> 
-                <InputText id="effectedition" @bind-Value="Edition.EffectEdition" class="form-control" /> 
+                <InputText id="effectedition" @bind-Value="Edition.EffectEdition" class="form-control" aria-required="true"/> 
                 <ValidationMessage For="() => Edition.EffectEdition" class="text-danger" /> 
             </div>        
             <button type="submit" class="btn btn-primary">Create</button>

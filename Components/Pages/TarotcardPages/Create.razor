@@ -17,12 +17,12 @@
             <ValidationSummary class="text-danger" role="alert"/>
             <div class="mb-3">
                 <label for="nametarot" class="form-label">NameTarot:</label> 
-                <InputText id="nametarot" @bind-Value="Tarotcard.NameTarot" class="form-control" /> 
+                <InputText id="nametarot" @bind-Value="Tarotcard.NameTarot" class="form-control" aria-required="true"/> 
                 <ValidationMessage For="() => Tarotcard.NameTarot" class="text-danger" /> 
             </div>        
             <div class="mb-3">
                 <label for="effecttarot" class="form-label">EffectTarot:</label> 
-                <InputText id="effecttarot" @bind-Value="Tarotcard.EffectTarot" class="form-control" /> 
+                <InputText id="effecttarot" @bind-Value="Tarotcard.EffectTarot" class="form-control" aria-required="true"/> 
                 <ValidationMessage For="() => Tarotcard.EffectTarot" class="text-danger" /> 
             </div>        
             <button type="submit" class="btn btn-primary">Create</button>

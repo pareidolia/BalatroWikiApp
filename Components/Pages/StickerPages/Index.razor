@@ -1,8 +1,7 @@
 ﻿@page "/stickers"
-@using Microsoft.AspNetCore.Authorization
-@attribute [Authorize]
 @using Microsoft.EntityFrameworkCore
 @using Microsoft.AspNetCore.Components.QuickGrid
+@using BalatroWikiApp.Models
 @using BalatroWikiApp.Models
 @implements IAsyncDisposable
 @inject IDbContextFactory<BalatroWikiApp.Models.BalatroDBContext> DbFactory
@@ -21,9 +20,9 @@
     <PropertyColumn Property="sticker => sticker.EffectSticker" />
 
     <TemplateColumn Context="sticker">
-        <a href="@($"stickers/edit?idsticker={sticker.IdSticker}")">Edit</a> |
-        <a href="@($"stickers/details?idsticker={sticker.IdSticker}")">Details</a> |
-        <a href="@($"stickers/delete?idsticker={sticker.IdSticker}")">Delete</a>
+        <a href="@($"stickers/edit?id={sticker.Id}")">Edit</a> |
+        <a href="@($"stickers/details?id={sticker.Id}")">Details</a> |
+        <a href="@($"stickers/delete?id={sticker.Id}")">Delete</a>
     </TemplateColumn>
 </QuickGrid>
 

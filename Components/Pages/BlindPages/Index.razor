@@ -1,8 +1,7 @@
 ﻿@page "/blinds"
-@using Microsoft.AspNetCore.Authorization
-@attribute [Authorize]
 @using Microsoft.EntityFrameworkCore
 @using Microsoft.AspNetCore.Components.QuickGrid
+@using BalatroWikiApp.Models
 @using BalatroWikiApp.Models
 @implements IAsyncDisposable
 @inject IDbContextFactory<BalatroWikiApp.Models.BalatroDBContext> DbFactory
@@ -23,9 +22,9 @@
     <PropertyColumn Property="blind => blind.RewardBlind" />
 
     <TemplateColumn Context="blind">
-        <a href="@($"blinds/edit?idblind={blind.IdBlind}")">Edit</a> |
-        <a href="@($"blinds/details?idblind={blind.IdBlind}")">Details</a> |
-        <a href="@($"blinds/delete?idblind={blind.IdBlind}")">Delete</a>
+        <a href="@($"blinds/edit?id={blind.Id}")">Edit</a> |
+        <a href="@($"blinds/details?id={blind.Id}")">Details</a> |
+        <a href="@($"blinds/delete?id={blind.Id}")">Delete</a>
     </TemplateColumn>
 </QuickGrid>
 

@@ -17,12 +17,12 @@
             <ValidationSummary class="text-danger" role="alert"/>
             <div class="mb-3">
                 <label for="namejoker" class="form-label">NameJoker:</label> 
-                <InputText id="namejoker" @bind-Value="Joker.NameJoker" class="form-control" /> 
+                <InputText id="namejoker" @bind-Value="Joker.NameJoker" class="form-control" aria-required="true"/> 
                 <ValidationMessage For="() => Joker.NameJoker" class="text-danger" /> 
             </div>        
             <div class="mb-3">
                 <label for="rarityjoker" class="form-label">RarityJoker:</label> 
-                <InputText id="rarityjoker" @bind-Value="Joker.RarityJoker" class="form-control" /> 
+                <InputText id="rarityjoker" @bind-Value="Joker.RarityJoker" class="form-control" aria-required="true"/> 
                 <ValidationMessage For="() => Joker.RarityJoker" class="text-danger" /> 
             </div>        
             <div class="mb-3">
@@ -32,12 +32,12 @@
             </div>        
             <div class="mb-3">
                 <label for="typejoker" class="form-label">TypeJoker:</label> 
-                <InputText id="typejoker" @bind-Value="Joker.TypeJoker" class="form-control" /> 
+                <InputText id="typejoker" @bind-Value="Joker.TypeJoker" class="form-control" aria-required="true"/> 
                 <ValidationMessage For="() => Joker.TypeJoker" class="text-danger" /> 
             </div>        
             <div class="mb-3">
                 <label for="descriptionjoker" class="form-label">DescriptionJoker:</label> 
-                <InputText id="descriptionjoker" @bind-Value="Joker.DescriptionJoker" class="form-control" /> 
+                <InputText id="descriptionjoker" @bind-Value="Joker.DescriptionJoker" class="form-control" aria-required="true"/> 
                 <ValidationMessage For="() => Joker.DescriptionJoker" class="text-danger" /> 
             </div>        
             <div class="mb-3">

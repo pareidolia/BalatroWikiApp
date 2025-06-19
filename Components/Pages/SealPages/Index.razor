@@ -1,8 +1,7 @@
 ﻿@page "/seals"
-@using Microsoft.AspNetCore.Authorization
-@attribute [Authorize]
 @using Microsoft.EntityFrameworkCore
 @using Microsoft.AspNetCore.Components.QuickGrid
+@using BalatroWikiApp.Models
 @using BalatroWikiApp.Models
 @implements IAsyncDisposable
 @inject IDbContextFactory<BalatroWikiApp.Models.BalatroDBContext> DbFactory
@@ -21,9 +20,9 @@
     <PropertyColumn Property="seal => seal.TypeSeal" />
 
     <TemplateColumn Context="seal">
-        <a href="@($"seals/edit?idseal={seal.IdSeal}")">Edit</a> |
-        <a href="@($"seals/details?idseal={seal.IdSeal}")">Details</a> |
-        <a href="@($"seals/delete?idseal={seal.IdSeal}")">Delete</a>
+        <a href="@($"seals/edit?id={seal.Id}")">Edit</a> |
+        <a href="@($"seals/details?id={seal.Id}")">Details</a> |
+        <a href="@($"seals/delete?id={seal.Id}")">Delete</a>
     </TemplateColumn>
 </QuickGrid>
 

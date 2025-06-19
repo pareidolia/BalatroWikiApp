@@ -36,12 +36,12 @@
     private Edition? edition;
 
     [SupplyParameterFromQuery]
-    private int IdEdition { get; set; }
+    private int Id { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         using var context = DbFactory.CreateDbContext();
-        edition = await context.Editions.FirstOrDefaultAsync(m => m.IdEdition == IdEdition);
+        edition = await context.Editions.FirstOrDefaultAsync(m => m.Id == Id);
 
         if (edition is null)
         {

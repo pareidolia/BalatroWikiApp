@@ -21,15 +21,15 @@ else
             <EditForm method="post" Model="Card" OnValidSubmit="UpdateCard" FormName="edit" Enhance>
                 <DataAnnotationsValidator />
                 <ValidationSummary role="alert"/>
-                <input type="hidden" name="Card.NumCard" value="@Card.IdCard" />
+                <input type="hidden" name="Card.Id" value="@Card.Id" />
                 <div class="mb-3">
                     <label for="namecard" class="form-label">NameCard:</label>
-                    <InputText id="namecard" @bind-Value="Card.NameCard" class="form-control" />
+                    <InputText id="namecard" @bind-Value="Card.NameCard" class="form-control" aria-required="true"/>
                     <ValidationMessage For="() => Card.NameCard" class="text-danger" />
                 </div>
                 <div class="mb-3">
                     <label for="familycard" class="form-label">FamilyCard:</label>
-                    <InputText id="familycard" @bind-Value="Card.FamilyCard" class="form-control" />
+                    <InputText id="familycard" @bind-Value="Card.FamilyCard" class="form-control" aria-required="true"/>
                     <ValidationMessage For="() => Card.FamilyCard" class="text-danger" />
                 </div>
                 <div class="mb-3">
@@ -49,7 +49,7 @@ else
 
 @code {
     [SupplyParameterFromQuery]
-    private int NumCard { get; set; }
+    private int Id { get; set; }
 
     [SupplyParameterFromForm]
     private Card? Card { get; set; }
@@ -57,7 +57,7 @@ else
     protected override async Task OnInitializedAsync()
     {
         using var context = DbFactory.CreateDbContext();
-        Card ??= await context.Cards.FirstOrDefaultAsync(m => m.IdCard == NumCard);
+        Card ??= await context.Cards.FirstOrDefaultAsync(m => m.Id == Id);
 
         if (Card is null)
         {
@@ -78,7 +78,7 @@ else
         }
         catch (DbUpdateConcurrencyException)
         {
-            if (!CardExists(Card!.IdCard))
+            if (!CardExists(Card!.Id))
             {
                 NavigationManager.NavigateTo("notfound");
             }
@@ -91,9 +91,9 @@ else
         NavigationManager.NavigateTo("/cards");
     }
 
-    private bool CardExists(int numcard)
+    private bool CardExists(int id)
     {
         using var context = DbFactory.CreateDbContext();
-        return context.Cards.Any(e => e.IdCard == numcard);
+        return context.Cards.Any(e => e.Id == id);
     }
 }

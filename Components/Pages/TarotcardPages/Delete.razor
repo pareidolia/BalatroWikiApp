@@ -36,12 +36,12 @@
     private Tarotcard? tarotcard;
 
     [SupplyParameterFromQuery]
-    private int IdTarot { get; set; }
+    private int Id { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         using var context = DbFactory.CreateDbContext();
-        tarotcard = await context.Tarotcards.FirstOrDefaultAsync(m => m.IdTarot == IdTarot);
+        tarotcard = await context.Tarotcards.FirstOrDefaultAsync(m => m.Id == Id);
 
         if (tarotcard is null)
         {

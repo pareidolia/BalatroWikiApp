@@ -17,12 +17,12 @@
             <ValidationSummary class="text-danger" role="alert"/>
             <div class="mb-3">
                 <label for="namespectral" class="form-label">NameSpectral:</label> 
-                <InputText id="namespectral" @bind-Value="Spectralcard.NameSpectral" class="form-control" /> 
+                <InputText id="namespectral" @bind-Value="Spectralcard.NameSpectral" class="form-control" aria-required="true"/> 
                 <ValidationMessage For="() => Spectralcard.NameSpectral" class="text-danger" /> 
             </div>        
             <div class="mb-3">
                 <label for="effectspectral" class="form-label">EffectSpectral:</label> 
-                <InputText id="effectspectral" @bind-Value="Spectralcard.EffectSpectral" class="form-control" /> 
+                <InputText id="effectspectral" @bind-Value="Spectralcard.EffectSpectral" class="form-control" aria-required="true"/> 
                 <ValidationMessage For="() => Spectralcard.EffectSpectral" class="text-danger" /> 
             </div>        
             <button type="submit" class="btn btn-primary">Create</button>

@@ -48,12 +48,12 @@
     private Blind? blind;
 
     [SupplyParameterFromQuery]
-    private int IdBlind { get; set; }
+    private int Id { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         using var context = DbFactory.CreateDbContext();
-        blind = await context.Blinds.FirstOrDefaultAsync(m => m.IdBlind == IdBlind);
+        blind = await context.Blinds.FirstOrDefaultAsync(m => m.Id == Id);
 
         if (blind is null)
         {

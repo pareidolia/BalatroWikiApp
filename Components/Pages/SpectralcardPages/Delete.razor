@@ -36,12 +36,12 @@
     private Spectralcard? spectralcard;
 
     [SupplyParameterFromQuery]
-    private int IdSpectral { get; set; }
+    private int Id { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         using var context = DbFactory.CreateDbContext();
-        spectralcard = await context.Spectralcards.FirstOrDefaultAsync(m => m.IdSpectral == IdSpectral);
+        spectralcard = await context.Spectralcards.FirstOrDefaultAsync(m => m.Id == Id);
 
         if (spectralcard is null)
         {

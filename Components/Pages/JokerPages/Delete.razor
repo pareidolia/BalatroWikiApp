@@ -56,12 +56,12 @@
     private Joker? joker;
 
     [SupplyParameterFromQuery]
-    private int IdJoker { get; set; }
+    private int Id { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         using var context = DbFactory.CreateDbContext();
-        joker = await context.Jokers.FirstOrDefaultAsync(m => m.IdJoker == IdJoker);
+        joker = await context.Jokers.FirstOrDefaultAsync(m => m.Id == Id);
 
         if (joker is null)
         {

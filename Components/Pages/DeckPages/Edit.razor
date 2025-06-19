@@ -21,15 +21,15 @@ else
             <EditForm method="post" Model="Deck" OnValidSubmit="UpdateDeck" FormName="edit" Enhance>
                 <DataAnnotationsValidator />
                 <ValidationSummary role="alert"/>
-                <input type="hidden" name="Deck.IdDeck" value="@Deck.IdDeck" />
+                <input type="hidden" name="Deck.Id" value="@Deck.Id" />
                 <div class="mb-3">
                     <label for="namedeck" class="form-label">NameDeck:</label>
-                    <InputText id="namedeck" @bind-Value="Deck.NameDeck" class="form-control" />
+                    <InputText id="namedeck" @bind-Value="Deck.NameDeck" class="form-control" aria-required="true"/>
                     <ValidationMessage For="() => Deck.NameDeck" class="text-danger" />
                 </div>
                 <div class="mb-3">
                     <label for="descriptiondeck" class="form-label">DescriptionDeck:</label>
-                    <InputText id="descriptiondeck" @bind-Value="Deck.DescriptionDeck" class="form-control" />
+                    <InputText id="descriptiondeck" @bind-Value="Deck.DescriptionDeck" class="form-control" aria-required="true"/>
                     <ValidationMessage For="() => Deck.DescriptionDeck" class="text-danger" />
                 </div>
                 <button type="submit" class="btn btn-primary">Save</button>
@@ -44,7 +44,7 @@ else
 
 @code {
     [SupplyParameterFromQuery]
-    private int IdDeck { get; set; }
+    private int Id { get; set; }
 
     [SupplyParameterFromForm]
     private Deck? Deck { get; set; }
@@ -52,7 +52,7 @@ else
     protected override async Task OnInitializedAsync()
     {
         using var context = DbFactory.CreateDbContext();
-        Deck ??= await context.Decks.FirstOrDefaultAsync(m => m.IdDeck == IdDeck);
+        Deck ??= await context.Decks.FirstOrDefaultAsync(m => m.Id == Id);
 
         if (Deck is null)
         {
@@ -73,7 +73,7 @@ else
         }
         catch (DbUpdateConcurrencyException)
         {
-            if (!DeckExists(Deck!.IdDeck))
+            if (!DeckExists(Deck!.Id))
             {
                 NavigationManager.NavigateTo("notfound");
             }
@@ -86,9 +86,9 @@ else
         NavigationManager.NavigateTo("/decks");
     }
 
-    private bool DeckExists(int iddeck)
+    private bool DeckExists(int id)
     {
         using var context = DbFactory.CreateDbContext();
-        return context.Decks.Any(e => e.IdDeck == iddeck);
+        return context.Decks.Any(e => e.Id == id);
     }
 }

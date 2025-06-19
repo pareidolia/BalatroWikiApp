@@ -21,10 +21,10 @@ else
             <EditForm method="post" Model="Blind" OnValidSubmit="UpdateBlind" FormName="edit" Enhance>
                 <DataAnnotationsValidator />
                 <ValidationSummary role="alert"/>
-                <input type="hidden" name="Blind.IdBlind" value="@Blind.IdBlind" />
+                <input type="hidden" name="Blind.Id" value="@Blind.Id" />
                 <div class="mb-3">
                     <label for="nameblind" class="form-label">NameBlind:</label>
-                    <InputText id="nameblind" @bind-Value="Blind.NameBlind" class="form-control" />
+                    <InputText id="nameblind" @bind-Value="Blind.NameBlind" class="form-control" aria-required="true"/>
                     <ValidationMessage For="() => Blind.NameBlind" class="text-danger" />
                 </div>
                 <div class="mb-3">
@@ -34,12 +34,12 @@ else
                 </div>
                 <div class="mb-3">
                     <label for="descriptionblind" class="form-label">DescriptionBlind:</label>
-                    <InputText id="descriptionblind" @bind-Value="Blind.DescriptionBlind" class="form-control" />
+                    <InputText id="descriptionblind" @bind-Value="Blind.DescriptionBlind" class="form-control" aria-required="true"/>
                     <ValidationMessage For="() => Blind.DescriptionBlind" class="text-danger" />
                 </div>
                 <div class="mb-3">
                     <label for="effectblind" class="form-label">EffectBlind:</label>
-                    <InputText id="effectblind" @bind-Value="Blind.EffectBlind" class="form-control" />
+                    <InputText id="effectblind" @bind-Value="Blind.EffectBlind" class="form-control" aria-required="true"/>
                     <ValidationMessage For="() => Blind.EffectBlind" class="text-danger" />
                 </div>
                 <div class="mb-3">
@@ -59,7 +59,7 @@ else
 
 @code {
     [SupplyParameterFromQuery]
-    private int IdBlind { get; set; }
+    private int Id { get; set; }
 
     [SupplyParameterFromForm]
     private Blind? Blind { get; set; }
@@ -67,7 +67,7 @@ else
     protected override async Task OnInitializedAsync()
     {
         using var context = DbFactory.CreateDbContext();
-        Blind ??= await context.Blinds.FirstOrDefaultAsync(m => m.IdBlind == IdBlind);
+        Blind ??= await context.Blinds.FirstOrDefaultAsync(m => m.Id == Id);
 
         if (Blind is null)
         {
@@ -88,7 +88,7 @@ else
         }
         catch (DbUpdateConcurrencyException)
         {
-            if (!BlindExists(Blind!.IdBlind))
+            if (!BlindExists(Blind!.Id))
             {
                 NavigationManager.NavigateTo("notfound");
             }
@@ -101,9 +101,9 @@ else
         NavigationManager.NavigateTo("/blinds");
     }
 
-    private bool BlindExists(int idblind)
+    private bool BlindExists(int id)
     {
         using var context = DbFactory.CreateDbContext();
-        return context.Blinds.Any(e => e.IdBlind == idblind);
+        return context.Blinds.Any(e => e.Id == id);
     }
 }

@@ -40,12 +40,12 @@
     private Enhancedcard? enhancedcard;
 
     [SupplyParameterFromQuery]
-    private int IdEnhanced { get; set; }
+    private int Id { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         using var context = DbFactory.CreateDbContext();
-        enhancedcard = await context.Enhancedcards.FirstOrDefaultAsync(m => m.IdEnhanced == IdEnhanced);
+        enhancedcard = await context.Enhancedcards.FirstOrDefaultAsync(m => m.Id == Id);
 
         if (enhancedcard is null)
         {

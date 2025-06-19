@@ -29,7 +29,7 @@
             <dd class="col-sm-10">@blind.RewardBlind</dd>
         </dl>
         <div>
-            <a href="@($"/blinds/edit?idblind={blind.IdBlind}")">Edit</a> |
+            <a href="@($"/blinds/edit?id={blind.Id}")">Edit</a> |
             <a href="@($"/blinds")">Back to List</a>
         </div>
     }
@@ -39,12 +39,12 @@
     private Blind? blind;
 
     [SupplyParameterFromQuery]
-    private int IdBlind { get; set; }
+    private int Id { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         using var context = DbFactory.CreateDbContext();
-        blind = await context.Blinds.FirstOrDefaultAsync(m => m.IdBlind == IdBlind);
+        blind = await context.Blinds.FirstOrDefaultAsync(m => m.Id == Id);
 
         if (blind is null)
         {

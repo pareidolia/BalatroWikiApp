@@ -1,0 +1,31 @@
+﻿@page
+@model BalatroWikiApp.Components.Pages.DetailsModel
+
+<div>
+    <h4>Card</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Card.NameCard)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Card.NameCard)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Card.FamilyCard)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Card.FamilyCard)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Card.IsEnhanced)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Card.IsEnhanced)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Card.Id">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

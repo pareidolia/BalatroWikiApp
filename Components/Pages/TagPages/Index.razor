@@ -1,8 +1,7 @@
 ﻿@page "/tags"
-@using Microsoft.AspNetCore.Authorization
-@attribute [Authorize]
 @using Microsoft.EntityFrameworkCore
 @using Microsoft.AspNetCore.Components.QuickGrid
+@using BalatroWikiApp.Models
 @using BalatroWikiApp.Models
 @implements IAsyncDisposable
 @inject IDbContextFactory<BalatroWikiApp.Models.BalatroDBContext> DbFactory
@@ -20,9 +19,9 @@
     <PropertyColumn Property="tag => tag.EffectTag" />
 
     <TemplateColumn Context="tag">
-        <a href="@($"tags/edit?idtag={tag.IdTag}")">Edit</a> |
-        <a href="@($"tags/details?idtag={tag.IdTag}")">Details</a> |
-        <a href="@($"tags/delete?idtag={tag.IdTag}")">Delete</a>
+        <a href="@($"tags/edit?id={tag.Id}")">Edit</a> |
+        <a href="@($"tags/details?id={tag.Id}")">Details</a> |
+        <a href="@($"tags/delete?id={tag.Id}")">Delete</a>
     </TemplateColumn>
 </QuickGrid>
 

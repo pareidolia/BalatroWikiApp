@@ -23,7 +23,7 @@
             <dd class="col-sm-10">@spectralcard.EffectSpectral</dd>
         </dl>
         <div>
-            <a href="@($"/spectralcards/edit?idspectral={spectralcard.IdSpectral}")">Edit</a> |
+            <a href="@($"/spectralcards/edit?id={spectralcard.Id}")">Edit</a> |
             <a href="@($"/spectralcards")">Back to List</a>
         </div>
     }
@@ -33,12 +33,12 @@
     private Spectralcard? spectralcard;
 
     [SupplyParameterFromQuery]
-    private int IdSpectral { get; set; }
+    private int Id { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         using var context = DbFactory.CreateDbContext();
-        spectralcard = await context.Spectralcards.FirstOrDefaultAsync(m => m.IdSpectral == IdSpectral);
+        spectralcard = await context.Spectralcards.FirstOrDefaultAsync(m => m.Id == Id);
 
         if (spectralcard is null)
         {

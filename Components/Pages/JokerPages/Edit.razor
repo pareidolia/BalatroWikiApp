@@ -21,15 +21,15 @@ else
             <EditForm method="post" Model="Joker" OnValidSubmit="UpdateJoker" FormName="edit" Enhance>
                 <DataAnnotationsValidator />
                 <ValidationSummary role="alert"/>
-                <input type="hidden" name="Joker.IdJoker" value="@Joker.IdJoker" />
+                <input type="hidden" name="Joker.Id" value="@Joker.Id" />
                 <div class="mb-3">
                     <label for="namejoker" class="form-label">NameJoker:</label>
-                    <InputText id="namejoker" @bind-Value="Joker.NameJoker" class="form-control" />
+                    <InputText id="namejoker" @bind-Value="Joker.NameJoker" class="form-control" aria-required="true"/>
                     <ValidationMessage For="() => Joker.NameJoker" class="text-danger" />
                 </div>
                 <div class="mb-3">
                     <label for="rarityjoker" class="form-label">RarityJoker:</label>
-                    <InputText id="rarityjoker" @bind-Value="Joker.RarityJoker" class="form-control" />
+                    <InputText id="rarityjoker" @bind-Value="Joker.RarityJoker" class="form-control" aria-required="true"/>
                     <ValidationMessage For="() => Joker.RarityJoker" class="text-danger" />
                 </div>
                 <div class="mb-3">
@@ -39,12 +39,12 @@ else
                 </div>
                 <div class="mb-3">
                     <label for="typejoker" class="form-label">TypeJoker:</label>
-                    <InputText id="typejoker" @bind-Value="Joker.TypeJoker" class="form-control" />
+                    <InputText id="typejoker" @bind-Value="Joker.TypeJoker" class="form-control" aria-required="true"/>
                     <ValidationMessage For="() => Joker.TypeJoker" class="text-danger" />
                 </div>
                 <div class="mb-3">
                     <label for="descriptionjoker" class="form-label">DescriptionJoker:</label>
-                    <InputText id="descriptionjoker" @bind-Value="Joker.DescriptionJoker" class="form-control" />
+                    <InputText id="descriptionjoker" @bind-Value="Joker.DescriptionJoker" class="form-control" aria-required="true"/>
                     <ValidationMessage For="() => Joker.DescriptionJoker" class="text-danger" />
                 </div>
                 <div class="mb-3">
@@ -69,7 +69,7 @@ else
 
 @code {
     [SupplyParameterFromQuery]
-    private int IdJoker { get; set; }
+    private int Id { get; set; }
 
     [SupplyParameterFromForm]
     private Joker? Joker { get; set; }
@@ -77,7 +77,7 @@ else
     protected override async Task OnInitializedAsync()
     {
         using var context = DbFactory.CreateDbContext();
-        Joker ??= await context.Jokers.FirstOrDefaultAsync(m => m.IdJoker == IdJoker);
+        Joker ??= await context.Jokers.FirstOrDefaultAsync(m => m.Id == Id);
 
         if (Joker is null)
         {
@@ -98,7 +98,7 @@ else
         }
         catch (DbUpdateConcurrencyException)
         {
-            if (!JokerExists(Joker!.IdJoker))
+            if (!JokerExists(Joker!.Id))
             {
                 NavigationManager.NavigateTo("notfound");
             }
@@ -111,9 +111,9 @@ else
         NavigationManager.NavigateTo("/jokers");
     }
 
-    private bool JokerExists(int idjoker)
+    private bool JokerExists(int id)
     {
         using var context = DbFactory.CreateDbContext();
-        return context.Jokers.Any(e => e.IdJoker == idjoker);
+        return context.Jokers.Any(e => e.Id == id);
     }
 }

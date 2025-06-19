@@ -40,12 +40,12 @@
     private Sticker? sticker;
 
     [SupplyParameterFromQuery]
-    private int IdSticker { get; set; }
+    private int Id { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         using var context = DbFactory.CreateDbContext();
-        sticker = await context.Stickers.FirstOrDefaultAsync(m => m.IdSticker == IdSticker);
+        sticker = await context.Stickers.FirstOrDefaultAsync(m => m.Id == Id);
 
         if (sticker is null)
         {

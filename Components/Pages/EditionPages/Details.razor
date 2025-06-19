@@ -23,7 +23,7 @@
             <dd class="col-sm-10">@edition.EffectEdition</dd>
         </dl>
         <div>
-            <a href="@($"/editions/edit?idedition={edition.IdEdition}")">Edit</a> |
+            <a href="@($"/editions/edit?id={edition.Id}")">Edit</a> |
             <a href="@($"/editions")">Back to List</a>
         </div>
     }
@@ -33,12 +33,12 @@
     private Edition? edition;
 
     [SupplyParameterFromQuery]
-    private int IdEdition { get; set; }
+    private int Id { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         using var context = DbFactory.CreateDbContext();
-        edition = await context.Editions.FirstOrDefaultAsync(m => m.IdEdition == IdEdition);
+        edition = await context.Editions.FirstOrDefaultAsync(m => m.Id == Id);
 
         if (edition is null)
         {

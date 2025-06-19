@@ -21,20 +21,20 @@ else
             <EditForm method="post" Model="Enhancedcard" OnValidSubmit="UpdateEnhancedcard" FormName="edit" Enhance>
                 <DataAnnotationsValidator />
                 <ValidationSummary role="alert"/>
-                <input type="hidden" name="Enhancedcard.IdEnhanced" value="@Enhancedcard.IdEnhanced" />
+                <input type="hidden" name="Enhancedcard.Id" value="@Enhancedcard.Id" />
                 <div class="mb-3">
                     <label for="nameenhanced" class="form-label">NameEnhanced:</label>
-                    <InputText id="nameenhanced" @bind-Value="Enhancedcard.NameEnhanced" class="form-control" />
+                    <InputText id="nameenhanced" @bind-Value="Enhancedcard.NameEnhanced" class="form-control" aria-required="true"/>
                     <ValidationMessage For="() => Enhancedcard.NameEnhanced" class="text-danger" />
                 </div>
                 <div class="mb-3">
                     <label for="effectenhanced" class="form-label">EffectEnhanced:</label>
-                    <InputText id="effectenhanced" @bind-Value="Enhancedcard.EffectEnhanced" class="form-control" />
+                    <InputText id="effectenhanced" @bind-Value="Enhancedcard.EffectEnhanced" class="form-control" aria-required="true"/>
                     <ValidationMessage For="() => Enhancedcard.EffectEnhanced" class="text-danger" />
                 </div>
                 <div class="mb-3">
                     <label for="typeenhanced" class="form-label">TypeEnhanced:</label>
-                    <InputText id="typeenhanced" @bind-Value="Enhancedcard.TypeEnhanced" class="form-control" />
+                    <InputText id="typeenhanced" @bind-Value="Enhancedcard.TypeEnhanced" class="form-control" aria-required="true"/>
                     <ValidationMessage For="() => Enhancedcard.TypeEnhanced" class="text-danger" />
                 </div>
                 <button type="submit" class="btn btn-primary">Save</button>
@@ -49,7 +49,7 @@ else
 
 @code {
     [SupplyParameterFromQuery]
-    private int IdEnhanced { get; set; }
+    private int Id { get; set; }
 
     [SupplyParameterFromForm]
     private Enhancedcard? Enhancedcard { get; set; }
@@ -57,7 +57,7 @@ else
     protected override async Task OnInitializedAsync()
     {
         using var context = DbFactory.CreateDbContext();
-        Enhancedcard ??= await context.Enhancedcards.FirstOrDefaultAsync(m => m.IdEnhanced == IdEnhanced);
+        Enhancedcard ??= await context.Enhancedcards.FirstOrDefaultAsync(m => m.Id == Id);
 
         if (Enhancedcard is null)
         {
@@ -78,7 +78,7 @@ else
         }
         catch (DbUpdateConcurrencyException)
         {
-            if (!EnhancedcardExists(Enhancedcard!.IdEnhanced))
+            if (!EnhancedcardExists(Enhancedcard!.Id))
             {
                 NavigationManager.NavigateTo("notfound");
             }
@@ -91,9 +91,9 @@ else
         NavigationManager.NavigateTo("/enhancedcards");
     }
 
-    private bool EnhancedcardExists(int idenhanced)
+    private bool EnhancedcardExists(int id)
     {
         using var context = DbFactory.CreateDbContext();
-        return context.Enhancedcards.Any(e => e.IdEnhanced == idenhanced);
+        return context.Enhancedcards.Any(e => e.Id == id);
     }
 }

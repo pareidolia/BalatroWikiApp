@@ -36,12 +36,12 @@
     private Tag? tag;
 
     [SupplyParameterFromQuery]
-    private int IdTag { get; set; }
+    private int Id { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         using var context = DbFactory.CreateDbContext();
-        tag = await context.Tags.FirstOrDefaultAsync(m => m.IdTag == IdTag);
+        tag = await context.Tags.FirstOrDefaultAsync(m => m.Id == Id);
 
         if (tag is null)
         {

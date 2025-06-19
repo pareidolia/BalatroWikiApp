@@ -21,15 +21,15 @@ else
             <EditForm method="post" Model="Spectralcard" OnValidSubmit="UpdateSpectralcard" FormName="edit" Enhance>
                 <DataAnnotationsValidator />
                 <ValidationSummary role="alert"/>
-                <input type="hidden" name="Spectralcard.IdSpectral" value="@Spectralcard.IdSpectral" />
+                <input type="hidden" name="Spectralcard.Id" value="@Spectralcard.Id" />
                 <div class="mb-3">
                     <label for="namespectral" class="form-label">NameSpectral:</label>
-                    <InputText id="namespectral" @bind-Value="Spectralcard.NameSpectral" class="form-control" />
+                    <InputText id="namespectral" @bind-Value="Spectralcard.NameSpectral" class="form-control" aria-required="true"/>
                     <ValidationMessage For="() => Spectralcard.NameSpectral" class="text-danger" />
                 </div>
                 <div class="mb-3">
                     <label for="effectspectral" class="form-label">EffectSpectral:</label>
-                    <InputText id="effectspectral" @bind-Value="Spectralcard.EffectSpectral" class="form-control" />
+                    <InputText id="effectspectral" @bind-Value="Spectralcard.EffectSpectral" class="form-control" aria-required="true"/>
                     <ValidationMessage For="() => Spectralcard.EffectSpectral" class="text-danger" />
                 </div>
                 <button type="submit" class="btn btn-primary">Save</button>
@@ -44,7 +44,7 @@ else
 
 @code {
     [SupplyParameterFromQuery]
-    private int IdSpectral { get; set; }
+    private int Id { get; set; }
 
     [SupplyParameterFromForm]
     private Spectralcard? Spectralcard { get; set; }
@@ -52,7 +52,7 @@ else
     protected override async Task OnInitializedAsync()
     {
         using var context = DbFactory.CreateDbContext();
-        Spectralcard ??= await context.Spectralcards.FirstOrDefaultAsync(m => m.IdSpectral == IdSpectral);
+        Spectralcard ??= await context.Spectralcards.FirstOrDefaultAsync(m => m.Id == Id);
 
         if (Spectralcard is null)
         {
@@ -73,7 +73,7 @@ else
         }
         catch (DbUpdateConcurrencyException)
         {
-            if (!SpectralcardExists(Spectralcard!.IdSpectral))
+            if (!SpectralcardExists(Spectralcard!.Id))
             {
                 NavigationManager.NavigateTo("notfound");
             }
@@ -86,9 +86,9 @@ else
         NavigationManager.NavigateTo("/spectralcards");
     }
 
-    private bool SpectralcardExists(int idspectral)
+    private bool SpectralcardExists(int id)
     {
         using var context = DbFactory.CreateDbContext();
-        return context.Spectralcards.Any(e => e.IdSpectral == idspectral);
+        return context.Spectralcards.Any(e => e.Id == id);
     }
 }

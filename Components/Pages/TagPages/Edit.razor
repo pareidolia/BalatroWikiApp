@@ -21,15 +21,15 @@ else
             <EditForm method="post" Model="Tag" OnValidSubmit="UpdateTag" FormName="edit" Enhance>
                 <DataAnnotationsValidator />
                 <ValidationSummary role="alert"/>
-                <input type="hidden" name="Tag.IdTag" value="@Tag.IdTag" />
+                <input type="hidden" name="Tag.Id" value="@Tag.Id" />
                 <div class="mb-3">
                     <label for="nametag" class="form-label">NameTag:</label>
-                    <InputText id="nametag" @bind-Value="Tag.NameTag" class="form-control" />
+                    <InputText id="nametag" @bind-Value="Tag.NameTag" class="form-control" aria-required="true"/>
                     <ValidationMessage For="() => Tag.NameTag" class="text-danger" />
                 </div>
                 <div class="mb-3">
                     <label for="effecttag" class="form-label">EffectTag:</label>
-                    <InputText id="effecttag" @bind-Value="Tag.EffectTag" class="form-control" />
+                    <InputText id="effecttag" @bind-Value="Tag.EffectTag" class="form-control" aria-required="true"/>
                     <ValidationMessage For="() => Tag.EffectTag" class="text-danger" />
                 </div>
                 <button type="submit" class="btn btn-primary">Save</button>
@@ -44,7 +44,7 @@ else
 
 @code {
     [SupplyParameterFromQuery]
-    private int IdTag { get; set; }
+    private int Id { get; set; }
 
     [SupplyParameterFromForm]
     private Tag? Tag { get; set; }
@@ -52,7 +52,7 @@ else
     protected override async Task OnInitializedAsync()
     {
         using var context = DbFactory.CreateDbContext();
-        Tag ??= await context.Tags.FirstOrDefaultAsync(m => m.IdTag == IdTag);
+        Tag ??= await context.Tags.FirstOrDefaultAsync(m => m.Id == Id);
 
         if (Tag is null)
         {
@@ -73,7 +73,7 @@ else
         }
         catch (DbUpdateConcurrencyException)
         {
-            if (!TagExists(Tag!.IdTag))
+            if (!TagExists(Tag!.Id))
             {
                 NavigationManager.NavigateTo("notfound");
             }
@@ -86,9 +86,9 @@ else
         NavigationManager.NavigateTo("/tags");
     }
 
-    private bool TagExists(int idtag)
+    private bool TagExists(int id)
     {
         using var context = DbFactory.CreateDbContext();
-        return context.Tags.Any(e => e.IdTag == idtag);
+        return context.Tags.Any(e => e.Id == id);
     }
 }

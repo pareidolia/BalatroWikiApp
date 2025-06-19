@@ -1,8 +1,7 @@
 ﻿@page "/decks"
-@using Microsoft.AspNetCore.Authorization
-@attribute [Authorize]
 @using Microsoft.EntityFrameworkCore
 @using Microsoft.AspNetCore.Components.QuickGrid
+@using BalatroWikiApp.Models
 @using BalatroWikiApp.Models
 @implements IAsyncDisposable
 @inject IDbContextFactory<BalatroWikiApp.Models.BalatroDBContext> DbFactory
@@ -20,9 +19,9 @@
     <PropertyColumn Property="deck => deck.DescriptionDeck" />
 
     <TemplateColumn Context="deck">
-        <a href="@($"decks/edit?iddeck={deck.IdDeck}")">Edit</a> |
-        <a href="@($"decks/details?iddeck={deck.IdDeck}")">Details</a> |
-        <a href="@($"decks/delete?iddeck={deck.IdDeck}")">Delete</a>
+        <a href="@($"decks/edit?id={deck.Id}")">Edit</a> |
+        <a href="@($"decks/details?id={deck.Id}")">Details</a> |
+        <a href="@($"decks/delete?id={deck.Id}")">Delete</a>
     </TemplateColumn>
 </QuickGrid>
 

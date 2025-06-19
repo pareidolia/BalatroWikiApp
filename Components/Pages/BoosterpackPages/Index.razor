@@ -1,8 +1,7 @@
 ﻿@page "/boosterpacks"
-@using Microsoft.AspNetCore.Authorization
-@attribute [Authorize]
 @using Microsoft.EntityFrameworkCore
 @using Microsoft.AspNetCore.Components.QuickGrid
+@using BalatroWikiApp.Models
 @using BalatroWikiApp.Models
 @implements IAsyncDisposable
 @inject IDbContextFactory<BalatroWikiApp.Models.BalatroDBContext> DbFactory
@@ -16,6 +15,10 @@
 </p>
 
 <QuickGrid Class="table" Items="context.Boosterpacks">
+    <PropertyColumn Property="boosterpack => boosterpack.IdJoker" />
+    <PropertyColumn Property="boosterpack => boosterpack.IdTarot" />
+    <PropertyColumn Property="boosterpack => boosterpack.IdSpectral" />
+    <PropertyColumn Property="boosterpack => boosterpack.IdCard" />
     <PropertyColumn Property="boosterpack => boosterpack.NamePack" />
     <PropertyColumn Property="boosterpack => boosterpack.NumberPack" />
     <PropertyColumn Property="boosterpack => boosterpack.NumberChoices" />
@@ -24,9 +27,9 @@
     <PropertyColumn Property="boosterpack => boosterpack.PricePack" />
 
     <TemplateColumn Context="boosterpack">
-        <a href="@($"boosterpacks/edit?idjoker={boosterpack.IdJoker}")">Edit</a> |
-        <a href="@($"boosterpacks/details?idjoker={boosterpack.IdJoker}")">Details</a> |
-        <a href="@($"boosterpacks/delete?idjoker={boosterpack.IdJoker}")">Delete</a>
+        <a href="@($"boosterpacks/edit?id={boosterpack.Id}")">Edit</a> |
+        <a href="@($"boosterpacks/details?id={boosterpack.Id}")">Details</a> |
+        <a href="@($"boosterpacks/delete?id={boosterpack.Id}")">Delete</a>
     </TemplateColumn>
 </QuickGrid>
 

@@ -21,10 +21,30 @@ else
             <EditForm method="post" Model="Boosterpack" OnValidSubmit="UpdateBoosterpack" FormName="edit" Enhance>
                 <DataAnnotationsValidator />
                 <ValidationSummary role="alert"/>
-                <input type="hidden" name="Boosterpack.IdJoker" value="@Boosterpack.IdJoker" />
+                <input type="hidden" name="Boosterpack.Id" value="@Boosterpack.Id" />
+                <div class="mb-3">
+                    <label for="idjoker" class="form-label">IdJoker:</label>
+                    <InputNumber id="idjoker" @bind-Value="Boosterpack.IdJoker" class="form-control" />
+                    <ValidationMessage For="() => Boosterpack.IdJoker" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="idtarot" class="form-label">IdTarot:</label>
+                    <InputNumber id="idtarot" @bind-Value="Boosterpack.IdTarot" class="form-control" />
+                    <ValidationMessage For="() => Boosterpack.IdTarot" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="idspectral" class="form-label">IdSpectral:</label>
+                    <InputNumber id="idspectral" @bind-Value="Boosterpack.IdSpectral" class="form-control" />
+                    <ValidationMessage For="() => Boosterpack.IdSpectral" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="idcard" class="form-label">IdCard:</label>
+                    <InputNumber id="idcard" @bind-Value="Boosterpack.IdCard" class="form-control" />
+                    <ValidationMessage For="() => Boosterpack.IdCard" class="text-danger" />
+                </div>
                 <div class="mb-3">
                     <label for="namepack" class="form-label">NamePack:</label>
-                    <InputText id="namepack" @bind-Value="Boosterpack.NamePack" class="form-control" />
+                    <InputText id="namepack" @bind-Value="Boosterpack.NamePack" class="form-control" aria-required="true"/>
                     <ValidationMessage For="() => Boosterpack.NamePack" class="text-danger" />
                 </div>
                 <div class="mb-3">
@@ -44,7 +64,7 @@ else
                 </div>
                 <div class="mb-3">
                     <label for="descriptionpack" class="form-label">DescriptionPack:</label>
-                    <InputText id="descriptionpack" @bind-Value="Boosterpack.DescriptionPack" class="form-control" />
+                    <InputText id="descriptionpack" @bind-Value="Boosterpack.DescriptionPack" class="form-control" aria-required="true"/>
                     <ValidationMessage For="() => Boosterpack.DescriptionPack" class="text-danger" />
                 </div>
                 <div class="mb-3">
@@ -64,7 +84,7 @@ else
 
 @code {
     [SupplyParameterFromQuery]
-    private int IdJoker { get; set; }
+    private int Id { get; set; }
 
     [SupplyParameterFromForm]
     private Boosterpack? Boosterpack { get; set; }
@@ -72,7 +92,7 @@ else
     protected override async Task OnInitializedAsync()
     {
         using var context = DbFactory.CreateDbContext();
-        Boosterpack ??= await context.Boosterpacks.FirstOrDefaultAsync(m => m.IdJoker == IdJoker);
+        Boosterpack ??= await context.Boosterpacks.FirstOrDefaultAsync(m => m.Id == Id);
 
         if (Boosterpack is null)
         {
@@ -93,7 +113,7 @@ else
         }
         catch (DbUpdateConcurrencyException)
         {
-            if (!BoosterpackExists(Boosterpack!.IdJoker))
+            if (!BoosterpackExists(Boosterpack!.Id))
             {
                 NavigationManager.NavigateTo("notfound");
             }
@@ -106,9 +126,9 @@ else
         NavigationManager.NavigateTo("/boosterpacks");
     }
 
-    private bool BoosterpackExists(int idjoker)
+    private bool BoosterpackExists(int id)
     {
         using var context = DbFactory.CreateDbContext();
-        return context.Boosterpacks.Any(e => e.IdJoker == idjoker);
+        return context.Boosterpacks.Any(e => e.Id == id);
     }
 }
