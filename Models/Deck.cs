@@ -15,10 +15,12 @@ public partial class Deck
     [Column("idDeck")]
     public int IdDeck { get; set; }
 
+    [Required]
     [Column("nameDeck")]
     [StringLength(50)]
     public string NameDeck { get; set; }
 
+    [Required]
     [Column("descriptionDeck")]
     [StringLength(200)]
     public string DescriptionDeck { get; set; }

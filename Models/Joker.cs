@@ -28,10 +28,12 @@ public partial class Joker
     [Column("priceJoker")]
     public int PriceJoker { get; set; }
 
+    [Required]
     [Column("typeJoker")]
     [StringLength(20)]
     public string TypeJoker { get; set; }
 
+    [Required]
     [Column("descriptionJoker")]
     [StringLength(200)]
     public string DescriptionJoker { get; set; }
