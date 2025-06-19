@@ -98,7 +98,7 @@ namespace BalatroWikiApp.Migrations
                 name: "cards",
                 columns: table => new
                 {
-                    numCard = table.Column<int>(type: "int", nullable: false)
+                    idCard = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     nameCard = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false, collation: "utf8mb4_0900_ai_ci")
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -108,7 +108,7 @@ namespace BalatroWikiApp.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PRIMARY", x => x.numCard);
+                    table.PrimaryKey("PRIMARY", x => x.idCard);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4")
                 .Annotation("Relational:Collation", "utf8mb4_0900_ai_ci");
@@ -119,9 +119,9 @@ namespace BalatroWikiApp.Migrations
                 {
                     idDeck = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    nameDeck = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true, collation: "utf8mb4_0900_ai_ci")
+                    nameDeck = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false, collation: "utf8mb4_0900_ai_ci")
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    descriptionDeck = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: true, collation: "utf8mb4_0900_ai_ci")
+                    descriptionDeck = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: false, collation: "utf8mb4_0900_ai_ci")
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
@@ -180,9 +180,9 @@ namespace BalatroWikiApp.Migrations
                     rarityJoker = table.Column<string>(type: "varchar(30)", maxLength: 30, nullable: false, collation: "utf8mb4_0900_ai_ci")
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     priceJoker = table.Column<int>(type: "int", nullable: false),
-                    typeJoker = table.Column<string>(type: "varchar(20)", maxLength: 20, nullable: true, collation: "utf8mb4_0900_ai_ci")
+                    typeJoker = table.Column<string>(type: "varchar(20)", maxLength: 20, nullable: false, collation: "utf8mb4_0900_ai_ci")
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    descriptionJoker = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: true, collation: "utf8mb4_0900_ai_ci")
+                    descriptionJoker = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: false, collation: "utf8mb4_0900_ai_ci")
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     sizeJoker = table.Column<decimal>(type: "decimal(3,2)", precision: 3, scale: 2, nullable: true),
                     hasFaceJoker = table.Column<bool>(type: "tinyint(1)", nullable: false)
@@ -462,10 +462,12 @@ namespace BalatroWikiApp.Migrations
                 name: "boosterpack",
                 columns: table => new
                 {
+                    idBoosterpack = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     idJoker = table.Column<int>(type: "int", nullable: false),
                     idTarot = table.Column<int>(type: "int", nullable: false),
                     idSpectral = table.Column<int>(type: "int", nullable: false),
-                    numCard = table.Column<int>(type: "int", nullable: false),
+                    idCard = table.Column<int>(type: "int", nullable: false),
                     namePack = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false, collation: "utf8mb4_0900_ai_ci")
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     numberPack = table.Column<int>(type: "int", nullable: false),
@@ -477,13 +479,12 @@ namespace BalatroWikiApp.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PRIMARY", x => new { x.idJoker, x.idTarot, x.idSpectral, x.numCard })
-                        .Annotation("MySql:IndexPrefixLength", new[] { 0, 0, 0, 0 });
+                    table.PrimaryKey("PRIMARY", x => x.idBoosterpack);
                     table.ForeignKey(
                         name: "fk_card",
-                        column: x => x.numCard,
+                        column: x => x.idCard,
                         principalTable: "cards",
-                        principalColumn: "numCard");
+                        principalColumn: "idCard");
                     table.ForeignKey(
                         name: "fk_joker",
                         column: x => x.idJoker,
@@ -543,7 +544,12 @@ namespace BalatroWikiApp.Migrations
             migrationBuilder.CreateIndex(
                 name: "fk_card",
                 table: "boosterpack",
-                column: "numCard");
+                column: "idCard");
+
+            migrationBuilder.CreateIndex(
+                name: "fk_joker",
+                table: "boosterpack",
+                column: "idJoker");
 
             migrationBuilder.CreateIndex(
                 name: "fk_spectral",

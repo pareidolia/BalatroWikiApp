@@ -56,9 +56,8 @@ public partial class BalatroDBContext : IdentityDbContext<ApplicationUser>
 
         modelBuilder.Entity<Boosterpack>(entity =>
         {
-            entity.HasKey(e => new { e.IdJoker, e.IdTarot, e.IdSpectral, e.NumCard })
-                .HasName("PRIMARY")
-                .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0, 0, 0 });
+            entity.HasKey(e => new { e.IdBoosterpack })
+                .HasName("PRIMARY");
 
             entity.HasOne(d => d.IdJokerNavigation).WithMany(p => p.Boosterpacks)
                 .OnDelete(DeleteBehavior.ClientSetNull)
@@ -72,14 +71,14 @@ public partial class BalatroDBContext : IdentityDbContext<ApplicationUser>
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_tarot");
 
-            entity.HasOne(d => d.NumCardNavigation).WithMany(p => p.Boosterpacks)
+            entity.HasOne(d => d.IdCardNavigation).WithMany(p => p.Boosterpacks)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_card");
         });
 
         modelBuilder.Entity<Card>(entity =>
         {
-            entity.HasKey(e => e.NumCard).HasName("PRIMARY");
+            entity.HasKey(e => e.IdCard).HasName("PRIMARY");
         });
 
         modelBuilder.Entity<Deck>(entity =>

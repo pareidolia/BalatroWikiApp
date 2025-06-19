@@ -8,28 +8,32 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BalatroWikiApp.Models;
 
-[PrimaryKey("IdJoker", "IdTarot", "IdSpectral", "NumCard")]
+
 [Table("boosterpack")]
-[Index("NumCard", Name = "fk_card")]
+[Index("IdJoker", Name = "fk_joker")]
+[Index("IdCard", Name = "fk_card")]
 [Index("IdSpectral", Name = "fk_spectral")]
 [Index("IdTarot", Name = "fk_tarot")]
 public partial class Boosterpack
 {
     [Key]
+    [Column("idBoosterpack")]
+    public int IdBoosterpack {  get; set; }
+    
     [Column("idJoker")]
     public int IdJoker { get; set; }
 
-    [Key]
+    
     [Column("idTarot")]
     public int IdTarot { get; set; }
 
-    [Key]
+    
     [Column("idSpectral")]
     public int IdSpectral { get; set; }
 
-    [Key]
-    [Column("numCard")]
-    public int NumCard { get; set; }
+    
+    [Column("idCard")]
+    public int IdCard { get; set; }
 
     [Required]
     [Column("namePack")]
@@ -65,7 +69,7 @@ public partial class Boosterpack
     [InverseProperty("Boosterpacks")]
     public virtual Tarotcard IdTarotNavigation { get; set; }
 
-    [ForeignKey("NumCard")]
+    [ForeignKey("IdCard")]
     [InverseProperty("Boosterpacks")]
-    public virtual Card NumCardNavigation { get; set; }
+    public virtual Card IdCardNavigation { get; set; }
 }

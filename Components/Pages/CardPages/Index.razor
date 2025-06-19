@@ -4,7 +4,6 @@
 @using Microsoft.EntityFrameworkCore
 @using Microsoft.AspNetCore.Components.QuickGrid
 @using BalatroWikiApp.Models
-@using BalatroWikiApp.Models
 @implements IAsyncDisposable
 @inject IDbContextFactory<BalatroWikiApp.Models.BalatroDBContext> DbFactory
 
@@ -22,9 +21,9 @@
     <PropertyColumn Property="card => card.IsEnhanced" />
 
     <TemplateColumn Context="card">
-        <a href="@($"cards/edit?numcard={card.NumCard}")">Edit</a> |
-        <a href="@($"cards/details?numcard={card.NumCard}")">Details</a> |
-        <a href="@($"cards/delete?numcard={card.NumCard}")">Delete</a>
+        <a href="@($"cards/edit?numcard={card.IdCard}")">Edit</a> |
+        <a href="@($"cards/details?numcard={card.IdCard}")">Details</a> |
+        <a href="@($"cards/delete?numcard={card.IdCard}")">Delete</a>
     </TemplateColumn>
 </QuickGrid>
 

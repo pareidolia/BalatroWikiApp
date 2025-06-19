@@ -21,7 +21,7 @@ else
             <EditForm method="post" Model="Card" OnValidSubmit="UpdateCard" FormName="edit" Enhance>
                 <DataAnnotationsValidator />
                 <ValidationSummary role="alert"/>
-                <input type="hidden" name="Card.NumCard" value="@Card.NumCard" />
+                <input type="hidden" name="Card.NumCard" value="@Card.IdCard" />
                 <div class="mb-3">
                     <label for="namecard" class="form-label">NameCard:</label>
                     <InputText id="namecard" @bind-Value="Card.NameCard" class="form-control" />
@@ -57,7 +57,7 @@ else
     protected override async Task OnInitializedAsync()
     {
         using var context = DbFactory.CreateDbContext();
-        Card ??= await context.Cards.FirstOrDefaultAsync(m => m.NumCard == NumCard);
+        Card ??= await context.Cards.FirstOrDefaultAsync(m => m.IdCard == NumCard);
 
         if (Card is null)
         {
@@ -78,7 +78,7 @@ else
         }
         catch (DbUpdateConcurrencyException)
         {
-            if (!CardExists(Card!.NumCard))
+            if (!CardExists(Card!.IdCard))
             {
                 NavigationManager.NavigateTo("notfound");
             }
@@ -94,6 +94,6 @@ else
     private bool CardExists(int numcard)
     {
         using var context = DbFactory.CreateDbContext();
-        return context.Cards.Any(e => e.NumCard == numcard);
+        return context.Cards.Any(e => e.IdCard == numcard);
     }
 }

@@ -25,7 +25,7 @@
             <dd class="col-sm-10">@card.IsEnhanced</dd>
         </dl>
         <div>
-            <a href="@($"/cards/edit?numcard={card.NumCard}")">Edit</a> |
+            <a href="@($"/cards/edit?numcard={card.IdCard}")">Edit</a> |
             <a href="@($"/cards")">Back to List</a>
         </div>
     }
@@ -40,7 +40,7 @@
     protected override async Task OnInitializedAsync()
     {
         using var context = DbFactory.CreateDbContext();
-        card = await context.Cards.FirstOrDefaultAsync(m => m.NumCard == NumCard);
+        card = await context.Cards.FirstOrDefaultAsync(m => m.IdCard == NumCard);
 
         if (card is null)
         {

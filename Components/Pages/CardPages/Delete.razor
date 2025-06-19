@@ -45,7 +45,7 @@
     protected override async Task OnInitializedAsync()
     {
         using var context = DbFactory.CreateDbContext();
-        card = await context.Cards.FirstOrDefaultAsync(m => m.NumCard == NumCard);
+        card = await context.Cards.FirstOrDefaultAsync(m => m.IdCard == NumCard);
 
         if (card is null)
         {
