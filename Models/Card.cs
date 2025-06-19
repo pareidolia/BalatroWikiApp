@@ -12,8 +12,8 @@ namespace BalatroWikiApp.Models;
 public partial class Card
 {
     [Key]
-    [Column("numCard")]
-    public int NumCard { get; set; }
+    [Column("idCard")]
+    public int IdCard { get; set; }
 
     [Required]
     [Column("nameCard")]
@@ -28,6 +28,6 @@ public partial class Card
     [Column("isEnhanced")]
     public bool IsEnhanced { get; set; }
 
-    [InverseProperty("NumCardNavigation")]
+    [InverseProperty("IdCardNavigation")]
     public virtual ICollection<Boosterpack> Boosterpacks { get; set; } = new List<Boosterpack>();
 }
