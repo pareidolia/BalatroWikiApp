@@ -9,8 +9,6 @@ using Microsoft.EntityFrameworkCore;
 namespace BalatroWikiApp.Models;
 
 [Table("seals")]
-[MySqlCharSet("utf8mb3")]
-[MySqlCollation("utf8mb3_general_ci")]
 public partial class Seal
 {
     [Key]
