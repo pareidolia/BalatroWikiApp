@@ -45,19 +45,15 @@ public partial class BalatroDBContext : IdentityDbContext<ApplicationUser>
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder
-            .UseCollation("utf8mb4_0900_ai_ci")
-            .HasCharSet("utf8mb4");
-
         modelBuilder.Entity<Blind>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
+            entity.HasKey(e => e.Id);
         });
 
         modelBuilder.Entity<Boosterpack>(entity =>
         {
-            entity.HasKey(e => new { e.Id })
-                .HasName("PRIMARY");
+            base.OnModelCreating(modelBuilder);
+            entity.HasKey(e => new { e.Id });
 
             entity.HasOne(d => d.Joker).WithMany(p => p.Boosterpacks)
                 .HasForeignKey(d => d.IdJoker)
@@ -79,67 +75,65 @@ public partial class BalatroDBContext : IdentityDbContext<ApplicationUser>
 
         modelBuilder.Entity<Card>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
+            entity.HasKey(e => e.Id);
         });
 
         modelBuilder.Entity<Deck>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
+            entity.HasKey(e => e.Id);
         });
 
         modelBuilder.Entity<Edition>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
+            entity.HasKey(e => e.Id);
         });
 
         modelBuilder.Entity<Enhancedcard>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
+            entity.HasKey(e => e.Id);
         });
 
         modelBuilder.Entity<Joker>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
+            entity.HasKey(e => e.Id);
         });
 
         modelBuilder.Entity<Planetcard>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
+            entity.HasKey(e => e.Id);
         });
 
         modelBuilder.Entity<Seal>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
+            entity.HasKey(e => e.Id);
         });
 
         modelBuilder.Entity<Spectralcard>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
+            entity.HasKey(e => e.Id);
         });
 
         modelBuilder.Entity<Sticker>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
+            entity.HasKey(e => e.Id);
         });
 
         modelBuilder.Entity<Tag>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
+            entity.HasKey(e => e.Id);
         });
 
         modelBuilder.Entity<Tarotcard>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
+            entity.HasKey(e => e.Id);
         });
 
         modelBuilder.Entity<Voucher>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
+            entity.HasKey(e => e.Id);
         });
 
         OnModelCreatingPartial(modelBuilder);
-
-        base.OnModelCreating(modelBuilder);
     }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
