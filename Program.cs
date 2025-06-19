@@ -5,6 +5,7 @@ using BalatroWikiApp.Models;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,9 +29,8 @@ builder.Services.AddAuthentication(options =>
 
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-var ServerVersion = new MySqlServerVersion(new Version(9, 1, 0));
 builder.Services.AddDbContextFactory<BalatroDBContext>(options =>
-    options.UseMySql(connectionString, ServerVersion));
+    options.UseNpgsql(connectionString));
 
 builder.Services.AddQuickGridEntityFrameworkAdapter();
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
