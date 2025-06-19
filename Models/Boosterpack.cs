@@ -13,8 +13,6 @@ namespace BalatroWikiApp.Models;
 [Index("NumCard", Name = "fk_card")]
 [Index("IdSpectral", Name = "fk_spectral")]
 [Index("IdTarot", Name = "fk_tarot")]
-[MySqlCharSet("utf8mb3")]
-[MySqlCollation("utf8mb3_general_ci")]
 public partial class Boosterpack
 {
     [Key]
