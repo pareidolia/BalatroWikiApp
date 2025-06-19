@@ -17,17 +17,17 @@
             <ValidationSummary class="text-danger" role="alert"/>
             <div class="mb-3">
                 <label for="nameseal" class="form-label">NameSeal:</label> 
-                <InputText id="nameseal" @bind-Value="Seal.NameSeal" class="form-control" /> 
+                <InputText id="nameseal" @bind-Value="Seal.NameSeal" class="form-control" aria-required="true"/> 
                 <ValidationMessage For="() => Seal.NameSeal" class="text-danger" /> 
             </div>        
             <div class="mb-3">
                 <label for="effectseal" class="form-label">EffectSeal:</label> 
-                <InputText id="effectseal" @bind-Value="Seal.EffectSeal" class="form-control" /> 
+                <InputText id="effectseal" @bind-Value="Seal.EffectSeal" class="form-control" aria-required="true"/> 
                 <ValidationMessage For="() => Seal.EffectSeal" class="text-danger" /> 
             </div>        
             <div class="mb-3">
                 <label for="typeseal" class="form-label">TypeSeal:</label> 
-                <InputText id="typeseal" @bind-Value="Seal.TypeSeal" class="form-control" /> 
+                <InputText id="typeseal" @bind-Value="Seal.TypeSeal" class="form-control" aria-required="true"/> 
                 <ValidationMessage For="() => Seal.TypeSeal" class="text-danger" /> 
             </div>        
             <button type="submit" class="btn btn-primary">Create</button>

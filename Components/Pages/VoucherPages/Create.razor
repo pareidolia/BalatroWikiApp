@@ -17,12 +17,12 @@
             <ValidationSummary class="text-danger" role="alert"/>
             <div class="mb-3">
                 <label for="namevoucher" class="form-label">NameVoucher:</label> 
-                <InputText id="namevoucher" @bind-Value="Voucher.NameVoucher" class="form-control" /> 
+                <InputText id="namevoucher" @bind-Value="Voucher.NameVoucher" class="form-control" aria-required="true"/> 
                 <ValidationMessage For="() => Voucher.NameVoucher" class="text-danger" /> 
             </div>        
             <div class="mb-3">
                 <label for="descriptionvoucher" class="form-label">DescriptionVoucher:</label> 
-                <InputText id="descriptionvoucher" @bind-Value="Voucher.DescriptionVoucher" class="form-control" /> 
+                <InputText id="descriptionvoucher" @bind-Value="Voucher.DescriptionVoucher" class="form-control" aria-required="true"/> 
                 <ValidationMessage For="() => Voucher.DescriptionVoucher" class="text-danger" /> 
             </div>        
             <div class="mb-3">

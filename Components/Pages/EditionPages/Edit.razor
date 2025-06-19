@@ -21,15 +21,15 @@ else
             <EditForm method="post" Model="Edition" OnValidSubmit="UpdateEdition" FormName="edit" Enhance>
                 <DataAnnotationsValidator />
                 <ValidationSummary role="alert"/>
-                <input type="hidden" name="Edition.IdEdition" value="@Edition.IdEdition" />
+                <input type="hidden" name="Edition.Id" value="@Edition.Id" />
                 <div class="mb-3">
                     <label for="nameedition" class="form-label">NameEdition:</label>
-                    <InputText id="nameedition" @bind-Value="Edition.NameEdition" class="form-control" />
+                    <InputText id="nameedition" @bind-Value="Edition.NameEdition" class="form-control" aria-required="true"/>
                     <ValidationMessage For="() => Edition.NameEdition" class="text-danger" />
                 </div>
                 <div class="mb-3">
                     <label for="effectedition" class="form-label">EffectEdition:</label>
-                    <InputText id="effectedition" @bind-Value="Edition.EffectEdition" class="form-control" />
+                    <InputText id="effectedition" @bind-Value="Edition.EffectEdition" class="form-control" aria-required="true"/>
                     <ValidationMessage For="() => Edition.EffectEdition" class="text-danger" />
                 </div>
                 <button type="submit" class="btn btn-primary">Save</button>
@@ -44,7 +44,7 @@ else
 
 @code {
     [SupplyParameterFromQuery]
-    private int IdEdition { get; set; }
+    private int Id { get; set; }
 
     [SupplyParameterFromForm]
     private Edition? Edition { get; set; }
@@ -52,7 +52,7 @@ else
     protected override async Task OnInitializedAsync()
     {
         using var context = DbFactory.CreateDbContext();
-        Edition ??= await context.Editions.FirstOrDefaultAsync(m => m.IdEdition == IdEdition);
+        Edition ??= await context.Editions.FirstOrDefaultAsync(m => m.Id == Id);
 
         if (Edition is null)
         {
@@ -73,7 +73,7 @@ else
         }
         catch (DbUpdateConcurrencyException)
         {
-            if (!EditionExists(Edition!.IdEdition))
+            if (!EditionExists(Edition!.Id))
             {
                 NavigationManager.NavigateTo("notfound");
             }
@@ -86,9 +86,9 @@ else
         NavigationManager.NavigateTo("/editions");
     }
 
-    private bool EditionExists(int idedition)
+    private bool EditionExists(int id)
     {
         using var context = DbFactory.CreateDbContext();
-        return context.Editions.Any(e => e.IdEdition == idedition);
+        return context.Editions.Any(e => e.Id == id);
     }
 }

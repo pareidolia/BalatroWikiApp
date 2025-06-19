@@ -36,12 +36,12 @@
     private Planetcard? planetcard;
 
     [SupplyParameterFromQuery]
-    private int IdPlanet { get; set; }
+    private int Id { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         using var context = DbFactory.CreateDbContext();
-        planetcard = await context.Planetcards.FirstOrDefaultAsync(m => m.IdPlanet == IdPlanet);
+        planetcard = await context.Planetcards.FirstOrDefaultAsync(m => m.Id == Id);
 
         if (planetcard is null)
         {

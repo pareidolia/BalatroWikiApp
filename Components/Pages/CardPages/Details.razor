@@ -25,7 +25,7 @@
             <dd class="col-sm-10">@card.IsEnhanced</dd>
         </dl>
         <div>
-            <a href="@($"/cards/edit?numcard={card.IdCard}")">Edit</a> |
+            <a href="@($"/cards/edit?id={card.Id}")">Edit</a> |
             <a href="@($"/cards")">Back to List</a>
         </div>
     }
@@ -35,12 +35,12 @@
     private Card? card;
 
     [SupplyParameterFromQuery]
-    private int NumCard { get; set; }
+    private int Id { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         using var context = DbFactory.CreateDbContext();
-        card = await context.Cards.FirstOrDefaultAsync(m => m.IdCard == NumCard);
+        card = await context.Cards.FirstOrDefaultAsync(m => m.Id == Id);
 
         if (card is null)
         {

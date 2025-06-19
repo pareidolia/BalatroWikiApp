@@ -21,15 +21,15 @@ else
             <EditForm method="post" Model="Planetcard" OnValidSubmit="UpdatePlanetcard" FormName="edit" Enhance>
                 <DataAnnotationsValidator />
                 <ValidationSummary role="alert"/>
-                <input type="hidden" name="Planetcard.IdPlanet" value="@Planetcard.IdPlanet" />
+                <input type="hidden" name="Planetcard.Id" value="@Planetcard.Id" />
                 <div class="mb-3">
                     <label for="nameplanet" class="form-label">NamePlanet:</label>
-                    <InputText id="nameplanet" @bind-Value="Planetcard.NamePlanet" class="form-control" />
+                    <InputText id="nameplanet" @bind-Value="Planetcard.NamePlanet" class="form-control" aria-required="true"/>
                     <ValidationMessage For="() => Planetcard.NamePlanet" class="text-danger" />
                 </div>
                 <div class="mb-3">
                     <label for="handplanet" class="form-label">HandPlanet:</label>
-                    <InputText id="handplanet" @bind-Value="Planetcard.HandPlanet" class="form-control" />
+                    <InputText id="handplanet" @bind-Value="Planetcard.HandPlanet" class="form-control" aria-required="true"/>
                     <ValidationMessage For="() => Planetcard.HandPlanet" class="text-danger" />
                 </div>
                 <button type="submit" class="btn btn-primary">Save</button>
@@ -44,7 +44,7 @@ else
 
 @code {
     [SupplyParameterFromQuery]
-    private int IdPlanet { get; set; }
+    private int Id { get; set; }
 
     [SupplyParameterFromForm]
     private Planetcard? Planetcard { get; set; }
@@ -52,7 +52,7 @@ else
     protected override async Task OnInitializedAsync()
     {
         using var context = DbFactory.CreateDbContext();
-        Planetcard ??= await context.Planetcards.FirstOrDefaultAsync(m => m.IdPlanet == IdPlanet);
+        Planetcard ??= await context.Planetcards.FirstOrDefaultAsync(m => m.Id == Id);
 
         if (Planetcard is null)
         {
@@ -73,7 +73,7 @@ else
         }
         catch (DbUpdateConcurrencyException)
         {
-            if (!PlanetcardExists(Planetcard!.IdPlanet))
+            if (!PlanetcardExists(Planetcard!.Id))
             {
                 NavigationManager.NavigateTo("notfound");
             }
@@ -86,9 +86,9 @@ else
         NavigationManager.NavigateTo("/planetcards");
     }
 
-    private bool PlanetcardExists(int idplanet)
+    private bool PlanetcardExists(int id)
     {
         using var context = DbFactory.CreateDbContext();
-        return context.Planetcards.Any(e => e.IdPlanet == idplanet);
+        return context.Planetcards.Any(e => e.Id == id);
     }
 }

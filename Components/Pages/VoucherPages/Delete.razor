@@ -44,12 +44,12 @@
     private Voucher? voucher;
 
     [SupplyParameterFromQuery]
-    private int IdVoucher { get; set; }
+    private int Id { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         using var context = DbFactory.CreateDbContext();
-        voucher = await context.Vouchers.FirstOrDefaultAsync(m => m.IdVoucher == IdVoucher);
+        voucher = await context.Vouchers.FirstOrDefaultAsync(m => m.Id == Id);
 
         if (voucher is null)
         {

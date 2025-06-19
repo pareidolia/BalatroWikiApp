@@ -1,8 +1,7 @@
 ﻿@page "/enhancedcards"
-@using Microsoft.AspNetCore.Authorization
-@attribute [Authorize]
 @using Microsoft.EntityFrameworkCore
 @using Microsoft.AspNetCore.Components.QuickGrid
+@using BalatroWikiApp.Models
 @using BalatroWikiApp.Models
 @implements IAsyncDisposable
 @inject IDbContextFactory<BalatroWikiApp.Models.BalatroDBContext> DbFactory
@@ -21,9 +20,9 @@
     <PropertyColumn Property="enhancedcard => enhancedcard.TypeEnhanced" />
 
     <TemplateColumn Context="enhancedcard">
-        <a href="@($"enhancedcards/edit?idenhanced={enhancedcard.IdEnhanced}")">Edit</a> |
-        <a href="@($"enhancedcards/details?idenhanced={enhancedcard.IdEnhanced}")">Details</a> |
-        <a href="@($"enhancedcards/delete?idenhanced={enhancedcard.IdEnhanced}")">Delete</a>
+        <a href="@($"enhancedcards/edit?id={enhancedcard.Id}")">Edit</a> |
+        <a href="@($"enhancedcards/details?id={enhancedcard.Id}")">Details</a> |
+        <a href="@($"enhancedcards/delete?id={enhancedcard.Id}")">Delete</a>
     </TemplateColumn>
 </QuickGrid>
 

@@ -40,12 +40,12 @@
     private Seal? seal;
 
     [SupplyParameterFromQuery]
-    private int IdSeal { get; set; }
+    private int Id { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         using var context = DbFactory.CreateDbContext();
-        seal = await context.Seals.FirstOrDefaultAsync(m => m.IdSeal == IdSeal);
+        seal = await context.Seals.FirstOrDefaultAsync(m => m.Id == Id);
 
         if (seal is null)
         {

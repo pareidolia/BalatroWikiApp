@@ -21,20 +21,20 @@ else
             <EditForm method="post" Model="Sticker" OnValidSubmit="UpdateSticker" FormName="edit" Enhance>
                 <DataAnnotationsValidator />
                 <ValidationSummary role="alert"/>
-                <input type="hidden" name="Sticker.IdSticker" value="@Sticker.IdSticker" />
+                <input type="hidden" name="Sticker.Id" value="@Sticker.Id" />
                 <div class="mb-3">
                     <label for="namesticker" class="form-label">NameSticker:</label>
-                    <InputText id="namesticker" @bind-Value="Sticker.NameSticker" class="form-control" />
+                    <InputText id="namesticker" @bind-Value="Sticker.NameSticker" class="form-control" aria-required="true"/>
                     <ValidationMessage For="() => Sticker.NameSticker" class="text-danger" />
                 </div>
                 <div class="mb-3">
                     <label for="descriptionsticker" class="form-label">DescriptionSticker:</label>
-                    <InputText id="descriptionsticker" @bind-Value="Sticker.DescriptionSticker" class="form-control" />
+                    <InputText id="descriptionsticker" @bind-Value="Sticker.DescriptionSticker" class="form-control" aria-required="true"/>
                     <ValidationMessage For="() => Sticker.DescriptionSticker" class="text-danger" />
                 </div>
                 <div class="mb-3">
                     <label for="effectsticker" class="form-label">EffectSticker:</label>
-                    <InputText id="effectsticker" @bind-Value="Sticker.EffectSticker" class="form-control" />
+                    <InputText id="effectsticker" @bind-Value="Sticker.EffectSticker" class="form-control" aria-required="true"/>
                     <ValidationMessage For="() => Sticker.EffectSticker" class="text-danger" />
                 </div>
                 <button type="submit" class="btn btn-primary">Save</button>
@@ -49,7 +49,7 @@ else
 
 @code {
     [SupplyParameterFromQuery]
-    private int IdSticker { get; set; }
+    private int Id { get; set; }
 
     [SupplyParameterFromForm]
     private Sticker? Sticker { get; set; }
@@ -57,7 +57,7 @@ else
     protected override async Task OnInitializedAsync()
     {
         using var context = DbFactory.CreateDbContext();
-        Sticker ??= await context.Stickers.FirstOrDefaultAsync(m => m.IdSticker == IdSticker);
+        Sticker ??= await context.Stickers.FirstOrDefaultAsync(m => m.Id == Id);
 
         if (Sticker is null)
         {
@@ -78,7 +78,7 @@ else
         }
         catch (DbUpdateConcurrencyException)
         {
-            if (!StickerExists(Sticker!.IdSticker))
+            if (!StickerExists(Sticker!.Id))
             {
                 NavigationManager.NavigateTo("notfound");
             }
@@ -91,9 +91,9 @@ else
         NavigationManager.NavigateTo("/stickers");
     }
 
-    private bool StickerExists(int idsticker)
+    private bool StickerExists(int id)
     {
         using var context = DbFactory.CreateDbContext();
-        return context.Stickers.Any(e => e.IdSticker == idsticker);
+        return context.Stickers.Any(e => e.Id == id);
     }
 }

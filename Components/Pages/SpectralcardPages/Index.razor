@@ -1,8 +1,7 @@
 ﻿@page "/spectralcards"
-@using Microsoft.AspNetCore.Authorization
-@attribute [Authorize]
 @using Microsoft.EntityFrameworkCore
 @using Microsoft.AspNetCore.Components.QuickGrid
+@using BalatroWikiApp.Models
 @using BalatroWikiApp.Models
 @implements IAsyncDisposable
 @inject IDbContextFactory<BalatroWikiApp.Models.BalatroDBContext> DbFactory
@@ -20,9 +19,9 @@
     <PropertyColumn Property="spectralcard => spectralcard.EffectSpectral" />
 
     <TemplateColumn Context="spectralcard">
-        <a href="@($"spectralcards/edit?idspectral={spectralcard.IdSpectral}")">Edit</a> |
-        <a href="@($"spectralcards/details?idspectral={spectralcard.IdSpectral}")">Details</a> |
-        <a href="@($"spectralcards/delete?idspectral={spectralcard.IdSpectral}")">Delete</a>
+        <a href="@($"spectralcards/edit?id={spectralcard.Id}")">Edit</a> |
+        <a href="@($"spectralcards/details?id={spectralcard.Id}")">Details</a> |
+        <a href="@($"spectralcards/delete?id={spectralcard.Id}")">Delete</a>
     </TemplateColumn>
 </QuickGrid>
 

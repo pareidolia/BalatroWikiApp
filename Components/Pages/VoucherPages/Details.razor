@@ -27,7 +27,7 @@
             <dd class="col-sm-10">@voucher.StateVoucher</dd>
         </dl>
         <div>
-            <a href="@($"/vouchers/edit?idvoucher={voucher.IdVoucher}")">Edit</a> |
+            <a href="@($"/vouchers/edit?id={voucher.Id}")">Edit</a> |
             <a href="@($"/vouchers")">Back to List</a>
         </div>
     }
@@ -37,12 +37,12 @@
     private Voucher? voucher;
 
     [SupplyParameterFromQuery]
-    private int IdVoucher { get; set; }
+    private int Id { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         using var context = DbFactory.CreateDbContext();
-        voucher = await context.Vouchers.FirstOrDefaultAsync(m => m.IdVoucher == IdVoucher);
+        voucher = await context.Vouchers.FirstOrDefaultAsync(m => m.Id == Id);
 
         if (voucher is null)
         {

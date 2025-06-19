@@ -17,12 +17,12 @@
             <ValidationSummary class="text-danger" role="alert"/>
             <div class="mb-3">
                 <label for="nameplanet" class="form-label">NamePlanet:</label> 
-                <InputText id="nameplanet" @bind-Value="Planetcard.NamePlanet" class="form-control" /> 
+                <InputText id="nameplanet" @bind-Value="Planetcard.NamePlanet" class="form-control" aria-required="true"/> 
                 <ValidationMessage For="() => Planetcard.NamePlanet" class="text-danger" /> 
             </div>        
             <div class="mb-3">
                 <label for="handplanet" class="form-label">HandPlanet:</label> 
-                <InputText id="handplanet" @bind-Value="Planetcard.HandPlanet" class="form-control" /> 
+                <InputText id="handplanet" @bind-Value="Planetcard.HandPlanet" class="form-control" aria-required="true"/> 
                 <ValidationMessage For="() => Planetcard.HandPlanet" class="text-danger" /> 
             </div>        
             <button type="submit" class="btn btn-primary">Create</button>

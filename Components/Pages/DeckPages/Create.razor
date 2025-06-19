@@ -17,12 +17,12 @@
             <ValidationSummary class="text-danger" role="alert"/>
             <div class="mb-3">
                 <label for="namedeck" class="form-label">NameDeck:</label> 
-                <InputText id="namedeck" @bind-Value="Deck.NameDeck" class="form-control" /> 
+                <InputText id="namedeck" @bind-Value="Deck.NameDeck" class="form-control" aria-required="true"/> 
                 <ValidationMessage For="() => Deck.NameDeck" class="text-danger" /> 
             </div>        
             <div class="mb-3">
                 <label for="descriptiondeck" class="form-label">DescriptionDeck:</label> 
-                <InputText id="descriptiondeck" @bind-Value="Deck.DescriptionDeck" class="form-control" /> 
+                <InputText id="descriptiondeck" @bind-Value="Deck.DescriptionDeck" class="form-control" aria-required="true"/> 
                 <ValidationMessage For="() => Deck.DescriptionDeck" class="text-danger" /> 
             </div>        
             <button type="submit" class="btn btn-primary">Create</button>

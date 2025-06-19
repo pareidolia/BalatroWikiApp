@@ -17,12 +17,12 @@
             <ValidationSummary class="text-danger" role="alert"/>
             <div class="mb-3">
                 <label for="nametag" class="form-label">NameTag:</label> 
-                <InputText id="nametag" @bind-Value="Tag.NameTag" class="form-control" /> 
+                <InputText id="nametag" @bind-Value="Tag.NameTag" class="form-control" aria-required="true"/> 
                 <ValidationMessage For="() => Tag.NameTag" class="text-danger" /> 
             </div>        
             <div class="mb-3">
                 <label for="effecttag" class="form-label">EffectTag:</label> 
-                <InputText id="effecttag" @bind-Value="Tag.EffectTag" class="form-control" /> 
+                <InputText id="effecttag" @bind-Value="Tag.EffectTag" class="form-control" aria-required="true"/> 
                 <ValidationMessage For="() => Tag.EffectTag" class="text-danger" /> 
             </div>        
             <button type="submit" class="btn btn-primary">Create</button>

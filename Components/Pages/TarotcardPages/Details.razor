@@ -23,7 +23,7 @@
             <dd class="col-sm-10">@tarotcard.EffectTarot</dd>
         </dl>
         <div>
-            <a href="@($"/tarotcards/edit?idtarot={tarotcard.IdTarot}")">Edit</a> |
+            <a href="@($"/tarotcards/edit?id={tarotcard.Id}")">Edit</a> |
             <a href="@($"/tarotcards")">Back to List</a>
         </div>
     }
@@ -33,12 +33,12 @@
     private Tarotcard? tarotcard;
 
     [SupplyParameterFromQuery]
-    private int IdTarot { get; set; }
+    private int Id { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         using var context = DbFactory.CreateDbContext();
-        tarotcard = await context.Tarotcards.FirstOrDefaultAsync(m => m.IdTarot == IdTarot);
+        tarotcard = await context.Tarotcards.FirstOrDefaultAsync(m => m.Id == Id);
 
         if (tarotcard is null)
         {

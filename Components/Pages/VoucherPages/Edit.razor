@@ -21,15 +21,15 @@ else
             <EditForm method="post" Model="Voucher" OnValidSubmit="UpdateVoucher" FormName="edit" Enhance>
                 <DataAnnotationsValidator />
                 <ValidationSummary role="alert"/>
-                <input type="hidden" name="Voucher.IdVoucher" value="@Voucher.IdVoucher" />
+                <input type="hidden" name="Voucher.Id" value="@Voucher.Id" />
                 <div class="mb-3">
                     <label for="namevoucher" class="form-label">NameVoucher:</label>
-                    <InputText id="namevoucher" @bind-Value="Voucher.NameVoucher" class="form-control" />
+                    <InputText id="namevoucher" @bind-Value="Voucher.NameVoucher" class="form-control" aria-required="true"/>
                     <ValidationMessage For="() => Voucher.NameVoucher" class="text-danger" />
                 </div>
                 <div class="mb-3">
                     <label for="descriptionvoucher" class="form-label">DescriptionVoucher:</label>
-                    <InputText id="descriptionvoucher" @bind-Value="Voucher.DescriptionVoucher" class="form-control" />
+                    <InputText id="descriptionvoucher" @bind-Value="Voucher.DescriptionVoucher" class="form-control" aria-required="true"/>
                     <ValidationMessage For="() => Voucher.DescriptionVoucher" class="text-danger" />
                 </div>
                 <div class="mb-3">
@@ -54,7 +54,7 @@ else
 
 @code {
     [SupplyParameterFromQuery]
-    private int IdVoucher { get; set; }
+    private int Id { get; set; }
 
     [SupplyParameterFromForm]
     private Voucher? Voucher { get; set; }
@@ -62,7 +62,7 @@ else
     protected override async Task OnInitializedAsync()
     {
         using var context = DbFactory.CreateDbContext();
-        Voucher ??= await context.Vouchers.FirstOrDefaultAsync(m => m.IdVoucher == IdVoucher);
+        Voucher ??= await context.Vouchers.FirstOrDefaultAsync(m => m.Id == Id);
 
         if (Voucher is null)
         {
@@ -83,7 +83,7 @@ else
         }
         catch (DbUpdateConcurrencyException)
         {
-            if (!VoucherExists(Voucher!.IdVoucher))
+            if (!VoucherExists(Voucher!.Id))
             {
                 NavigationManager.NavigateTo("notfound");
             }
@@ -96,9 +96,9 @@ else
         NavigationManager.NavigateTo("/vouchers");
     }
 
-    private bool VoucherExists(int idvoucher)
+    private bool VoucherExists(int id)
     {
         using var context = DbFactory.CreateDbContext();
-        return context.Vouchers.Any(e => e.IdVoucher == idvoucher);
+        return context.Vouchers.Any(e => e.Id == id);
     }
 }

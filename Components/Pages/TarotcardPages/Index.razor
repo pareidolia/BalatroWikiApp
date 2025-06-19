@@ -1,8 +1,7 @@
 ﻿@page "/tarotcards"
-@using Microsoft.AspNetCore.Authorization
-@attribute [Authorize]
 @using Microsoft.EntityFrameworkCore
 @using Microsoft.AspNetCore.Components.QuickGrid
+@using BalatroWikiApp.Models
 @using BalatroWikiApp.Models
 @implements IAsyncDisposable
 @inject IDbContextFactory<BalatroWikiApp.Models.BalatroDBContext> DbFactory
@@ -20,9 +19,9 @@
     <PropertyColumn Property="tarotcard => tarotcard.EffectTarot" />
 
     <TemplateColumn Context="tarotcard">
-        <a href="@($"tarotcards/edit?idtarot={tarotcard.IdTarot}")">Edit</a> |
-        <a href="@($"tarotcards/details?idtarot={tarotcard.IdTarot}")">Details</a> |
-        <a href="@($"tarotcards/delete?idtarot={tarotcard.IdTarot}")">Delete</a>
+        <a href="@($"tarotcards/edit?id={tarotcard.Id}")">Edit</a> |
+        <a href="@($"tarotcards/details?id={tarotcard.Id}")">Details</a> |
+        <a href="@($"tarotcards/delete?id={tarotcard.Id}")">Delete</a>
     </TemplateColumn>
 </QuickGrid>
 

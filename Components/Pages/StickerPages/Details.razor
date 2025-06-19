@@ -25,7 +25,7 @@
             <dd class="col-sm-10">@sticker.EffectSticker</dd>
         </dl>
         <div>
-            <a href="@($"/stickers/edit?idsticker={sticker.IdSticker}")">Edit</a> |
+            <a href="@($"/stickers/edit?id={sticker.Id}")">Edit</a> |
             <a href="@($"/stickers")">Back to List</a>
         </div>
     }
@@ -35,12 +35,12 @@
     private Sticker? sticker;
 
     [SupplyParameterFromQuery]
-    private int IdSticker { get; set; }
+    private int Id { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         using var context = DbFactory.CreateDbContext();
-        sticker = await context.Stickers.FirstOrDefaultAsync(m => m.IdSticker == IdSticker);
+        sticker = await context.Stickers.FirstOrDefaultAsync(m => m.Id == Id);
 
         if (sticker is null)
         {

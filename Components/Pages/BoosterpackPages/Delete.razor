@@ -18,6 +18,22 @@
     }
     else {
         <dl class="row">
+            <dt class="col-sm-2">IdJoker</dt>
+            <dd class="col-sm-10">@boosterpack.IdJoker</dd>
+        </dl>
+        <dl class="row">
+            <dt class="col-sm-2">IdTarot</dt>
+            <dd class="col-sm-10">@boosterpack.IdTarot</dd>
+        </dl>
+        <dl class="row">
+            <dt class="col-sm-2">IdSpectral</dt>
+            <dd class="col-sm-10">@boosterpack.IdSpectral</dd>
+        </dl>
+        <dl class="row">
+            <dt class="col-sm-2">IdCard</dt>
+            <dd class="col-sm-10">@boosterpack.IdCard</dd>
+        </dl>
+        <dl class="row">
             <dt class="col-sm-2">NamePack</dt>
             <dd class="col-sm-10">@boosterpack.NamePack</dd>
         </dl>
@@ -52,12 +68,12 @@
     private Boosterpack? boosterpack;
 
     [SupplyParameterFromQuery]
-    private int IdJoker { get; set; }
+    private int Id { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         using var context = DbFactory.CreateDbContext();
-        boosterpack = await context.Boosterpacks.FirstOrDefaultAsync(m => m.IdJoker == IdJoker);
+        boosterpack = await context.Boosterpacks.FirstOrDefaultAsync(m => m.Id == Id);
 
         if (boosterpack is null)
         {

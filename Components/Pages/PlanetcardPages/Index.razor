@@ -1,8 +1,7 @@
 ﻿@page "/planetcards"
-@using Microsoft.AspNetCore.Authorization
-@attribute [Authorize]
 @using Microsoft.EntityFrameworkCore
 @using Microsoft.AspNetCore.Components.QuickGrid
+@using BalatroWikiApp.Models
 @using BalatroWikiApp.Models
 @implements IAsyncDisposable
 @inject IDbContextFactory<BalatroWikiApp.Models.BalatroDBContext> DbFactory
@@ -20,9 +19,9 @@
     <PropertyColumn Property="planetcard => planetcard.HandPlanet" />
 
     <TemplateColumn Context="planetcard">
-        <a href="@($"planetcards/edit?idplanet={planetcard.IdPlanet}")">Edit</a> |
-        <a href="@($"planetcards/details?idplanet={planetcard.IdPlanet}")">Details</a> |
-        <a href="@($"planetcards/delete?idplanet={planetcard.IdPlanet}")">Delete</a>
+        <a href="@($"planetcards/edit?id={planetcard.Id}")">Edit</a> |
+        <a href="@($"planetcards/details?id={planetcard.Id}")">Details</a> |
+        <a href="@($"planetcards/delete?id={planetcard.Id}")">Delete</a>
     </TemplateColumn>
 </QuickGrid>
 

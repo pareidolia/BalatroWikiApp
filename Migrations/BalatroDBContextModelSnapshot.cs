@@ -90,12 +90,12 @@ namespace BalatroWikiApp.Migrations
 
             modelBuilder.Entity("BalatroWikiApp.Models.Blind", b =>
                 {
-                    b.Property<int>("IdBlind")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("idBlind");
+                        .HasColumnName("id");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("IdBlind"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("AnteBlind")
                         .HasColumnType("int")
@@ -123,20 +123,20 @@ namespace BalatroWikiApp.Migrations
                         .HasColumnType("int")
                         .HasColumnName("rewardBlind");
 
-                    b.HasKey("IdBlind")
+                    b.HasKey("Id")
                         .HasName("PRIMARY");
 
-                    b.ToTable("blinds");
+                    b.ToTable("blinds", (string)null);
                 });
 
             modelBuilder.Entity("BalatroWikiApp.Models.Boosterpack", b =>
                 {
-                    b.Property<int>("IdBoosterpack")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("idBoosterpack");
+                        .HasColumnName("id");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("IdBoosterpack"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("DescriptionPack")
                         .IsRequired()
@@ -144,19 +144,19 @@ namespace BalatroWikiApp.Migrations
                         .HasColumnType("varchar(200)")
                         .HasColumnName("descriptionPack");
 
-                    b.Property<int>("IdCard")
+                    b.Property<int?>("IdCard")
                         .HasColumnType("int")
                         .HasColumnName("idCard");
 
-                    b.Property<int>("IdJoker")
+                    b.Property<int?>("IdJoker")
                         .HasColumnType("int")
                         .HasColumnName("idJoker");
 
-                    b.Property<int>("IdSpectral")
+                    b.Property<int?>("IdSpectral")
                         .HasColumnType("int")
                         .HasColumnName("idSpectral");
 
-                    b.Property<int>("IdTarot")
+                    b.Property<int?>("IdTarot")
                         .HasColumnType("int")
                         .HasColumnName("idTarot");
 
@@ -182,28 +182,28 @@ namespace BalatroWikiApp.Migrations
                         .HasColumnType("int")
                         .HasColumnName("pricePack");
 
-                    b.HasKey("IdBoosterpack")
+                    b.HasKey("Id")
                         .HasName("PRIMARY");
 
-                    b.HasIndex(new[] { "IdCard" }, "fk_card");
+                    b.HasIndex("IdCard");
 
-                    b.HasIndex(new[] { "IdJoker" }, "fk_joker");
+                    b.HasIndex("IdJoker");
 
-                    b.HasIndex(new[] { "IdSpectral" }, "fk_spectral");
+                    b.HasIndex("IdSpectral");
 
-                    b.HasIndex(new[] { "IdTarot" }, "fk_tarot");
+                    b.HasIndex("IdTarot");
 
-                    b.ToTable("boosterpack");
+                    b.ToTable("boosterpack", (string)null);
                 });
 
             modelBuilder.Entity("BalatroWikiApp.Models.Card", b =>
                 {
-                    b.Property<int>("IdCard")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("idCard");
+                        .HasColumnName("id");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("IdCard"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("FamilyCard")
                         .IsRequired()
@@ -221,20 +221,20 @@ namespace BalatroWikiApp.Migrations
                         .HasColumnType("varchar(50)")
                         .HasColumnName("nameCard");
 
-                    b.HasKey("IdCard")
+                    b.HasKey("Id")
                         .HasName("PRIMARY");
 
-                    b.ToTable("cards");
+                    b.ToTable("cards", (string)null);
                 });
 
             modelBuilder.Entity("BalatroWikiApp.Models.Deck", b =>
                 {
-                    b.Property<int>("IdDeck")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("idDeck");
+                        .HasColumnName("id");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("IdDeck"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("DescriptionDeck")
                         .IsRequired()
@@ -248,20 +248,20 @@ namespace BalatroWikiApp.Migrations
                         .HasColumnType("varchar(50)")
                         .HasColumnName("nameDeck");
 
-                    b.HasKey("IdDeck")
+                    b.HasKey("Id")
                         .HasName("PRIMARY");
 
-                    b.ToTable("decks");
+                    b.ToTable("decks", (string)null);
                 });
 
             modelBuilder.Entity("BalatroWikiApp.Models.Edition", b =>
                 {
-                    b.Property<int>("IdEdition")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("idEdition");
+                        .HasColumnName("id");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("IdEdition"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("EffectEdition")
                         .IsRequired()
@@ -275,20 +275,20 @@ namespace BalatroWikiApp.Migrations
                         .HasColumnType("varchar(50)")
                         .HasColumnName("nameEdition");
 
-                    b.HasKey("IdEdition")
+                    b.HasKey("Id")
                         .HasName("PRIMARY");
 
-                    b.ToTable("editions");
+                    b.ToTable("editions", (string)null);
                 });
 
             modelBuilder.Entity("BalatroWikiApp.Models.Enhancedcard", b =>
                 {
-                    b.Property<int>("IdEnhanced")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("idEnhanced");
+                        .HasColumnName("id");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("IdEnhanced"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("EffectEnhanced")
                         .IsRequired()
@@ -308,20 +308,20 @@ namespace BalatroWikiApp.Migrations
                         .HasColumnType("varchar(20)")
                         .HasColumnName("typeEnhanced");
 
-                    b.HasKey("IdEnhanced")
+                    b.HasKey("Id")
                         .HasName("PRIMARY");
 
-                    b.ToTable("enhancedcards");
+                    b.ToTable("enhancedcards", (string)null);
                 });
 
             modelBuilder.Entity("BalatroWikiApp.Models.Joker", b =>
                 {
-                    b.Property<int>("IdJoker")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("idJoker");
+                        .HasColumnName("id");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("IdJoker"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("DescriptionJoker")
                         .IsRequired()
@@ -360,20 +360,20 @@ namespace BalatroWikiApp.Migrations
                         .HasColumnType("varchar(20)")
                         .HasColumnName("typeJoker");
 
-                    b.HasKey("IdJoker")
+                    b.HasKey("Id")
                         .HasName("PRIMARY");
 
-                    b.ToTable("jokers");
+                    b.ToTable("jokers", (string)null);
                 });
 
             modelBuilder.Entity("BalatroWikiApp.Models.Planetcard", b =>
                 {
-                    b.Property<int>("IdPlanet")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("idPlanet");
+                        .HasColumnName("id");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("IdPlanet"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("HandPlanet")
                         .IsRequired()
@@ -387,20 +387,20 @@ namespace BalatroWikiApp.Migrations
                         .HasColumnType("varchar(50)")
                         .HasColumnName("namePlanet");
 
-                    b.HasKey("IdPlanet")
+                    b.HasKey("Id")
                         .HasName("PRIMARY");
 
-                    b.ToTable("planetcard");
+                    b.ToTable("planetcard", (string)null);
                 });
 
             modelBuilder.Entity("BalatroWikiApp.Models.Seal", b =>
                 {
-                    b.Property<int>("IdSeal")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("idSeal");
+                        .HasColumnName("id");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("IdSeal"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("EffectSeal")
                         .IsRequired()
@@ -420,20 +420,20 @@ namespace BalatroWikiApp.Migrations
                         .HasColumnType("varchar(20)")
                         .HasColumnName("typeSeal");
 
-                    b.HasKey("IdSeal")
+                    b.HasKey("Id")
                         .HasName("PRIMARY");
 
-                    b.ToTable("seals");
+                    b.ToTable("seals", (string)null);
                 });
 
             modelBuilder.Entity("BalatroWikiApp.Models.Spectralcard", b =>
                 {
-                    b.Property<int>("IdSpectral")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("idSpectral");
+                        .HasColumnName("id");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("IdSpectral"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("EffectSpectral")
                         .IsRequired()
@@ -447,20 +447,20 @@ namespace BalatroWikiApp.Migrations
                         .HasColumnType("varchar(50)")
                         .HasColumnName("nameSpectral");
 
-                    b.HasKey("IdSpectral")
+                    b.HasKey("Id")
                         .HasName("PRIMARY");
 
-                    b.ToTable("spectralcard");
+                    b.ToTable("spectralcard", (string)null);
                 });
 
             modelBuilder.Entity("BalatroWikiApp.Models.Sticker", b =>
                 {
-                    b.Property<int>("IdSticker")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("idSticker");
+                        .HasColumnName("id");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("IdSticker"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("DescriptionSticker")
                         .IsRequired()
@@ -480,20 +480,20 @@ namespace BalatroWikiApp.Migrations
                         .HasColumnType("varchar(50)")
                         .HasColumnName("nameSticker");
 
-                    b.HasKey("IdSticker")
+                    b.HasKey("Id")
                         .HasName("PRIMARY");
 
-                    b.ToTable("sticker");
+                    b.ToTable("sticker", (string)null);
                 });
 
             modelBuilder.Entity("BalatroWikiApp.Models.Tag", b =>
                 {
-                    b.Property<int>("IdTag")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("idTag");
+                        .HasColumnName("id");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("IdTag"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("EffectTag")
                         .IsRequired()
@@ -507,20 +507,20 @@ namespace BalatroWikiApp.Migrations
                         .HasColumnType("varchar(50)")
                         .HasColumnName("nameTag");
 
-                    b.HasKey("IdTag")
+                    b.HasKey("Id")
                         .HasName("PRIMARY");
 
-                    b.ToTable("tags");
+                    b.ToTable("tags", (string)null);
                 });
 
             modelBuilder.Entity("BalatroWikiApp.Models.Tarotcard", b =>
                 {
-                    b.Property<int>("IdTarot")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("idTarot");
+                        .HasColumnName("id");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("IdTarot"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("EffectTarot")
                         .IsRequired()
@@ -534,20 +534,20 @@ namespace BalatroWikiApp.Migrations
                         .HasColumnType("varchar(50)")
                         .HasColumnName("nameTarot");
 
-                    b.HasKey("IdTarot")
+                    b.HasKey("Id")
                         .HasName("PRIMARY");
 
-                    b.ToTable("tarotcard");
+                    b.ToTable("tarotcard", (string)null);
                 });
 
             modelBuilder.Entity("BalatroWikiApp.Models.Voucher", b =>
                 {
-                    b.Property<int>("IdVoucher")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("idVoucher");
+                        .HasColumnName("id");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("IdVoucher"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("DescriptionVoucher")
                         .IsRequired()
@@ -569,10 +569,10 @@ namespace BalatroWikiApp.Migrations
                         .HasColumnType("tinyint(1)")
                         .HasColumnName("stateVoucher");
 
-                    b.HasKey("IdVoucher")
+                    b.HasKey("Id")
                         .HasName("PRIMARY");
 
-                    b.ToTable("vouchers");
+                    b.ToTable("vouchers", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -709,37 +709,29 @@ namespace BalatroWikiApp.Migrations
 
             modelBuilder.Entity("BalatroWikiApp.Models.Boosterpack", b =>
                 {
-                    b.HasOne("BalatroWikiApp.Models.Card", "IdCardNavigation")
+                    b.HasOne("BalatroWikiApp.Models.Card", "Card")
                         .WithMany("Boosterpacks")
-                        .HasForeignKey("IdCard")
-                        .IsRequired()
-                        .HasConstraintName("fk_card");
+                        .HasForeignKey("IdCard");
 
-                    b.HasOne("BalatroWikiApp.Models.Joker", "IdJokerNavigation")
+                    b.HasOne("BalatroWikiApp.Models.Joker", "Joker")
                         .WithMany("Boosterpacks")
-                        .HasForeignKey("IdJoker")
-                        .IsRequired()
-                        .HasConstraintName("fk_joker");
+                        .HasForeignKey("IdJoker");
 
-                    b.HasOne("BalatroWikiApp.Models.Spectralcard", "IdSpectralNavigation")
+                    b.HasOne("BalatroWikiApp.Models.Spectralcard", "Spectral")
                         .WithMany("Boosterpacks")
-                        .HasForeignKey("IdSpectral")
-                        .IsRequired()
-                        .HasConstraintName("fk_spectral");
+                        .HasForeignKey("IdSpectral");
 
-                    b.HasOne("BalatroWikiApp.Models.Tarotcard", "IdTarotNavigation")
+                    b.HasOne("BalatroWikiApp.Models.Tarotcard", "Tarot")
                         .WithMany("Boosterpacks")
-                        .HasForeignKey("IdTarot")
-                        .IsRequired()
-                        .HasConstraintName("fk_tarot");
+                        .HasForeignKey("IdTarot");
 
-                    b.Navigation("IdCardNavigation");
+                    b.Navigation("Card");
 
-                    b.Navigation("IdJokerNavigation");
+                    b.Navigation("Joker");
 
-                    b.Navigation("IdSpectralNavigation");
+                    b.Navigation("Spectral");
 
-                    b.Navigation("IdTarotNavigation");
+                    b.Navigation("Tarot");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
