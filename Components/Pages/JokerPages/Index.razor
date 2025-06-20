@@ -14,8 +14,9 @@
     <a href="jokers/create">Create New</a>
 </p>
 
-<QuickGrid Class="table" Items="context.Jokers">
+<QuickGrid Class="table" Items="context.Jokers.OrderBy(joker => joker.NumberJoker)">
     <PropertyColumn Property="joker => joker.NameJoker" />
+    <PropertyColumn Property="joker => joker.NumberJoker" />
     <PropertyColumn Property="joker => joker.RarityJoker" />
     <PropertyColumn Property="joker => joker.PriceJoker" />
     <PropertyColumn Property="joker => joker.TypeJoker" />
