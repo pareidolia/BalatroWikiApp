@@ -108,7 +108,7 @@
     {
         using var context = DbFactory.CreateDbContext();
         _cards = context.Cards.ToList();
-        _jokers = context.Jokers.ToList();
+        _jokers = context.Jokers.OrderBy(joker => joker.NumberJoker).ToList();
         _tarots = context.Tarotcards.ToList();
         _spectrals = context.Spectralcards.ToList();
     }
