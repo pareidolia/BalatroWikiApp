@@ -19,7 +19,12 @@
                 <label for="namejoker" class="form-label">NameJoker:</label> 
                 <InputText id="namejoker" @bind-Value="Joker.NameJoker" class="form-control" aria-required="true"/> 
                 <ValidationMessage For="() => Joker.NameJoker" class="text-danger" /> 
-            </div>        
+            </div>
+            <div class="mb-3">
+                <label for="numberjoker" class="form-label">NumberJoker:</label>
+                <InputNumber id="numberjoker" @bind-Value="Joker.NumberJoker" class="form-control" aria-required="true" />
+                <ValidationMessage For="() => Joker.NumberJoker" class="text-danger" />
+            </div>
             <div class="mb-3">
                 <label for="rarityjoker" class="form-label">RarityJoker:</label> 
                 <InputText id="rarityjoker" @bind-Value="Joker.RarityJoker" class="form-control" aria-required="true"/> 
