@@ -15,6 +15,10 @@ public partial class Joker : Entity
     public string NameJoker { get; set; }
 
     [Required]
+    [Column("numberJoker")]
+    public int NumberJoker { get; set; }
+
+    [Required]
     [Column("rarityJoker")]
     [StringLength(30)]
     public string RarityJoker { get; set; }
