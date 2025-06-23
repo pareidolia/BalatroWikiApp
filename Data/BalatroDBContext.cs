@@ -45,6 +45,7 @@ public partial class BalatroDBContext : IdentityDbContext<ApplicationUser>
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
         modelBuilder.Entity<Blind>(entity =>
         {
             entity.HasKey(e => e.Id);
@@ -52,7 +53,6 @@ public partial class BalatroDBContext : IdentityDbContext<ApplicationUser>
 
         modelBuilder.Entity<Boosterpack>(entity =>
         {
-            base.OnModelCreating(modelBuilder);
             entity.HasKey(e => new { e.Id });
 
             entity.HasOne(d => d.Joker).WithMany(p => p.Boosterpacks)
