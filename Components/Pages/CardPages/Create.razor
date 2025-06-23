@@ -24,12 +24,22 @@
                 <label for="familycard" class="form-label">FamilyCard:</label> 
                 <InputText id="familycard" @bind-Value="Card.FamilyCard" class="form-control" aria-required="true"/> 
                 <ValidationMessage For="() => Card.FamilyCard" class="text-danger" /> 
-            </div>        
+            </div>
             <div class="mb-3">
                 <label for="isenhanced" class="form-label">IsEnhanced:</label> 
                 <InputCheckbox id="isenhanced" @bind-Value="Card.IsEnhanced" class="form-check-input" /> 
                 <ValidationMessage For="() => Card.IsEnhanced" class="text-danger" /> 
-            </div>        
+            </div>
+            <div class="mb-3">
+                <label for="idenhancedcard" class="form-label">Enhancedcard:</label>
+                <InputSelect id="idenhancedcard" @bind-Value="Card.IdEnhancedcard">
+                    <option selected value="">Sélectionner une amélioration</option>
+                    @foreach (var enhancement in _enhancements)
+                    {
+                        <option value="@enhancement.Id">@enhancement.NameEnhanced</option>
+                    }
+                </InputSelect>
+            </div>
             <button type="submit" class="btn btn-primary">Create</button>
         </EditForm>
     </div>
@@ -42,6 +52,14 @@
 @code {
     [SupplyParameterFromForm]
     private Card Card { get; set; } = new();
+
+    private List<Enhancedcard> _enhancements = new();
+
+    protected override void OnInitialized()
+    {
+        using var context = DbFactory.CreateDbContext();
+        _enhancements = context.Enhancedcards.ToList();
+    }
 
     // To protect from overposting attacks, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
     private async Task AddCard()

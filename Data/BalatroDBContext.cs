@@ -76,6 +76,11 @@ public partial class BalatroDBContext : IdentityDbContext<ApplicationUser>
         modelBuilder.Entity<Card>(entity =>
         {
             entity.HasKey(e => e.Id);
+
+            entity.HasOne(d => d.NameEnhanced).WithMany(p => p.Cards)
+                .HasForeignKey(d => d.IdEnhancedcard)
+                .OnDelete(DeleteBehavior.ClientSetNull);
+
         });
 
         modelBuilder.Entity<Deck>(entity =>
