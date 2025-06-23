@@ -30,16 +30,19 @@
                 <InputCheckbox id="isenhanced" @bind-Value="Card.IsEnhanced" class="form-check-input" /> 
                 <ValidationMessage For="() => Card.IsEnhanced" class="text-danger" /> 
             </div>
-            <div class="mb-3">
-                <label for="idenhancedcard" class="form-label">Enhancedcard:</label>
-                <InputSelect id="idenhancedcard" @bind-Value="Card.IdEnhancedcard">
-                    <option selected value="">Sélectionner une amélioration</option>
-                    @foreach (var enhancement in _enhancements)
-                    {
-                        <option value="@enhancement.Id">@enhancement.NameEnhanced</option>
-                    }
-                </InputSelect>
-            </div>
+            @if (Card.IsEnhanced == true)
+            {
+                <div class="mb-3">
+                    <label for="idenhancedcard" class="form-label">Enhancedcard:</label>
+                    <InputSelect id="idenhancedcard" @bind-Value="Card.IdEnhancedcard">
+                        <option selected value="">Sélectionner une amélioration</option>
+                        @foreach (var enhancement in _enhancements)
+                        {
+                            <option value="@enhancement.Id">@enhancement.NameEnhanced</option>
+                        }
+                    </InputSelect>
+                </div>
+            }
             <button type="submit" class="btn btn-primary">Create</button>
         </EditForm>
     </div>
