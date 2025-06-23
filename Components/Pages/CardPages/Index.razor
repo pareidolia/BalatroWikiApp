@@ -13,10 +13,11 @@
     <a href="cards/create">Create New</a>
 </p>
 
-<QuickGrid Class="table" Items="context.Cards">
+<QuickGrid Class="table" Items="context.Cards.Include(c => c.NameEnhanced)">
     <PropertyColumn Property="card => card.NameCard" />
     <PropertyColumn Property="card => card.FamilyCard" />
     <PropertyColumn Property="card => card.IsEnhanced" />
+    <PropertyColumn Property="card => card.NameEnhanced" />
 
     <TemplateColumn Context="card">
         <a href="@($"cards/edit?id={card.Id}")">Edit</a> |

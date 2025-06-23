@@ -9,6 +9,7 @@ namespace BalatroWikiApp.Models;
 [Table("enhancedcards")]
 public partial class Enhancedcard : Entity
 {
+
     [Required]
     [Column("nameEnhanced")]
     [StringLength(50)]
@@ -23,4 +24,8 @@ public partial class Enhancedcard : Entity
     [Column("typeEnhanced")]
     [StringLength(20)]
     public string TypeEnhanced { get; set; }
+
+    public virtual ICollection<Card> Cards { get; set; } = new List<Card>();
+
+    public override string ToString() => NameEnhanced;
 }
