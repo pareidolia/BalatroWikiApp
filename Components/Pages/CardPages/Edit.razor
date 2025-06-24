@@ -37,6 +37,21 @@ else
                     <InputCheckbox id="isenhanced" @bind-Value="Card.IsEnhanced" class="form-check-input" />
                     <ValidationMessage For="() => Card.IsEnhanced" class="text-danger" />
                 </div>
+
+                @if (Card.IsEnhanced == true)
+                {
+                    <div class="mb-3">
+                        <label for="idenhancedcard" class="form-label">Enhancedcard:</label>
+                        <InputSelect id="idenhancedcard" @bind-Value="Card.IdEnhancedcard">
+                            <option selected value="">Sélectionner une amélioration</option>
+                            @foreach (var enhancement in _enhancements)
+                            {
+                                <option value="@enhancement.Id">@enhancement.NameEnhanced</option>
+                            }
+                        </InputSelect>
+                    </div>
+                }
+
                 <button type="submit" class="btn btn-primary">Save</button>
             </EditForm>
         </div>
@@ -53,10 +68,13 @@ else
 
     [SupplyParameterFromForm]
     private Card? Card { get; set; }
+    private List<Enhancedcard> _enhancements = new();
 
     protected override async Task OnInitializedAsync()
     {
         using var context = DbFactory.CreateDbContext();
+        _enhancements = context.Enhancedcards.ToList();
+
         Card ??= await context.Cards.FirstOrDefaultAsync(m => m.Id == Id);
 
         if (Card is null)
@@ -69,7 +87,23 @@ else
     // For more information, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
     private async Task UpdateCard()
     {
+        if (Card.IsEnhanced)
+        {
+            if (Card.IdEnhancedcard == null)
+            {
+                Card.IsEnhanced = false;
+            }
+        }
+        else
+        {
+            if (Card.IdEnhancedcard != null)
+            {
+                Card.IdEnhancedcard = null;
+            }
+
+        }
         using var context = DbFactory.CreateDbContext();
+        context.Entry(Card!).Property(b => b.IdEnhancedcard).IsModified = true;
         context.Attach(Card!).State = EntityState.Modified;
 
         try
