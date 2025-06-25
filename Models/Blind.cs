@@ -29,4 +29,8 @@ public partial class Blind : Entity
 
     [Column("rewardBlind")]
     public int RewardBlind { get; set; }
+
+    [Column("imageBlind")]
+    [StringLength(100)]
+    public string ImageBlind { get; set; }
 }

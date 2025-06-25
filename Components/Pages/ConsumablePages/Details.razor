@@ -1,0 +1,48 @@
+﻿@page "/consumables/details"
+@using Microsoft.EntityFrameworkCore
+@using BalatroWikiApp.Models
+@inject IDbContextFactory<BalatroDBContext> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Details</PageTitle>
+
+<h1>Details</h1>
+
+<div>
+    <h2>Consumable</h2>
+    <hr />
+    @if (consumable is null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else {
+        <dl class="row">
+            <dt class="col-sm-2">ImageConsumable</dt>
+            <dd class="col-sm-10">@consumable.ImageConsumable</dd>
+            <dt class="col-sm-2">TypeConsumable</dt>
+            <dd class="col-sm-10">@consumable.TypeConsumable</dd>
+        </dl>
+        <div>
+            <a href="@($"/consumables/edit?id={consumable.Id}")">Edit</a> |
+            <a href="@($"/consumables")">Back to List</a>
+        </div>
+    }
+</div>
+
+@code {
+    private Consumable? consumable;
+
+    [SupplyParameterFromQuery]
+    private int Id { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var context = DbFactory.CreateDbContext();
+        consumable = await context.Consumables.FirstOrDefaultAsync(m => m.Id == Id);
+
+        if (consumable is null)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+    }
+}

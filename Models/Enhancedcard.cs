@@ -25,6 +25,10 @@ public partial class Enhancedcard : Entity
     [StringLength(20)]
     public string TypeEnhanced { get; set; }
 
+    [Column("imageEnhancedcard")]
+    [StringLength(100)]
+    public string ImageEnhancedcard { get; set; }
+
     public virtual ICollection<Card> Cards { get; set; } = new List<Card>();
 
     public override string ToString() => NameEnhanced;

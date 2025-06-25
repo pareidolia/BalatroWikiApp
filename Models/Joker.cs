@@ -43,5 +43,9 @@ public partial class Joker : Entity
     [Column("hasFaceJoker")]
     public bool HasFaceJoker { get; set; }
 
+    [Column("imageJoker")]
+    [StringLength(100)]
+    public string ImageJoker { get; set; }
+
     public virtual ICollection<Boosterpack> Boosterpacks { get; set; } = new List<Boosterpack>();
 }

@@ -24,4 +24,8 @@ public partial class Voucher : Entity
 
     [Column("stateVoucher")]
     public bool StateVoucher { get; set; }
+
+    [Column("imageVoucher")]
+    [StringLength(100)]
+    public string ImageVoucher { get; set; }
 }

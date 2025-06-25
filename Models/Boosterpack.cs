@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+using BalatroWikiApp.Enums;
 
 namespace BalatroWikiApp.Models;
 
@@ -29,6 +30,11 @@ public partial class Boosterpack : Entity
     [StringLength(50)]
     public string NamePack { get; set; }
 
+    [Required]
+    [Column("typePack")]
+    [StringLength(50)]
+    public TypeBoosterpack Type { get; set; } // enum
+
     [Column("numberPack")]
     public int NumberPack { get; set; }
 
@@ -46,11 +52,13 @@ public partial class Boosterpack : Entity
     [Column("pricePack")]
     public int PricePack { get; set; }
 
+    [Column("imageBoosterpack")]
+    [StringLength(100)]
+    public string ImageBoosterpack { get; set; }
+
+    public TypeBoosterpack TypeBoosterpack { get; set; }
+
     public virtual Joker? Joker { get; set; }
-
-    public virtual Spectralcard? Spectral { get; set; }
-
-    public virtual Tarotcard? Tarot { get; set; }
 
     public virtual Card? Card { get; set; }
 }

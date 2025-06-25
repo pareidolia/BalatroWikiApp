@@ -18,4 +18,8 @@ public partial class Deck : Entity
     [Column("descriptionDeck")]
     [StringLength(200)]
     public string DescriptionDeck { get; set; }
+
+    [Column("imageDeck")]
+    [StringLength(100)]
+    public string ImageDeck { get; set; }
 }

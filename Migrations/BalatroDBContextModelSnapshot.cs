@@ -111,6 +111,12 @@ namespace BalatroWikiApp.Migrations
                         .HasColumnType("character varying(50)")
                         .HasColumnName("effectBlind");
 
+                    b.Property<string>("ImageBlind")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("imageBlind");
+
                     b.Property<string>("NameBlind")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -157,6 +163,12 @@ namespace BalatroWikiApp.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("idTarot");
 
+                    b.Property<string>("ImageBoosterpack")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("imageBoosterpack");
+
                     b.Property<string>("NamePack")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -179,15 +191,20 @@ namespace BalatroWikiApp.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("pricePack");
 
+                    b.Property<int>("Type")
+                        .HasMaxLength(50)
+                        .HasColumnType("integer")
+                        .HasColumnName("typePack");
+
+                    b.Property<string>("TypeBoosterpack")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.HasKey("Id");
 
                     b.HasIndex("IdCard");
 
                     b.HasIndex("IdJoker");
-
-                    b.HasIndex("IdSpectral");
-
-                    b.HasIndex("IdTarot");
 
                     b.ToTable("boosterpack");
                 });
@@ -228,6 +245,31 @@ namespace BalatroWikiApp.Migrations
                     b.ToTable("cards");
                 });
 
+            modelBuilder.Entity("BalatroWikiApp.Models.Consumable", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ImageConsumable")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("imageConsumable");
+
+                    b.Property<string>("TypeConsumable")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("typeConsumable");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("consumables");
+                });
+
             modelBuilder.Entity("BalatroWikiApp.Models.Deck", b =>
                 {
                     b.Property<int>("Id")
@@ -242,6 +284,12 @@ namespace BalatroWikiApp.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("character varying(200)")
                         .HasColumnName("descriptionDeck");
+
+                    b.Property<string>("ImageDeck")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("imageDeck");
 
                     b.Property<string>("NameDeck")
                         .IsRequired()
@@ -269,6 +317,12 @@ namespace BalatroWikiApp.Migrations
                         .HasColumnType("character varying(50)")
                         .HasColumnName("effectEdition");
 
+                    b.Property<string>("ImageEdition")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("imageEdition");
+
                     b.Property<string>("NameEdition")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -295,6 +349,12 @@ namespace BalatroWikiApp.Migrations
                         .HasColumnType("character varying(50)")
                         .HasColumnName("effectEnhanced");
 
+                    b.Property<string>("ImageEnhancedcard")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("imageEnhancedcard");
+
                     b.Property<string>("NameEnhanced")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -310,6 +370,40 @@ namespace BalatroWikiApp.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("enhancedcards");
+                });
+
+            modelBuilder.Entity("BalatroWikiApp.Models.Hand", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("BaseChips")
+                        .HasColumnType("integer")
+                        .HasColumnName("baseChips");
+
+                    b.Property<int>("BaseMult")
+                        .HasColumnType("integer")
+                        .HasColumnName("baseMult");
+
+                    b.Property<string>("ImageHand")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("imageHand");
+
+                    b.Property<string>("NameHand")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("nameHand");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("hands");
                 });
 
             modelBuilder.Entity("BalatroWikiApp.Models.Joker", b =>
@@ -330,6 +424,12 @@ namespace BalatroWikiApp.Migrations
                     b.Property<bool>("HasFaceJoker")
                         .HasColumnType("boolean")
                         .HasColumnName("hasFaceJoker");
+
+                    b.Property<string>("ImageJoker")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("imageJoker");
 
                     b.Property<string>("NameJoker")
                         .IsRequired()
@@ -367,7 +467,7 @@ namespace BalatroWikiApp.Migrations
                     b.ToTable("jokers");
                 });
 
-            modelBuilder.Entity("BalatroWikiApp.Models.Planetcard", b =>
+            modelBuilder.Entity("BalatroWikiApp.Models.OtherEffect", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -376,21 +476,31 @@ namespace BalatroWikiApp.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("HandPlanet")
+                    b.Property<string>("Copy")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("character varying(50)")
-                        .HasColumnName("handPlanet");
+                        .HasColumnName("copy");
 
-                    b.Property<string>("NamePlanet")
+                    b.Property<string>("Creation")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("character varying(50)")
-                        .HasColumnName("namePlanet");
+                        .HasColumnName("creation");
+
+                    b.Property<int>("Money")
+                        .HasColumnType("integer")
+                        .HasColumnName("money");
+
+                    b.Property<string>("imageOtherEffect")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("imageOtherEffect");
 
                     b.HasKey("Id");
 
-                    b.ToTable("planetcard");
+                    b.ToTable("otherEffects");
                 });
 
             modelBuilder.Entity("BalatroWikiApp.Models.Seal", b =>
@@ -408,6 +518,12 @@ namespace BalatroWikiApp.Migrations
                         .HasColumnType("character varying(20)")
                         .HasColumnName("effectSeal");
 
+                    b.Property<string>("ImageSeal")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("imageSeal");
+
                     b.Property<string>("NameSeal")
                         .IsRequired()
                         .HasMaxLength(20)
@@ -423,32 +539,6 @@ namespace BalatroWikiApp.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("seals");
-                });
-
-            modelBuilder.Entity("BalatroWikiApp.Models.Spectralcard", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("EffectSpectral")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("character varying(200)")
-                        .HasColumnName("effectSpectral");
-
-                    b.Property<string>("NameSpectral")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)")
-                        .HasColumnName("nameSpectral");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("spectralcard");
                 });
 
             modelBuilder.Entity("BalatroWikiApp.Models.Sticker", b =>
@@ -471,6 +561,12 @@ namespace BalatroWikiApp.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("character varying(50)")
                         .HasColumnName("effectSticker");
+
+                    b.Property<string>("ImageSticker")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("imageSticker");
 
                     b.Property<string>("NameSticker")
                         .IsRequired()
@@ -498,6 +594,12 @@ namespace BalatroWikiApp.Migrations
                         .HasColumnType("character varying(200)")
                         .HasColumnName("effectTag");
 
+                    b.Property<string>("ImageTag")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("imageTag");
+
                     b.Property<string>("NameTag")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -507,32 +609,6 @@ namespace BalatroWikiApp.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("tags");
-                });
-
-            modelBuilder.Entity("BalatroWikiApp.Models.Tarotcard", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("EffectTarot")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)")
-                        .HasColumnName("effectTarot");
-
-                    b.Property<string>("NameTarot")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)")
-                        .HasColumnName("nameTarot");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("tarotcard");
                 });
 
             modelBuilder.Entity("BalatroWikiApp.Models.Voucher", b =>
@@ -549,6 +625,12 @@ namespace BalatroWikiApp.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("character varying(200)")
                         .HasColumnName("descriptionVoucher");
+
+                    b.Property<string>("ImageVoucher")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("imageVoucher");
 
                     b.Property<string>("NameVoucher")
                         .IsRequired()
@@ -711,30 +793,18 @@ namespace BalatroWikiApp.Migrations
                         .WithMany("Boosterpacks")
                         .HasForeignKey("IdJoker");
 
-                    b.HasOne("BalatroWikiApp.Models.Spectralcard", "Spectral")
-                        .WithMany("Boosterpacks")
-                        .HasForeignKey("IdSpectral");
-
-                    b.HasOne("BalatroWikiApp.Models.Tarotcard", "Tarot")
-                        .WithMany("Boosterpacks")
-                        .HasForeignKey("IdTarot");
-
                     b.Navigation("Card");
 
                     b.Navigation("Joker");
-
-                    b.Navigation("Spectral");
-
-                    b.Navigation("Tarot");
                 });
 
             modelBuilder.Entity("BalatroWikiApp.Models.Card", b =>
                 {
-                    b.HasOne("BalatroWikiApp.Models.Enhancedcard", "Enhancedcard")
+                    b.HasOne("BalatroWikiApp.Models.Enhancedcard", "NameEnhanced")
                         .WithMany("Cards")
                         .HasForeignKey("IdEnhancedcard");
 
-                    b.Navigation("Enhancedcard");
+                    b.Navigation("NameEnhanced");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -799,16 +869,6 @@ namespace BalatroWikiApp.Migrations
                 });
 
             modelBuilder.Entity("BalatroWikiApp.Models.Joker", b =>
-                {
-                    b.Navigation("Boosterpacks");
-                });
-
-            modelBuilder.Entity("BalatroWikiApp.Models.Spectralcard", b =>
-                {
-                    b.Navigation("Boosterpacks");
-                });
-
-            modelBuilder.Entity("BalatroWikiApp.Models.Tarotcard", b =>
                 {
                     b.Navigation("Boosterpacks");
                 });

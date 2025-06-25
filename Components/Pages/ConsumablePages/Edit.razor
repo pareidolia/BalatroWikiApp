@@ -1,16 +1,16 @@
-﻿@page "/planetcards/edit"
+﻿@page "/consumables/edit"
 @using Microsoft.EntityFrameworkCore
 @using BalatroWikiApp.Models
-@inject IDbContextFactory<BalatroWikiApp.Models.BalatroDBContext> DbFactory
+@inject IDbContextFactory<BalatroDBContext> DbFactory
 @inject NavigationManager NavigationManager
 
 <PageTitle>Edit</PageTitle>
 
 <h1>Edit</h1>
 
-<h2>Planetcard</h2>
+<h2>Consumable</h2>
 <hr />
-@if (Planetcard is null)
+@if (Consumable is null)
 {
     <p><em>Loading...</em></p>
 }
@@ -18,19 +18,19 @@ else
 {
     <div class="row">
         <div class="col-md-4">
-            <EditForm method="post" Model="Planetcard" OnValidSubmit="UpdatePlanetcard" FormName="edit" Enhance>
+            <EditForm method="post" Model="Consumable" OnValidSubmit="UpdateConsumable" FormName="edit" Enhance>
                 <DataAnnotationsValidator />
                 <ValidationSummary role="alert"/>
-                <input type="hidden" name="Planetcard.Id" value="@Planetcard.Id" />
+                <input type="hidden" name="Consumable.Id" value="@Consumable.Id" />
                 <div class="mb-3">
-                    <label for="nameplanet" class="form-label">NamePlanet:</label>
-                    <InputText id="nameplanet" @bind-Value="Planetcard.NamePlanet" class="form-control" aria-required="true"/>
-                    <ValidationMessage For="() => Planetcard.NamePlanet" class="text-danger" />
+                    <label for="imageconsumable" class="form-label">ImageConsumable:</label>
+                    <InputText id="imageconsumable" @bind-Value="Consumable.ImageConsumable" class="form-control" aria-required="true"/>
+                    <ValidationMessage For="() => Consumable.ImageConsumable" class="text-danger" />
                 </div>
                 <div class="mb-3">
-                    <label for="handplanet" class="form-label">HandPlanet:</label>
-                    <InputText id="handplanet" @bind-Value="Planetcard.HandPlanet" class="form-control" aria-required="true"/>
-                    <ValidationMessage For="() => Planetcard.HandPlanet" class="text-danger" />
+                    <label for="typeconsumable" class="form-label">TypeConsumable:</label>
+                    @* <InputText id="typeconsumable" @bind-Value="Consumable.TypeConsumable" class="form-control" aria-required="true"/> *@
+                    <ValidationMessage For="() => Consumable.TypeConsumable" class="text-danger" />
                 </div>
                 <button type="submit" class="btn btn-primary">Save</button>
             </EditForm>
@@ -39,7 +39,7 @@ else
 }
 
 <div>
-    <a href="/planetcards">Back to List</a>
+    <a href="/consumables">Back to List</a>
 </div>
 
 @code {
@@ -47,14 +47,14 @@ else
     private int Id { get; set; }
 
     [SupplyParameterFromForm]
-    private Planetcard? Planetcard { get; set; }
+    private Consumable? Consumable { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         using var context = DbFactory.CreateDbContext();
-        Planetcard ??= await context.Planetcards.FirstOrDefaultAsync(m => m.Id == Id);
+        Consumable ??= await context.Consumables.FirstOrDefaultAsync(m => m.Id == Id);
 
-        if (Planetcard is null)
+        if (Consumable is null)
         {
             NavigationManager.NavigateTo("notfound");
         }
@@ -62,10 +62,10 @@ else
 
     // To protect from overposting attacks, enable the specific properties you want to bind to.
     // For more information, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
-    private async Task UpdatePlanetcard()
+    private async Task UpdateConsumable()
     {
         using var context = DbFactory.CreateDbContext();
-        context.Attach(Planetcard!).State = EntityState.Modified;
+        context.Attach(Consumable!).State = EntityState.Modified;
 
         try
         {
@@ -73,7 +73,7 @@ else
         }
         catch (DbUpdateConcurrencyException)
         {
-            if (!PlanetcardExists(Planetcard!.Id))
+            if (!ConsumableExists(Consumable!.Id))
             {
                 NavigationManager.NavigateTo("notfound");
             }
@@ -83,12 +83,12 @@ else
             }
         }
 
-        NavigationManager.NavigateTo("/planetcards");
+        NavigationManager.NavigateTo("/consumables");
     }
 
-    private bool PlanetcardExists(int id)
+    private bool ConsumableExists(int id)
     {
         using var context = DbFactory.CreateDbContext();
-        return context.Planetcards.Any(e => e.Id == id);
+        return context.Consumables.Any(e => e.Id == id);
     }
 }

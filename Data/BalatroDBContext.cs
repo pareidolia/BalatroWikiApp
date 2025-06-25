@@ -21,25 +21,25 @@ public partial class BalatroDBContext : IdentityDbContext<ApplicationUser>
 
     public virtual DbSet<Card> Cards { get; set; }
 
+    public virtual DbSet<Consumable> Consumables { get; set; }
+
     public virtual DbSet<Deck> Decks { get; set; }
 
     public virtual DbSet<Edition> Editions { get; set; }
 
     public virtual DbSet<Enhancedcard> Enhancedcards { get; set; }
 
+    public virtual DbSet<Hand> Hands { get; set; }
+
     public virtual DbSet<Joker> Jokers { get; set; }
 
-    public virtual DbSet<Planetcard> Planetcards { get; set; }
+    public virtual DbSet<OtherEffect> OtherEffects { get; set; }
 
     public virtual DbSet<Seal> Seals { get; set; }
-
-    public virtual DbSet<Spectralcard> Spectralcards { get; set; }
 
     public virtual DbSet<Sticker> Stickers { get; set; }
 
     public virtual DbSet<Tag> Tags { get; set; }
-
-    public virtual DbSet<Tarotcard> Tarotcards { get; set; }
 
     public virtual DbSet<Voucher> Vouchers { get; set; }
 
@@ -59,17 +59,13 @@ public partial class BalatroDBContext : IdentityDbContext<ApplicationUser>
                 .HasForeignKey(d => d.IdJoker)
                 .OnDelete(DeleteBehavior.ClientSetNull);
 
-            entity.HasOne(d => d.Spectral).WithMany(p => p.Boosterpacks)
-                .HasForeignKey(d => d.IdSpectral)
-                .OnDelete(DeleteBehavior.ClientSetNull);
-
-            entity.HasOne(d => d.Tarot).WithMany(p => p.Boosterpacks)
-                .HasForeignKey(d => d.IdTarot)
-                .OnDelete(DeleteBehavior.ClientSetNull);
-
             entity.HasOne(d => d.Card).WithMany(p => p.Boosterpacks)
                 .HasForeignKey(d => d.IdCard)
                 .OnDelete(DeleteBehavior.ClientSetNull);
+
+            entity.Property(e => e.TypeBoosterpack)
+            .HasConversion<string>()
+            .IsRequired();
 
         });
 
@@ -81,6 +77,14 @@ public partial class BalatroDBContext : IdentityDbContext<ApplicationUser>
                 .HasForeignKey(d => d.IdEnhancedcard)
                 .OnDelete(DeleteBehavior.ClientSetNull);
 
+        });
+
+        modelBuilder.Entity<Consumable>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.TypeConsumable)
+            .HasConversion<string>()
+            .IsRequired();
         });
 
         modelBuilder.Entity<Deck>(entity =>
@@ -98,22 +102,22 @@ public partial class BalatroDBContext : IdentityDbContext<ApplicationUser>
             entity.HasKey(e => e.Id);
         });
 
+        modelBuilder.Entity<Hand>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+        });
+
         modelBuilder.Entity<Joker>(entity =>
         {
             entity.HasKey(e => e.Id);
         });
 
-        modelBuilder.Entity<Planetcard>(entity =>
+        modelBuilder.Entity<OtherEffect>(entity =>
         {
             entity.HasKey(e => e.Id);
         });
 
         modelBuilder.Entity<Seal>(entity =>
-        {
-            entity.HasKey(e => e.Id);
-        });
-
-        modelBuilder.Entity<Spectralcard>(entity =>
         {
             entity.HasKey(e => e.Id);
         });
@@ -124,11 +128,6 @@ public partial class BalatroDBContext : IdentityDbContext<ApplicationUser>
         });
 
         modelBuilder.Entity<Tag>(entity =>
-        {
-            entity.HasKey(e => e.Id);
-        });
-
-        modelBuilder.Entity<Tarotcard>(entity =>
         {
             entity.HasKey(e => e.Id);
         });

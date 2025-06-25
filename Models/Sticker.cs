@@ -23,4 +23,8 @@ public partial class Sticker : Entity
     [Column("effectSticker")]
     [StringLength(50)]
     public string EffectSticker { get; set; }
+
+    [Column("imageSticker")]
+    [StringLength(100)]
+    public string ImageSticker { get; set; }
 }
