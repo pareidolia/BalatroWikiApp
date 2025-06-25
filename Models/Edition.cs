@@ -18,4 +18,8 @@ public partial class Edition : Entity
     [Column("effectEdition")]
     [StringLength(50)]
     public string EffectEdition { get; set; }
+
+    [Column("imageEdition")]
+    [StringLength(100)]
+    public string ImageEdition { get; set; }
 }

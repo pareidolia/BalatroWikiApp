@@ -23,4 +23,8 @@ public partial class Seal : Entity
     [Column("typeSeal")]
     [StringLength(20)]
     public string TypeSeal { get; set; }
+
+    [Column("imageSeal")]
+    [StringLength(100)]
+    public string ImageSeal { get; set; }
 }

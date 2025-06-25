@@ -18,4 +18,8 @@ public partial class Tag : Entity
     [Column("effectTag")]
     [StringLength(200)]
     public string EffectTag { get; set; }
+
+    [Column("imageTag")]
+    [StringLength(100)]
+    public string ImageTag { get; set; }
 }

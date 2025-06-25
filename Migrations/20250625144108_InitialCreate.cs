@@ -61,7 +61,8 @@ namespace BalatroWikiApp.Migrations
                     anteBlind = table.Column<int>(type: "integer", nullable: false),
                     descriptionBlind = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
                     effectBlind = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    rewardBlind = table.Column<int>(type: "integer", nullable: false)
+                    rewardBlind = table.Column<int>(type: "integer", nullable: false),
+                    imageBlind = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -69,18 +70,17 @@ namespace BalatroWikiApp.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "cards",
+                name: "consumables",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    nameCard = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    familyCard = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    isEnhanced = table.Column<bool>(type: "boolean", nullable: false)
+                    imageConsumable = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    typeConsumable = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_cards", x => x.id);
+                    table.PrimaryKey("PK_consumables", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -90,7 +90,8 @@ namespace BalatroWikiApp.Migrations
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     nameDeck = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    descriptionDeck = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false)
+                    descriptionDeck = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
+                    imageDeck = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -104,7 +105,8 @@ namespace BalatroWikiApp.Migrations
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     nameEdition = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    effectEdition = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false)
+                    effectEdition = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
+                    imageEdition = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -119,11 +121,28 @@ namespace BalatroWikiApp.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     nameEnhanced = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     effectEnhanced = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    typeEnhanced = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false)
+                    typeEnhanced = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
+                    imageEnhancedcard = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_enhancedcards", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "hands",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    nameHand = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
+                    baseChips = table.Column<int>(type: "integer", nullable: false),
+                    baseMult = table.Column<int>(type: "integer", nullable: false),
+                    imageHand = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_hands", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -133,12 +152,14 @@ namespace BalatroWikiApp.Migrations
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     nameJoker = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: false),
+                    numberJoker = table.Column<int>(type: "integer", nullable: false),
                     rarityJoker = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: false),
                     priceJoker = table.Column<int>(type: "integer", nullable: false),
                     typeJoker = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
                     descriptionJoker = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
                     sizeJoker = table.Column<decimal>(type: "numeric(3,2)", precision: 3, scale: 2, nullable: true),
-                    hasFaceJoker = table.Column<bool>(type: "boolean", nullable: false)
+                    hasFaceJoker = table.Column<bool>(type: "boolean", nullable: false),
+                    imageJoker = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -146,17 +167,19 @@ namespace BalatroWikiApp.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "planetcard",
+                name: "otherEffects",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    namePlanet = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    handPlanet = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false)
+                    money = table.Column<int>(type: "integer", nullable: false),
+                    creation = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
+                    copy = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
+                    imageOtherEffect = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_planetcard", x => x.id);
+                    table.PrimaryKey("PK_otherEffects", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -167,25 +190,12 @@ namespace BalatroWikiApp.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     nameSeal = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
                     effectSeal = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
-                    typeSeal = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false)
+                    typeSeal = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
+                    imageSeal = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_seals", x => x.id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "spectralcard",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    nameSpectral = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    effectSpectral = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_spectralcard", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -196,7 +206,8 @@ namespace BalatroWikiApp.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     nameSticker = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     descriptionSticker = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
-                    effectSticker = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false)
+                    effectSticker = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
+                    imageSticker = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -210,25 +221,12 @@ namespace BalatroWikiApp.Migrations
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     nameTag = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    effectTag = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false)
+                    effectTag = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
+                    imageTag = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_tags", x => x.id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "tarotcard",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    nameTarot = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    effectTarot = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_tarotcard", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -240,7 +238,8 @@ namespace BalatroWikiApp.Migrations
                     nameVoucher = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     descriptionVoucher = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
                     priceVoucher = table.Column<int>(type: "integer", nullable: false),
-                    stateVoucher = table.Column<bool>(type: "boolean", nullable: false)
+                    stateVoucher = table.Column<bool>(type: "boolean", nullable: false),
+                    imageVoucher = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -354,6 +353,27 @@ namespace BalatroWikiApp.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "cards",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    idEnhancedcard = table.Column<int>(type: "integer", nullable: true),
+                    nameCard = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
+                    familyCard = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
+                    isEnhanced = table.Column<bool>(type: "boolean", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_cards", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_cards_enhancedcards_idEnhancedcard",
+                        column: x => x.idEnhancedcard,
+                        principalTable: "enhancedcards",
+                        principalColumn: "id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "boosterpack",
                 columns: table => new
                 {
@@ -364,11 +384,14 @@ namespace BalatroWikiApp.Migrations
                     idSpectral = table.Column<int>(type: "integer", nullable: true),
                     idCard = table.Column<int>(type: "integer", nullable: true),
                     namePack = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
+                    typePack = table.Column<int>(type: "integer", maxLength: 50, nullable: false),
                     numberPack = table.Column<int>(type: "integer", nullable: false),
                     numberChoices = table.Column<int>(type: "integer", nullable: false),
                     numberProposition = table.Column<int>(type: "integer", nullable: false),
                     descriptionPack = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
-                    pricePack = table.Column<int>(type: "integer", nullable: false)
+                    pricePack = table.Column<int>(type: "integer", nullable: false),
+                    imageBoosterpack = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    TypeBoosterpack = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -382,16 +405,6 @@ namespace BalatroWikiApp.Migrations
                         name: "FK_boosterpack_jokers_idJoker",
                         column: x => x.idJoker,
                         principalTable: "jokers",
-                        principalColumn: "id");
-                    table.ForeignKey(
-                        name: "FK_boosterpack_spectralcard_idSpectral",
-                        column: x => x.idSpectral,
-                        principalTable: "spectralcard",
-                        principalColumn: "id");
-                    table.ForeignKey(
-                        name: "FK_boosterpack_tarotcard_idTarot",
-                        column: x => x.idTarot,
-                        principalTable: "tarotcard",
                         principalColumn: "id");
                 });
 
@@ -443,14 +456,9 @@ namespace BalatroWikiApp.Migrations
                 column: "idJoker");
 
             migrationBuilder.CreateIndex(
-                name: "IX_boosterpack_idSpectral",
-                table: "boosterpack",
-                column: "idSpectral");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_boosterpack_idTarot",
-                table: "boosterpack",
-                column: "idTarot");
+                name: "IX_cards_idEnhancedcard",
+                table: "cards",
+                column: "idEnhancedcard");
         }
 
         /// <inheritdoc />
@@ -478,16 +486,19 @@ namespace BalatroWikiApp.Migrations
                 name: "boosterpack");
 
             migrationBuilder.DropTable(
+                name: "consumables");
+
+            migrationBuilder.DropTable(
                 name: "decks");
 
             migrationBuilder.DropTable(
                 name: "editions");
 
             migrationBuilder.DropTable(
-                name: "enhancedcards");
+                name: "hands");
 
             migrationBuilder.DropTable(
-                name: "planetcard");
+                name: "otherEffects");
 
             migrationBuilder.DropTable(
                 name: "seals");
@@ -514,10 +525,7 @@ namespace BalatroWikiApp.Migrations
                 name: "jokers");
 
             migrationBuilder.DropTable(
-                name: "spectralcard");
-
-            migrationBuilder.DropTable(
-                name: "tarotcard");
+                name: "enhancedcards");
         }
     }
 }

@@ -26,7 +26,7 @@ public partial class Card : Entity
     [Column("isEnhanced")]
     public bool IsEnhanced { get; set; }
 
-    [DisplayName("Caca")]
+    [DisplayName("nameEnhanced")]
     public virtual Enhancedcard? NameEnhanced { get; set; }
 
     public virtual ICollection<Boosterpack> Boosterpacks { get; set; } = new List<Boosterpack>();

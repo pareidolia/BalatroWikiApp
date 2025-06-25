@@ -36,9 +36,9 @@ else
                     <label for="idtarot" class="form-label">Tarot:</label>
                     <InputSelect id="idtarot" @bind-Value="Boosterpack.IdTarot">
                         <option value="">Sélectionner un tarot</option>
-                        @foreach (var tarot in _tarots)
+                        @foreach (var tarot in _consumables)
                         {
-                            <option value="@tarot.Id">@tarot.NameTarot</option>
+                            <option value="@tarot.Id">@tarot.TypeConsumable</option>
                         }
                     </InputSelect>
                 </div>
@@ -46,9 +46,9 @@ else
                     <label for="idspectral" class="form-label">Spectral:</label>
                     <InputSelect id="idspectral" @bind-Value="Boosterpack.IdSpectral">
                         <option value="">Sélectionner un spectral</option>
-                        @foreach (var spectral in _spectrals)
+                        @foreach (var spectral in _consumables)
                         {
-                            <option value="@spectral.Id">@spectral.NameSpectral</option>
+                            <option value="@spectral.Id">@spectral.TypeConsumable.ToString()</option>
                         }
                     </InputSelect>
                 </div>
@@ -112,8 +112,7 @@ else
 
     private List<Card> _cards = new();
     private List<Joker> _jokers = new();
-    private List<Tarotcard> _tarots = new();
-    private List<Spectralcard> _spectrals = new();
+    private List<Consumable> _consumables = new();
 
     protected override async Task OnInitializedAsync()
     {
@@ -126,8 +125,7 @@ else
         }
         _cards = context.Cards.ToList();
         _jokers = context.Jokers.ToList();
-        _tarots = context.Tarotcards.ToList();
-        _spectrals = context.Spectralcards.ToList();
+        _consumables = context.Consumables.ToList();
     }
 
     // To protect from overposting attacks, enable the specific properties you want to bind to.
