@@ -55,14 +55,6 @@ public partial class BalatroDBContext : IdentityDbContext<ApplicationUser>
         {
             entity.HasKey(e => new { e.Id });
 
-            entity.HasOne(d => d.Joker).WithMany(p => p.Boosterpacks)
-                .HasForeignKey(d => d.IdJoker)
-                .OnDelete(DeleteBehavior.ClientSetNull);
-
-            entity.HasOne(d => d.Card).WithMany(p => p.Boosterpacks)
-                .HasForeignKey(d => d.IdCard)
-                .OnDelete(DeleteBehavior.ClientSetNull);
-
             entity.Property(e => e.TypeBoosterpack)
             .HasConversion<string>()
             .IsRequired();
