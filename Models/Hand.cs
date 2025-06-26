@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
@@ -24,6 +25,12 @@ namespace BalatroWikiApp.Models
         [StringLength(100)]
         public string ImageHand { get; set; }
 
+        [DisplayName("nameConsumable")]
+        public virtual Consumable? Consumable { get; set; }
 
+        public override string ToString()
+        {
+            return NameHand;
+        }
     }
 }

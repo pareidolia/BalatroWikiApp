@@ -17,13 +17,22 @@
         <p><em>Loading...</em></p>
     }
     else {
+
         <dl class="row">
-            <dt class="col-sm-2">ImageConsumable</dt>
-            <dd class="col-sm-10">@consumable.ImageConsumable</dd>
+            <dt class="col-sm-2">NameConsumable</dt>
+            <dd class="col-sm-10">@consumable.NameConsumable</dd>
         </dl>
         <dl class="row">
             <dt class="col-sm-2">TypeConsumable</dt>
             <dd class="col-sm-10">@consumable.TypeConsumable</dd>
+        </dl>
+        <dl class="row">
+            <dt class="col-sm-2">EffectConsumable</dt>
+            <dd class="col-sm-10">@consumable.EffectConsumable</dd>
+        </dl>
+        <dl class="row">
+            <dt class="col-sm-2">ImageConsumable</dt>
+            <dd class="col-sm-10">@consumable.ImageConsumable</dd>
         </dl>
         <EditForm method="post" Model="consumable" OnValidSubmit="DeleteConsumable" FormName="delete" Enhance>
             <button type="submit" class="btn btn-danger" disabled="@(consumable is null)">Delete</button> |

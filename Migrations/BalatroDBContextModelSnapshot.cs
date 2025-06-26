@@ -254,18 +254,36 @@ namespace BalatroWikiApp.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("EffectConsumable")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)")
+                        .HasColumnName("effectConsumable");
+
+                    b.Property<int?>("IdHand")
+                        .HasColumnType("integer")
+                        .HasColumnName("idHand");
+
                     b.Property<string>("ImageConsumable")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)")
                         .HasColumnName("imageConsumable");
 
-                    b.Property<string>("TypeConsumable")
+                    b.Property<string>("NameConsumable")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("nameConsumable");
+
+                    b.Property<int>("TypeConsumable")
+                        .HasColumnType("integer")
                         .HasColumnName("typeConsumable");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("IdHand")
+                        .IsUnique();
 
                     b.ToTable("consumables");
                 });
@@ -807,6 +825,15 @@ namespace BalatroWikiApp.Migrations
                     b.Navigation("NameEnhanced");
                 });
 
+            modelBuilder.Entity("BalatroWikiApp.Models.Consumable", b =>
+                {
+                    b.HasOne("BalatroWikiApp.Models.Hand", "Hand")
+                        .WithOne("Consumable")
+                        .HasForeignKey("BalatroWikiApp.Models.Consumable", "IdHand");
+
+                    b.Navigation("Hand");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -866,6 +893,11 @@ namespace BalatroWikiApp.Migrations
             modelBuilder.Entity("BalatroWikiApp.Models.Enhancedcard", b =>
                 {
                     b.Navigation("Cards");
+                });
+
+            modelBuilder.Entity("BalatroWikiApp.Models.Hand", b =>
+                {
+                    b.Navigation("Consumable");
                 });
 
             modelBuilder.Entity("BalatroWikiApp.Models.Joker", b =>

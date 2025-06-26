@@ -70,20 +70,6 @@ namespace BalatroWikiApp.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "consumables",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    imageConsumable = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
-                    typeConsumable = table.Column<string>(type: "text", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_consumables", x => x.id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "decks",
                 columns: table => new
                 {
@@ -374,6 +360,28 @@ namespace BalatroWikiApp.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "consumables",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    idHand = table.Column<int>(type: "integer", nullable: true),
+                    nameConsumable = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
+                    typeConsumable = table.Column<int>(type: "integer", nullable: false),
+                    effectConsumable = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
+                    imageConsumable = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_consumables", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_consumables_hands_idHand",
+                        column: x => x.idHand,
+                        principalTable: "hands",
+                        principalColumn: "id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "boosterpack",
                 columns: table => new
                 {
@@ -459,6 +467,12 @@ namespace BalatroWikiApp.Migrations
                 name: "IX_cards_idEnhancedcard",
                 table: "cards",
                 column: "idEnhancedcard");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_consumables_idHand",
+                table: "consumables",
+                column: "idHand",
+                unique: true);
         }
 
         /// <inheritdoc />
@@ -495,9 +509,6 @@ namespace BalatroWikiApp.Migrations
                 name: "editions");
 
             migrationBuilder.DropTable(
-                name: "hands");
-
-            migrationBuilder.DropTable(
                 name: "otherEffects");
 
             migrationBuilder.DropTable(
@@ -523,6 +534,9 @@ namespace BalatroWikiApp.Migrations
 
             migrationBuilder.DropTable(
                 name: "jokers");
+
+            migrationBuilder.DropTable(
+                name: "hands");
 
             migrationBuilder.DropTable(
                 name: "enhancedcards");

@@ -1,22 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
 using BalatroWikiApp.Enums;
+using Microsoft.EntityFrameworkCore;
 
 namespace BalatroWikiApp.Models
 {
     [Table("consumables")]
     public partial class Consumable : Entity
     {
+        [Column("idHand")]
+        public int? IdHand { get; set; }
+
+        [Required]
+        [Column("nameConsumable")]
+        [StringLength(50)]
+        public string NameConsumable { get; set; }
+
+        [Required]
+        [Column("typeConsumable")]
+        public TypeConsumable TypeConsumable {  get; set; }
+
+        [Required]
+        [Column("effectConsumable")]
+        [StringLength(200)]
+        public string EffectConsumable { get; set; }
+
         [Required]
         [Column("imageConsumable")]
         [StringLength(100)]
         public string ImageConsumable { get; set; }
 
-        [Required]
-        [Column("typeConsumable")]
-        public TypeConsumable TypeConsumable {  get; set; }
+        [DisplayName("nameHand")]
+        public virtual Hand? Hand { get; set; }
     }
 }

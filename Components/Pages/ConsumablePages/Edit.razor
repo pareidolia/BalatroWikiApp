@@ -25,14 +25,24 @@ else
                 <ValidationSummary role="alert"/>
                 <input type="hidden" name="Consumable.Id" value="@Consumable.Id" />
                 <div class="mb-3">
-                    <label for="imageconsumable" class="form-label">ImageConsumable:</label>
-                    <InputText id="imageconsumable" @bind-Value="Consumable.ImageConsumable" class="form-control" aria-required="true"/>
-                    <ValidationMessage For="() => Consumable.ImageConsumable" class="text-danger" />
+                    <label for="nameconsumable" class="form-label">NameConsumable:</label>
+                    <InputText id="nameconsumable" @bind-Value="Consumable.NameConsumable" class="form-control" aria-required="true" />
+                    <ValidationMessage For="() => Consumable.NameConsumable" class="text-danger" />
                 </div>
                 <div class="mb-3">
                     <label for="typeconsumable" class="form-label">TypeConsumable:</label>
                     <EnumSelect TEnum="TypeConsumable" @bind-Value="Consumable.TypeConsumable"/>
                     <ValidationMessage For="() => Consumable.TypeConsumable" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="effectconsumable" class="form-label">EffectConsumable:</label>
+                    <InputText id="effectconsumable" @bind-Value="Consumable.EffectConsumable" class="form-control" aria-required="true" />
+                    <ValidationMessage For="() => Consumable.EffectConsumable" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="imageconsumable" class="form-label">ImageConsumable:</label>
+                    <InputText id="imageconsumable" @bind-Value="Consumable.ImageConsumable" class="form-control" aria-required="true" />
+                    <ValidationMessage For="() => Consumable.ImageConsumable" class="text-danger" />
                 </div>
                 <button type="submit" class="btn btn-primary">Save</button>
             </EditForm>

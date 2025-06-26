@@ -15,8 +15,12 @@
 </p>
 
 <QuickGrid Class="table" Items="context.Consumables">
-    <PropertyColumn Property="consumable => consumable.ImageConsumable" />
+    <PropertyColumn Property="consumable => consumable.NameConsumable" />
     <PropertyColumn Property="consumable => consumable.TypeConsumable" />
+    <PropertyColumn Property="consumable => consumable.EffectConsumable" />
+    <PropertyColumn Property="consumable => consumable.ImageConsumable" />
+    <PropertyColumn Property="consumable => consumable.Hand" />
+    
 
     <TemplateColumn Context="consumable">
         <a href="@($"consumables/edit?id={consumable.Id}")">Edit</a> |
