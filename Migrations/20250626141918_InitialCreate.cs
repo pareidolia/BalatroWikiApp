@@ -62,11 +62,32 @@ namespace BalatroWikiApp.Migrations
                     descriptionBlind = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
                     effectBlind = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     rewardBlind = table.Column<int>(type: "integer", nullable: false),
-                    imageBlind = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false)
+                    imageBlind = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_blinds", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "boosterpack",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    namePack = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
+                    typePack = table.Column<int>(type: "integer", maxLength: 50, nullable: false),
+                    numberPack = table.Column<int>(type: "integer", nullable: false),
+                    numberChoices = table.Column<int>(type: "integer", nullable: false),
+                    numberProposition = table.Column<int>(type: "integer", nullable: false),
+                    descriptionPack = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
+                    pricePack = table.Column<int>(type: "integer", nullable: false),
+                    imageBoosterpack = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
+                    TypeBoosterpack = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_boosterpack", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -77,7 +98,7 @@ namespace BalatroWikiApp.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     nameDeck = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     descriptionDeck = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
-                    imageDeck = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false)
+                    imageDeck = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -92,7 +113,7 @@ namespace BalatroWikiApp.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     nameEdition = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     effectEdition = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    imageEdition = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false)
+                    imageEdition = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -108,7 +129,7 @@ namespace BalatroWikiApp.Migrations
                     nameEnhanced = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     effectEnhanced = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     typeEnhanced = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
-                    imageEnhancedcard = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false)
+                    imageEnhancedcard = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -124,7 +145,7 @@ namespace BalatroWikiApp.Migrations
                     nameHand = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     baseChips = table.Column<int>(type: "integer", nullable: false),
                     baseMult = table.Column<int>(type: "integer", nullable: false),
-                    imageHand = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false)
+                    imageHand = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -145,7 +166,7 @@ namespace BalatroWikiApp.Migrations
                     descriptionJoker = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
                     sizeJoker = table.Column<decimal>(type: "numeric(3,2)", precision: 3, scale: 2, nullable: true),
                     hasFaceJoker = table.Column<bool>(type: "boolean", nullable: false),
-                    imageJoker = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false)
+                    imageJoker = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -177,7 +198,7 @@ namespace BalatroWikiApp.Migrations
                     nameSeal = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
                     effectSeal = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
                     typeSeal = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
-                    imageSeal = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false)
+                    imageSeal = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -193,7 +214,7 @@ namespace BalatroWikiApp.Migrations
                     nameSticker = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     descriptionSticker = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
                     effectSticker = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    imageSticker = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false)
+                    imageSticker = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -208,7 +229,7 @@ namespace BalatroWikiApp.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     nameTag = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     effectTag = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
-                    imageTag = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false)
+                    imageTag = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -225,7 +246,7 @@ namespace BalatroWikiApp.Migrations
                     descriptionVoucher = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
                     priceVoucher = table.Column<int>(type: "integer", nullable: false),
                     stateVoucher = table.Column<bool>(type: "boolean", nullable: false),
-                    imageVoucher = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false)
+                    imageVoucher = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -347,7 +368,8 @@ namespace BalatroWikiApp.Migrations
                     idEnhancedcard = table.Column<int>(type: "integer", nullable: true),
                     nameCard = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     familyCard = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    isEnhanced = table.Column<bool>(type: "boolean", nullable: false)
+                    isEnhanced = table.Column<bool>(type: "boolean", nullable: false),
+                    imageCard = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -366,6 +388,8 @@ namespace BalatroWikiApp.Migrations
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     idHand = table.Column<int>(type: "integer", nullable: true),
+                    idSeal = table.Column<int>(type: "integer", nullable: true),
+                    idEnhancedcard = table.Column<int>(type: "integer", nullable: true),
                     nameConsumable = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     typeConsumable = table.Column<int>(type: "integer", nullable: false),
                     effectConsumable = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
@@ -375,44 +399,19 @@ namespace BalatroWikiApp.Migrations
                 {
                     table.PrimaryKey("PK_consumables", x => x.id);
                     table.ForeignKey(
+                        name: "FK_consumables_enhancedcards_idEnhancedcard",
+                        column: x => x.idEnhancedcard,
+                        principalTable: "enhancedcards",
+                        principalColumn: "id");
+                    table.ForeignKey(
                         name: "FK_consumables_hands_idHand",
                         column: x => x.idHand,
                         principalTable: "hands",
                         principalColumn: "id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "boosterpack",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    idJoker = table.Column<int>(type: "integer", nullable: true),
-                    idTarot = table.Column<int>(type: "integer", nullable: true),
-                    idSpectral = table.Column<int>(type: "integer", nullable: true),
-                    idCard = table.Column<int>(type: "integer", nullable: true),
-                    namePack = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    typePack = table.Column<int>(type: "integer", maxLength: 50, nullable: false),
-                    numberPack = table.Column<int>(type: "integer", nullable: false),
-                    numberChoices = table.Column<int>(type: "integer", nullable: false),
-                    numberProposition = table.Column<int>(type: "integer", nullable: false),
-                    descriptionPack = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
-                    pricePack = table.Column<int>(type: "integer", nullable: false),
-                    imageBoosterpack = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
-                    TypeBoosterpack = table.Column<string>(type: "text", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_boosterpack", x => x.id);
                     table.ForeignKey(
-                        name: "FK_boosterpack_cards_idCard",
-                        column: x => x.idCard,
-                        principalTable: "cards",
-                        principalColumn: "id");
-                    table.ForeignKey(
-                        name: "FK_boosterpack_jokers_idJoker",
-                        column: x => x.idJoker,
-                        principalTable: "jokers",
+                        name: "FK_consumables_seals_idSeal",
+                        column: x => x.idSeal,
+                        principalTable: "seals",
                         principalColumn: "id");
                 });
 
@@ -454,24 +453,26 @@ namespace BalatroWikiApp.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_boosterpack_idCard",
-                table: "boosterpack",
-                column: "idCard");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_boosterpack_idJoker",
-                table: "boosterpack",
-                column: "idJoker");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_cards_idEnhancedcard",
                 table: "cards",
                 column: "idEnhancedcard");
 
             migrationBuilder.CreateIndex(
+                name: "IX_consumables_idEnhancedcard",
+                table: "consumables",
+                column: "idEnhancedcard",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_consumables_idHand",
                 table: "consumables",
                 column: "idHand",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_consumables_idSeal",
+                table: "consumables",
+                column: "idSeal",
                 unique: true);
         }
 
@@ -500,6 +501,9 @@ namespace BalatroWikiApp.Migrations
                 name: "boosterpack");
 
             migrationBuilder.DropTable(
+                name: "cards");
+
+            migrationBuilder.DropTable(
                 name: "consumables");
 
             migrationBuilder.DropTable(
@@ -509,10 +513,10 @@ namespace BalatroWikiApp.Migrations
                 name: "editions");
 
             migrationBuilder.DropTable(
-                name: "otherEffects");
+                name: "jokers");
 
             migrationBuilder.DropTable(
-                name: "seals");
+                name: "otherEffects");
 
             migrationBuilder.DropTable(
                 name: "sticker");
@@ -530,16 +534,13 @@ namespace BalatroWikiApp.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "cards");
-
-            migrationBuilder.DropTable(
-                name: "jokers");
+                name: "enhancedcards");
 
             migrationBuilder.DropTable(
                 name: "hands");
 
             migrationBuilder.DropTable(
-                name: "enhancedcards");
+                name: "seals");
         }
     }
 }

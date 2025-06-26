@@ -1,0 +1,59 @@
+﻿@page "/othereffects/create"
+@using Microsoft.EntityFrameworkCore
+@using BalatroWikiApp.Models
+@inject IDbContextFactory<BalatroWikiApp.Models.BalatroDBContext> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Create</PageTitle>
+
+<h1>Create</h1>
+
+<h2>OtherEffect</h2>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <EditForm method="post" Model="OtherEffect" OnValidSubmit="AddOtherEffect" FormName="create" Enhance>
+            <DataAnnotationsValidator />
+            <ValidationSummary class="text-danger" role="alert"/>
+            <div class="mb-3">
+                <label for="money" class="form-label">Money:</label> 
+                <InputNumber id="money" @bind-Value="OtherEffect.Money" class="form-control" /> 
+                <ValidationMessage For="() => OtherEffect.Money" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="creation" class="form-label">Creation:</label> 
+                <InputText id="creation" @bind-Value="OtherEffect.Creation" class="form-control" aria-required="true"/> 
+                <ValidationMessage For="() => OtherEffect.Creation" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="copy" class="form-label">Copy:</label> 
+                <InputText id="copy" @bind-Value="OtherEffect.Copy" class="form-control" aria-required="true"/> 
+                <ValidationMessage For="() => OtherEffect.Copy" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="imageothereffect" class="form-label">imageOtherEffect:</label> 
+                <InputText id="imageothereffect" @bind-Value="OtherEffect.imageOtherEffect" class="form-control" aria-required="true"/> 
+                <ValidationMessage For="() => OtherEffect.imageOtherEffect" class="text-danger" /> 
+            </div>        
+            <button type="submit" class="btn btn-primary">Create</button>
+        </EditForm>
+    </div>
+</div>
+
+<div>
+    <a href="/othereffects">Back to List</a>
+</div>
+
+@code {
+    [SupplyParameterFromForm]
+    private OtherEffect OtherEffect { get; set; } = new();
+
+    // To protect from overposting attacks, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
+    private async Task AddOtherEffect()
+    {
+        using var context = DbFactory.CreateDbContext();
+        context.OtherEffects.Add(OtherEffect);
+        await context.SaveChangesAsync();
+        NavigationManager.NavigateTo("/othereffects");
+    }
+}

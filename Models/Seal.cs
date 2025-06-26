@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
 
 namespace BalatroWikiApp.Models;
 
@@ -26,5 +27,13 @@ public partial class Seal : Entity
 
     [Column("imageSeal")]
     [StringLength(100)]
-    public string ImageSeal { get; set; }
+    public string? ImageSeal { get; set; }
+
+    [DisplayName("nameConsumable")]
+    public virtual Consumable? Consumable { get; set; }
+
+    public override string ToString()
+    {
+        return NameSeal;
+    }
 }

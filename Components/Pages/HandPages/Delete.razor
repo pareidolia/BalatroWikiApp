@@ -1,0 +1,67 @@
+﻿@page "/hands/delete"
+@using Microsoft.EntityFrameworkCore
+@using BalatroWikiApp.Models
+@inject IDbContextFactory<BalatroWikiApp.Models.BalatroDBContext> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Delete</PageTitle>
+
+<h1>Delete</h1>
+
+<p>Are you sure you want to delete this?</p>
+<div>
+    <h2>Hand</h2>
+    <hr />
+    @if (hand is null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else {
+        <dl class="row">
+            <dt class="col-sm-2">NameHand</dt>
+            <dd class="col-sm-10">@hand.NameHand</dd>
+        </dl>
+        <dl class="row">
+            <dt class="col-sm-2">BaseChips</dt>
+            <dd class="col-sm-10">@hand.BaseChips</dd>
+        </dl>
+        <dl class="row">
+            <dt class="col-sm-2">BaseMult</dt>
+            <dd class="col-sm-10">@hand.BaseMult</dd>
+        </dl>
+        <dl class="row">
+            <dt class="col-sm-2">ImageHand</dt>
+            <dd class="col-sm-10">@hand.ImageHand</dd>
+        </dl>
+        <EditForm method="post" Model="hand" OnValidSubmit="DeleteHand" FormName="delete" Enhance>
+            <button type="submit" class="btn btn-danger" disabled="@(hand is null)">Delete</button> |
+            <a href="/hands">Back to List</a>
+        </EditForm>
+    }
+</div>
+
+@code {
+    private Hand? hand;
+
+    [SupplyParameterFromQuery]
+    private int Id { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var context = DbFactory.CreateDbContext();
+        hand = await context.Hands.FirstOrDefaultAsync(m => m.Id == Id);
+
+        if (hand is null)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+    }
+
+    private async Task DeleteHand()
+    {
+        using var context = DbFactory.CreateDbContext();
+        context.Hands.Remove(hand!);
+        await context.SaveChangesAsync();
+        NavigationManager.NavigateTo("/hands");
+    }
+}

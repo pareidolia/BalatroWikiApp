@@ -23,7 +23,7 @@ namespace BalatroWikiApp.Models
 
         [Column("imageHand")]
         [StringLength(100)]
-        public string ImageHand { get; set; }
+        public string? ImageHand { get; set; }
 
         [DisplayName("nameConsumable")]
         public virtual Consumable? Consumable { get; set; }

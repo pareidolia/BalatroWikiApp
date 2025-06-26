@@ -21,5 +21,5 @@ public partial class Deck : Entity
 
     [Column("imageDeck")]
     [StringLength(100)]
-    public string ImageDeck { get; set; }
+    public string? ImageDeck { get; set; }
 }

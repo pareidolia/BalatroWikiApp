@@ -74,11 +74,22 @@ public partial class BalatroDBContext : IdentityDbContext<ApplicationUser>
         modelBuilder.Entity<Consumable>(entity =>
         {
             entity.HasKey(e => e.Id);
+
             entity.HasOne(c => c.Hand).WithOne(h => h.Consumable)
             .HasForeignKey<Consumable>(c => c.IdHand)
             .OnDelete(DeleteBehavior.ClientSetNull);
 
+            entity.HasOne(c => c.Seal).WithOne(h => h.Consumable)
+            .HasForeignKey<Consumable>(c => c.IdSeal)
+            .OnDelete(DeleteBehavior.ClientSetNull);
+
+            entity.HasOne(c => c.Enhancedcard).WithOne(h => h.Consumable)
+            .HasForeignKey<Consumable>(c => c.IdEnhancedcard)
+            .OnDelete(DeleteBehavior.ClientSetNull);
+
+
         });
+
 
         modelBuilder.Entity<Deck>(entity =>
         {

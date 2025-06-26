@@ -40,7 +40,7 @@ public partial class Boosterpack : Entity
 
     [Column("imageBoosterpack")]
     [StringLength(100)]
-    public string ImageBoosterpack { get; set; }
+    public string? ImageBoosterpack { get; set; }
 
     public TypeBoosterpack TypeBoosterpack { get; set; }
 }

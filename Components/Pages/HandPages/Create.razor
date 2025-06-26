@@ -1,0 +1,59 @@
+﻿@page "/hands/create"
+@using Microsoft.EntityFrameworkCore
+@using BalatroWikiApp.Models
+@inject IDbContextFactory<BalatroWikiApp.Models.BalatroDBContext> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Create</PageTitle>
+
+<h1>Create</h1>
+
+<h2>Hand</h2>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <EditForm method="post" Model="Hand" OnValidSubmit="AddHand" FormName="create" Enhance>
+            <DataAnnotationsValidator />
+            <ValidationSummary class="text-danger" role="alert"/>
+            <div class="mb-3">
+                <label for="namehand" class="form-label">NameHand:</label> 
+                <InputText id="namehand" @bind-Value="Hand.NameHand" class="form-control" aria-required="true"/> 
+                <ValidationMessage For="() => Hand.NameHand" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="basechips" class="form-label">BaseChips:</label> 
+                <InputNumber id="basechips" @bind-Value="Hand.BaseChips" class="form-control" /> 
+                <ValidationMessage For="() => Hand.BaseChips" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="basemult" class="form-label">BaseMult:</label> 
+                <InputNumber id="basemult" @bind-Value="Hand.BaseMult" class="form-control" /> 
+                <ValidationMessage For="() => Hand.BaseMult" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="imagehand" class="form-label">ImageHand:</label> 
+                <InputText id="imagehand" @bind-Value="Hand.ImageHand" class="form-control" aria-required="false" /> 
+                <ValidationMessage For="() => Hand.ImageHand" class="text-danger" /> 
+            </div>        
+            <button type="submit" class="btn btn-primary">Create</button>
+        </EditForm>
+    </div>
+</div>
+
+<div>
+    <a href="/hands">Back to List</a>
+</div>
+
+@code {
+    [SupplyParameterFromForm]
+    private Hand Hand { get; set; } = new();
+
+    // To protect from overposting attacks, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
+    private async Task AddHand()
+    {
+        using var context = DbFactory.CreateDbContext();
+        context.Hands.Add(Hand);
+        await context.SaveChangesAsync();
+        NavigationManager.NavigateTo("/hands");
+    }
+}

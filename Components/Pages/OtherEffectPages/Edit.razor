@@ -1,0 +1,104 @@
+﻿@page "/othereffects/edit"
+@using Microsoft.EntityFrameworkCore
+@using BalatroWikiApp.Models
+@inject IDbContextFactory<BalatroWikiApp.Models.BalatroDBContext> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Edit</PageTitle>
+
+<h1>Edit</h1>
+
+<h2>OtherEffect</h2>
+<hr />
+@if (OtherEffect is null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-4">
+            <EditForm method="post" Model="OtherEffect" OnValidSubmit="UpdateOtherEffect" FormName="edit" Enhance>
+                <DataAnnotationsValidator />
+                <ValidationSummary role="alert"/>
+                <input type="hidden" name="OtherEffect.Id" value="@OtherEffect.Id" />
+                <div class="mb-3">
+                    <label for="money" class="form-label">Money:</label>
+                    <InputNumber id="money" @bind-Value="OtherEffect.Money" class="form-control" />
+                    <ValidationMessage For="() => OtherEffect.Money" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="creation" class="form-label">Creation:</label>
+                    <InputText id="creation" @bind-Value="OtherEffect.Creation" class="form-control" aria-required="true"/>
+                    <ValidationMessage For="() => OtherEffect.Creation" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="copy" class="form-label">Copy:</label>
+                    <InputText id="copy" @bind-Value="OtherEffect.Copy" class="form-control" aria-required="true"/>
+                    <ValidationMessage For="() => OtherEffect.Copy" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="imageothereffect" class="form-label">imageOtherEffect:</label>
+                    <InputText id="imageothereffect" @bind-Value="OtherEffect.imageOtherEffect" class="form-control" aria-required="true"/>
+                    <ValidationMessage For="() => OtherEffect.imageOtherEffect" class="text-danger" />
+                </div>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </EditForm>
+        </div>
+    </div>
+}
+
+<div>
+    <a href="/othereffects">Back to List</a>
+</div>
+
+@code {
+    [SupplyParameterFromQuery]
+    private int Id { get; set; }
+
+    [SupplyParameterFromForm]
+    private OtherEffect? OtherEffect { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var context = DbFactory.CreateDbContext();
+        OtherEffect ??= await context.OtherEffects.FirstOrDefaultAsync(m => m.Id == Id);
+
+        if (OtherEffect is null)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+    }
+
+    // To protect from overposting attacks, enable the specific properties you want to bind to.
+    // For more information, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
+    private async Task UpdateOtherEffect()
+    {
+        using var context = DbFactory.CreateDbContext();
+        context.Attach(OtherEffect!).State = EntityState.Modified;
+
+        try
+        {
+            await context.SaveChangesAsync();
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            if (!OtherEffectExists(OtherEffect!.Id))
+            {
+                NavigationManager.NavigateTo("notfound");
+            }
+            else
+            {
+                throw;
+            }
+        }
+
+        NavigationManager.NavigateTo("/othereffects");
+    }
+
+    private bool OtherEffectExists(int id)
+    {
+        using var context = DbFactory.CreateDbContext();
+        return context.OtherEffects.Any(e => e.Id == id);
+    }
+}

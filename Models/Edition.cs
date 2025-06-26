@@ -21,5 +21,5 @@ public partial class Edition : Entity
 
     [Column("imageEdition")]
     [StringLength(100)]
-    public string ImageEdition { get; set; }
+    public string? ImageEdition { get; set; }
 }

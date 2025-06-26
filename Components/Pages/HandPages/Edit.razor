@@ -1,0 +1,104 @@
+﻿@page "/hands/edit"
+@using Microsoft.EntityFrameworkCore
+@using BalatroWikiApp.Models
+@inject IDbContextFactory<BalatroWikiApp.Models.BalatroDBContext> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Edit</PageTitle>
+
+<h1>Edit</h1>
+
+<h2>Hand</h2>
+<hr />
+@if (Hand is null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-4">
+            <EditForm method="post" Model="Hand" OnValidSubmit="UpdateHand" FormName="edit" Enhance>
+                <DataAnnotationsValidator />
+                <ValidationSummary role="alert"/>
+                <input type="hidden" name="Hand.Id" value="@Hand.Id" />
+                <div class="mb-3">
+                    <label for="namehand" class="form-label">NameHand:</label>
+                    <InputText id="namehand" @bind-Value="Hand.NameHand" class="form-control" aria-required="true"/>
+                    <ValidationMessage For="() => Hand.NameHand" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="basechips" class="form-label">BaseChips:</label>
+                    <InputNumber id="basechips" @bind-Value="Hand.BaseChips" class="form-control" />
+                    <ValidationMessage For="() => Hand.BaseChips" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="basemult" class="form-label">BaseMult:</label>
+                    <InputNumber id="basemult" @bind-Value="Hand.BaseMult" class="form-control" />
+                    <ValidationMessage For="() => Hand.BaseMult" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="imagehand" class="form-label">ImageHand:</label>
+                    <InputText id="imagehand" @bind-Value="Hand.ImageHand" class="form-control" />
+                    <ValidationMessage For="() => Hand.ImageHand" class="text-danger" />
+                </div>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </EditForm>
+        </div>
+    </div>
+}
+
+<div>
+    <a href="/hands">Back to List</a>
+</div>
+
+@code {
+    [SupplyParameterFromQuery]
+    private int Id { get; set; }
+
+    [SupplyParameterFromForm]
+    private Hand? Hand { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var context = DbFactory.CreateDbContext();
+        Hand ??= await context.Hands.FirstOrDefaultAsync(m => m.Id == Id);
+
+        if (Hand is null)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+    }
+
+    // To protect from overposting attacks, enable the specific properties you want to bind to.
+    // For more information, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
+    private async Task UpdateHand()
+    {
+        using var context = DbFactory.CreateDbContext();
+        context.Attach(Hand!).State = EntityState.Modified;
+
+        try
+        {
+            await context.SaveChangesAsync();
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            if (!HandExists(Hand!.Id))
+            {
+                NavigationManager.NavigateTo("notfound");
+            }
+            else
+            {
+                throw;
+            }
+        }
+
+        NavigationManager.NavigateTo("/hands");
+    }
+
+    private bool HandExists(int id)
+    {
+        using var context = DbFactory.CreateDbContext();
+        return context.Hands.Any(e => e.Id == id);
+    }
+}

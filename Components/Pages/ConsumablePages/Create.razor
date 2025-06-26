@@ -41,13 +41,42 @@
             {
                 <div class="mb-3">
                     <label for="namehand" class="form-label">NameHand:</label>
-                    <InputSelect id="namehand" @bind-Value="Consumable.IdHand" class="form-control" aria-required="true" />
-                    <option selected value="">Sélectionnez une main : </option>
-                    @foreach (var hand in _hands)
-                    {
-                        <option value="@hand.Id">@hand.NameHand</option>
-                    }
-                    <ValidationMessage For="() => Consumable.IdHand" class="text-danger" />
+                    <InputSelect id="idhand" @bind-Value="Consumable.IdHand" class="form-control" aria-required="true">
+                        <option selected value="">Sélectionnez une main </option>
+                        @foreach (var hand in _hands)
+                        {
+                            <option value="@hand.Id">@hand.NameHand</option>
+                        }
+                        <ValidationMessage For="() => Consumable.IdHand" class="text-danger" />
+                    </InputSelect>
+                </div>
+            }
+            @if (Consumable.TypeConsumable == TypeConsumable.Spectral)
+            {
+                <div class="mb-3">
+                    <label for="nameseal" class="form-label">NameSeal:</label>
+                    <InputSelect id="idseal" @bind-Value="Consumable.IdSeal" class="form-control" aria-required="true">
+                        <option selected value="">Sélectionnez un sceau </option>
+                        @foreach (var seal in _seals)
+                        {
+                            <option value="@seal.Id">@seal.NameSeal</option>
+                        }
+                        <ValidationMessage For="() => Consumable.IdSeal" class="text-danger" />
+                    </InputSelect>
+                </div>
+            }
+            @if (Consumable.TypeConsumable == TypeConsumable.Tarot)
+            {
+                <div class="mb-3">
+                    <label for="nameenhanced" class="form-label">NameEnhanced:</label>
+                    <InputSelect id="idenhanced" @bind-Value="Consumable.IdEnhancedcard" class="form-control" aria-required="true">
+                        <option selected value="">Sélectionnez une amélioration</option>
+                        @foreach (var enhanced in _enhanced)
+                        {
+                            <option value="@enhanced.Id">@enhanced.NameEnhanced</option>
+                        }
+                        <ValidationMessage For="() => Consumable.IdEnhancedcard" class="text-danger" />
+                    </InputSelect>
                 </div>
             }
             <button type="submit" class="btn btn-primary">Create</button>
@@ -63,11 +92,15 @@
     [SupplyParameterFromForm]
     private Consumable Consumable { get; set; } = new();
     private List<Hand> _hands = new();
+    private List<Seal> _seals = new();
+    private List<Enhancedcard> _enhanced = new();
 
     protected override void OnInitialized()
     {
         using var context = DbFactory.CreateDbContext();
         _hands = context.Hands.ToList();
+        _seals = context.Seals.ToList();
+        _enhanced = context.Enhancedcards.ToList();
     }
 
     // To protect from overposting attacks, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.

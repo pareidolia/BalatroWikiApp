@@ -14,6 +14,13 @@ namespace BalatroWikiApp.Models
         [Column("idHand")]
         public int? IdHand { get; set; }
 
+        [Column("idSeal")]
+        public int? IdSeal { get; set; }
+
+        [Column("idEnhancedcard")]
+        public int? IdEnhancedcard{ get; set; }
+
+
         [Required]
         [Column("nameConsumable")]
         [StringLength(50)]
@@ -31,9 +38,16 @@ namespace BalatroWikiApp.Models
         [Required]
         [Column("imageConsumable")]
         [StringLength(100)]
-        public string ImageConsumable { get; set; }
+        public string? ImageConsumable { get; set; }
 
         [DisplayName("nameHand")]
         public virtual Hand? Hand { get; set; }
+
+        [DisplayName("nameSeal")]
+        public virtual Seal? Seal { get; set; }
+
+        [DisplayName("nameEnhancedcard")]
+        public virtual Enhancedcard? Enhancedcard { get; set; }
+
     }
 }
