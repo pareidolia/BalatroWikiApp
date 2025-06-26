@@ -82,9 +82,10 @@ public partial class BalatroDBContext : IdentityDbContext<ApplicationUser>
         modelBuilder.Entity<Consumable>(entity =>
         {
             entity.HasKey(e => e.Id);
-            entity.Property(e => e.TypeConsumable)
-            .HasConversion<string>()
-            .IsRequired();
+            entity.HasOne(c => c.Hand).WithOne(h => h.Consumable)
+            .HasForeignKey<Consumable>(c => c.IdHand)
+            .OnDelete(DeleteBehavior.ClientSetNull);
+
         });
 
         modelBuilder.Entity<Deck>(entity =>

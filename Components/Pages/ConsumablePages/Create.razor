@@ -18,15 +18,38 @@
             <DataAnnotationsValidator />
             <ValidationSummary class="text-danger" role="alert"/>
             <div class="mb-3">
-                <label for="imageconsumable" class="form-label">ImageConsumable:</label> 
-                <InputText id="imageconsumable" @bind-Value="Consumable.ImageConsumable" class="form-control" aria-required="true"/> 
-                <ValidationMessage For="() => Consumable.ImageConsumable" class="text-danger" /> 
-            </div>        
+                <label for="nameconsumable" class="form-label">NameConsumable:</label>
+                <InputText id="nameconsumable" @bind-Value="Consumable.NameConsumable" class="form-control" aria-required="true" />
+                <ValidationMessage For="() => Consumable.NameConsumable" class="text-danger" />
+            </div>
             <div class="mb-3">
                 <label for="typeconsumable" class="form-label">TypeConsumable:</label>
                 <EnumSelect TEnum="TypeConsumable" @bind-Value="Consumable.TypeConsumable" />
                 <ValidationMessage For="() => Consumable.TypeConsumable" class="text-danger" /> 
-            </div>        
+            </div>
+            <div class="mb-3">
+                <label for="effectconsumable" class="form-label">EffectConsumable:</label>
+                <InputText id="effectconsumable" @bind-Value="Consumable.EffectConsumable" class="form-control" aria-required="true" />
+                <ValidationMessage For="() => Consumable.EffectConsumable" class="text-danger" />
+            </div>
+            <div class="mb-3">
+                <label for="imageconsumable" class="form-label">ImageConsumable:</label>
+                <InputText id="imageconsumable" @bind-Value="Consumable.ImageConsumable" class="form-control" aria-required="true" />
+                <ValidationMessage For="() => Consumable.ImageConsumable" class="text-danger" />
+            </div>
+            @if (Consumable.TypeConsumable == TypeConsumable.Planet)
+            {
+                <div class="mb-3">
+                    <label for="namehand" class="form-label">NameHand:</label>
+                    <InputSelect id="namehand" @bind-Value="Consumable.IdHand" class="form-control" aria-required="true" />
+                    <option selected value="">Sélectionnez une main : </option>
+                    @foreach (var hand in _hands)
+                    {
+                        <option value="@hand.Id">@hand.NameHand</option>
+                    }
+                    <ValidationMessage For="() => Consumable.IdHand" class="text-danger" />
+                </div>
+            }
             <button type="submit" class="btn btn-primary">Create</button>
         </EditForm>
     </div>
@@ -39,6 +62,13 @@
 @code {
     [SupplyParameterFromForm]
     private Consumable Consumable { get; set; } = new();
+    private List<Hand> _hands = new();
+
+    protected override void OnInitialized()
+    {
+        using var context = DbFactory.CreateDbContext();
+        _hands = context.Hands.ToList();
+    }
 
     // To protect from overposting attacks, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
     private async Task AddConsumable()
