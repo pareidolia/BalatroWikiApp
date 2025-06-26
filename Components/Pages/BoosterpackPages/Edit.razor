@@ -22,46 +22,7 @@ else
                 <DataAnnotationsValidator />
                 <ValidationSummary role="alert" />
                 <input type="hidden" name="Boosterpack.Id" value="@Boosterpack.Id" />
-                <div class="mb-3">
-                    <label for="idjoker" class="form-label">Joker:</label>
-                    <InputSelect id="idjoker" @bind-Value="Boosterpack.IdJoker">
-                        <option value="">Sélectionner un joker</option>
-                        @foreach (var joker in _jokers)
-                        {
-                            <option value="@joker.Id">@joker.NameJoker</option>
-                        }
-                    </InputSelect>
-                </div>
-                <div class="mb-3">
-                    <label for="idtarot" class="form-label">Tarot:</label>
-                    <InputSelect id="idtarot" @bind-Value="Boosterpack.IdTarot">
-                        <option value="">Sélectionner un tarot</option>
-                        @foreach (var tarot in _consumables)
-                        {
-                            <option value="@tarot.Id">@tarot.TypeConsumable</option>
-                        }
-                    </InputSelect>
-                </div>
-                <div class="mb-3">
-                    <label for="idspectral" class="form-label">Spectral:</label>
-                    <InputSelect id="idspectral" @bind-Value="Boosterpack.IdSpectral">
-                        <option value="">Sélectionner un spectral</option>
-                        @foreach (var spectral in _consumables)
-                        {
-                            <option value="@spectral.Id">@spectral.TypeConsumable.ToString()</option>
-                        }
-                    </InputSelect>
-                </div>
-                <div class="mb-3">
-                    <label for="idcard" class="form-label">Carte:</label>
-                    <InputSelect id="idcard" @bind-Value="Boosterpack.IdCard">
-                        <option value="">Sélectionner une carte</option>
-                        @foreach (var card in _cards)
-                        {
-                            <option value="@card.Id">@card.NameCard</option>
-                        }
-                    </InputSelect>
-                </div>
+                
                 <div class="mb-3">
                     <label for="namepack" class="form-label">NamePack:</label>
                     <InputText id="namepack" @bind-Value="Boosterpack.NamePack" class="form-control" aria-required="true" />
@@ -110,10 +71,6 @@ else
     private Boosterpack? Boosterpack { get; set; }
 
 
-    private List<Card> _cards = new();
-    private List<Joker> _jokers = new();
-    private List<Consumable> _consumables = new();
-
     protected override async Task OnInitializedAsync()
     {
         using var context = DbFactory.CreateDbContext();
@@ -123,9 +80,7 @@ else
         {
             NavigationManager.NavigateTo("notfound");
         }
-        _cards = context.Cards.ToList();
-        _jokers = context.Jokers.ToList();
-        _consumables = context.Consumables.ToList();
+       
     }
 
     // To protect from overposting attacks, enable the specific properties you want to bind to.
@@ -133,10 +88,6 @@ else
     private async Task UpdateBoosterpack()
     {
         using var context = DbFactory.CreateDbContext();
-        context.Entry(Boosterpack!).Property(b => b.IdJoker).IsModified = true;
-        context.Entry(Boosterpack!).Property(b => b.IdTarot).IsModified = true;
-        context.Entry(Boosterpack!).Property(b => b.IdSpectral).IsModified = true;
-        context.Entry(Boosterpack!).Property(b => b.IdCard).IsModified = true;
 
         context.Attach(Boosterpack!).State = EntityState.Modified;
 
