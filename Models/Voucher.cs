@@ -27,5 +27,5 @@ public partial class Voucher : Entity
 
     [Column("imageVoucher")]
     [StringLength(100)]
-    public string ImageVoucher { get; set; }
+    public string? ImageVoucher { get; set; }
 }

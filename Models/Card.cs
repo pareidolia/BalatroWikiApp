@@ -29,4 +29,8 @@ public partial class Card : Entity
     [DisplayName("nameEnhanced")]
     public virtual Enhancedcard? NameEnhanced { get; set; }
 
+    [Column("imageCard")]
+    [StringLength(100)]
+    public string? ImageCard { get; set; }
+
 }

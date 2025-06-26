@@ -1,0 +1,39 @@
+﻿@page "/othereffects"
+@using Microsoft.EntityFrameworkCore
+@using Microsoft.AspNetCore.Components.QuickGrid
+@using BalatroWikiApp.Models
+@using BalatroWikiApp.Models
+@implements IAsyncDisposable
+@inject IDbContextFactory<BalatroWikiApp.Models.BalatroDBContext> DbFactory
+
+<PageTitle>Index</PageTitle>
+
+<h1>Index</h1>
+
+<p>
+    <a href="othereffects/create">Create New</a>
+</p>
+
+<QuickGrid Class="table" Items="context.OtherEffects">
+    <PropertyColumn Property="othereffect => othereffect.Money" />
+    <PropertyColumn Property="othereffect => othereffect.Creation" />
+    <PropertyColumn Property="othereffect => othereffect.Copy" />
+    <PropertyColumn Property="othereffect => othereffect.imageOtherEffect" />
+
+    <TemplateColumn Context="othereffect">
+        <a href="@($"othereffects/edit?id={othereffect.Id}")">Edit</a> |
+        <a href="@($"othereffects/details?id={othereffect.Id}")">Details</a> |
+        <a href="@($"othereffects/delete?id={othereffect.Id}")">Delete</a>
+    </TemplateColumn>
+</QuickGrid>
+
+@code {
+    private BalatroDBContext context = default!;
+
+    protected override void OnInitialized()
+    {
+        context = DbFactory.CreateDbContext();
+    }
+
+    public async ValueTask DisposeAsync() => await context.DisposeAsync();
+}

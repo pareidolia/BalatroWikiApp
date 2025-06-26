@@ -45,5 +45,5 @@ public partial class Joker : Entity
 
     [Column("imageJoker")]
     [StringLength(100)]
-    public string ImageJoker { get; set; }
+    public string? ImageJoker { get; set; }
 }

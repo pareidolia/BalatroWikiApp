@@ -26,5 +26,5 @@ public partial class Sticker : Entity
 
     [Column("imageSticker")]
     [StringLength(100)]
-    public string ImageSticker { get; set; }
+    public string? ImageSticker { get; set; }
 }

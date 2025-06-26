@@ -32,5 +32,5 @@ public partial class Blind : Entity
 
     [Column("imageBlind")]
     [StringLength(100)]
-    public string ImageBlind { get; set; }
+    public string? ImageBlind { get; set; }
 }

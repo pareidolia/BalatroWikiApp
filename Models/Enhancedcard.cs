@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
 
 namespace BalatroWikiApp.Models;
 
@@ -27,9 +28,15 @@ public partial class Enhancedcard : Entity
 
     [Column("imageEnhancedcard")]
     [StringLength(100)]
-    public string ImageEnhancedcard { get; set; }
+    public string? ImageEnhancedcard { get; set; }
+
+    [DisplayName("nameConsumable")]
+    public virtual Consumable? Consumable { get; set; }
 
     public virtual ICollection<Card> Cards { get; set; } = new List<Card>();
 
-    public override string ToString() => NameEnhanced;
+    public override string ToString()
+    {
+        return NameEnhanced;
+    }
 }

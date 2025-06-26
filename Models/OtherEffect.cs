@@ -25,6 +25,6 @@ namespace BalatroWikiApp.Models
         [Required]
         [Column("imageOtherEffect")]
         [StringLength(100)]
-        public string imageOtherEffect { get; set; }
+        public string? imageOtherEffect { get; set; }
     }
 }

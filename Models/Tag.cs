@@ -21,5 +21,5 @@ public partial class Tag : Entity
 
     [Column("imageTag")]
     [StringLength(100)]
-    public string ImageTag { get; set; }
+    public string? ImageTag { get; set; }
 }
