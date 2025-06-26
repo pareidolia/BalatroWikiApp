@@ -29,5 +29,4 @@ public partial class Card : Entity
     [DisplayName("nameEnhanced")]
     public virtual Enhancedcard? NameEnhanced { get; set; }
 
-    public virtual ICollection<Boosterpack> Boosterpacks { get; set; } = new List<Boosterpack>();
 }
