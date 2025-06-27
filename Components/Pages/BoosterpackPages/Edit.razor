@@ -53,6 +53,11 @@ else
                     <InputNumber id="pricepack" @bind-Value="Boosterpack.PricePack" class="form-control" />
                     <ValidationMessage For="() => Boosterpack.PricePack" class="text-danger" />
                 </div>
+                <div class="mb-3">
+                    <label for="imageboosterpack" class="form-label">ImageBoosterpack:</label>
+                    <InputNumber id="imageboosterpack" @bind-Value="Boosterpack.ImageBoosterpack" class="form-control" />
+                    <ValidationMessage For="() => Boosterpack.ImageBoosterpack" class="text-danger" />
+                </div>
                 <button type="submit" class="btn btn-primary">Save</button>
             </EditForm>
         </div>

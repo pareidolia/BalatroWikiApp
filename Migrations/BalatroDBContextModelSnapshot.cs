@@ -107,8 +107,8 @@ namespace BalatroWikiApp.Migrations
 
                     b.Property<string>("EffectBlind")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
                         .HasColumnName("effectBlind");
 
                     b.Property<string>("ImageBlind")
@@ -271,6 +271,9 @@ namespace BalatroWikiApp.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("typeConsumable");
 
+                    b.Property<int>("TypeOtherEffect")
+                        .HasColumnType("integer");
+
                     b.HasKey("Id");
 
                     b.HasIndex("IdEnhancedcard")
@@ -327,8 +330,8 @@ namespace BalatroWikiApp.Migrations
 
                     b.Property<string>("EffectEdition")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
                         .HasColumnName("effectEdition");
 
                     b.Property<string>("ImageEdition")
@@ -358,8 +361,8 @@ namespace BalatroWikiApp.Migrations
 
                     b.Property<string>("EffectEnhanced")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
                         .HasColumnName("effectEnhanced");
 
                     b.Property<string>("ImageEnhancedcard")
@@ -477,42 +480,6 @@ namespace BalatroWikiApp.Migrations
                     b.ToTable("jokers");
                 });
 
-            modelBuilder.Entity("BalatroWikiApp.Models.OtherEffect", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Copy")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)")
-                        .HasColumnName("copy");
-
-                    b.Property<string>("Creation")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)")
-                        .HasColumnName("creation");
-
-                    b.Property<int>("Money")
-                        .HasColumnType("integer")
-                        .HasColumnName("money");
-
-                    b.Property<string>("imageOtherEffect")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)")
-                        .HasColumnName("imageOtherEffect");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("otherEffects");
-                });
-
             modelBuilder.Entity("BalatroWikiApp.Models.Seal", b =>
                 {
                     b.Property<int>("Id")
@@ -524,8 +491,8 @@ namespace BalatroWikiApp.Migrations
 
                     b.Property<string>("EffectSeal")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("character varying(20)")
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
                         .HasColumnName("effectSeal");
 
                     b.Property<string>("ImageSeal")
@@ -539,10 +506,8 @@ namespace BalatroWikiApp.Migrations
                         .HasColumnType("character varying(20)")
                         .HasColumnName("nameSeal");
 
-                    b.Property<string>("TypeSeal")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("character varying(20)")
+                    b.Property<int>("TypeSeal")
+                        .HasColumnType("integer")
                         .HasColumnName("typeSeal");
 
                     b.HasKey("Id");

@@ -5,11 +5,11 @@ using System.Text;
 
 namespace BalatroWikiApp.Enums
 {
-    public enum TypeConsumable
+    public enum TypeOtherEffect
     {
         None = 0,
-        Tarot,
-        Spectral,
-        Planet,
+        Money,
+        Copy,
+        Creation,
     }
 }

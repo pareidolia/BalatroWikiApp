@@ -29,7 +29,12 @@
                 <label for="typeenhanced" class="form-label">TypeEnhanced:</label> 
                 <InputText id="typeenhanced" @bind-Value="Enhancedcard.TypeEnhanced" class="form-control" aria-required="true"/> 
                 <ValidationMessage For="() => Enhancedcard.TypeEnhanced" class="text-danger" /> 
-            </div>        
+            </div>
+            <div class="mb-3">
+                <label for="imageenhancedcard" class="form-label">ImageEnhancedcard:</label>
+                <InputText id="imageenhancedcard" @bind-Value="Enhancedcard.ImageEnhancedcard" class="form-control" aria-required="true" />
+                <ValidationMessage For="() => Enhancedcard.ImageEnhancedcard" class="text-danger" />
+            </div>
             <button type="submit" class="btn btn-primary">Create</button>
         </EditForm>
     </div>

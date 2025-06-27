@@ -24,7 +24,12 @@
                 <label for="effectedition" class="form-label">EffectEdition:</label> 
                 <InputText id="effectedition" @bind-Value="Edition.EffectEdition" class="form-control" aria-required="true"/> 
                 <ValidationMessage For="() => Edition.EffectEdition" class="text-danger" /> 
-            </div>        
+            </div>
+            <div class="mb-3">
+                <label for="imageedition" class="form-label">ImageEdition:</label>
+                <InputText id="imageedition" @bind-Value="Edition.ImageEdition" class="form-control" aria-required="true" />
+                <ValidationMessage For="() => Edition.ImageEdition" class="text-danger" />
+            </div>
             <button type="submit" class="btn btn-primary">Create</button>
         </EditForm>
     </div>

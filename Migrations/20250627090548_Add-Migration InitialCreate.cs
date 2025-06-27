@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BalatroWikiApp.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class AddMigrationInitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -60,7 +60,7 @@ namespace BalatroWikiApp.Migrations
                     nameBlind = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     anteBlind = table.Column<int>(type: "integer", nullable: false),
                     descriptionBlind = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
-                    effectBlind = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
+                    effectBlind = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     rewardBlind = table.Column<int>(type: "integer", nullable: false),
                     imageBlind = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true)
                 },
@@ -112,7 +112,7 @@ namespace BalatroWikiApp.Migrations
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     nameEdition = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    effectEdition = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
+                    effectEdition = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     imageEdition = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true)
                 },
                 constraints: table =>
@@ -127,7 +127,7 @@ namespace BalatroWikiApp.Migrations
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     nameEnhanced = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    effectEnhanced = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
+                    effectEnhanced = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     typeEnhanced = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
                     imageEnhancedcard = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true)
                 },
@@ -174,30 +174,14 @@ namespace BalatroWikiApp.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "otherEffects",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    money = table.Column<int>(type: "integer", nullable: false),
-                    creation = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    copy = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    imageOtherEffect = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_otherEffects", x => x.id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "seals",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     nameSeal = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
-                    effectSeal = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
-                    typeSeal = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
+                    effectSeal = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
+                    typeSeal = table.Column<int>(type: "integer", nullable: false),
                     imageSeal = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true)
                 },
                 constraints: table =>
@@ -392,6 +376,7 @@ namespace BalatroWikiApp.Migrations
                     idEnhancedcard = table.Column<int>(type: "integer", nullable: true),
                     nameConsumable = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     typeConsumable = table.Column<int>(type: "integer", nullable: false),
+                    TypeOtherEffect = table.Column<int>(type: "integer", nullable: false),
                     effectConsumable = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
                     imageConsumable = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false)
                 },
@@ -514,9 +499,6 @@ namespace BalatroWikiApp.Migrations
 
             migrationBuilder.DropTable(
                 name: "jokers");
-
-            migrationBuilder.DropTable(
-                name: "otherEffects");
 
             migrationBuilder.DropTable(
                 name: "sticker");

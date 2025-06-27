@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using BalatroWikiApp.Enums;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,13 +18,12 @@ public partial class Seal : Entity
 
     [Required]
     [Column("effectSeal")]
-    [StringLength(20)]
+    [StringLength(50)]
     public string EffectSeal { get; set; }
 
     [Required]
     [Column("typeSeal")]
-    [StringLength(20)]
-    public string TypeSeal { get; set; }
+    public TypeSeal TypeSeal { get; set; }
 
     [Column("imageSeal")]
     [StringLength(100)]

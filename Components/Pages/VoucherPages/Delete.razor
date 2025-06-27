@@ -33,6 +33,10 @@
             <dt class="col-sm-2">StateVoucher</dt>
             <dd class="col-sm-10">@voucher.StateVoucher</dd>
         </dl>
+        <dl class="row">
+            <dt class="col-sm-2">ImageVoucher</dt>
+            <dd class="col-sm-10">@voucher.ImageVoucher</dd>
+        </dl>
         <EditForm method="post" Model="voucher" OnValidSubmit="DeleteVoucher" FormName="delete" Enhance>
             <button type="submit" class="btn btn-danger" disabled="@(voucher is null)">Delete</button> |
             <a href="/vouchers">Back to List</a>

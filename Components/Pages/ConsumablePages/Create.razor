@@ -16,7 +16,7 @@
     <div class="col-md-4">
         <EditForm method="post" Model="Consumable" OnValidSubmit="AddConsumable" FormName="create" Enhance>
             <DataAnnotationsValidator />
-            <ValidationSummary class="text-danger" role="alert"/>
+            <ValidationSummary class="text-danger" role="alert" />
             <div class="mb-3">
                 <label for="nameconsumable" class="form-label">NameConsumable:</label>
                 <InputText id="nameconsumable" @bind-Value="Consumable.NameConsumable" class="form-control" aria-required="true" />
@@ -25,7 +25,7 @@
             <div class="mb-3">
                 <label for="typeconsumable" class="form-label">TypeConsumable:</label>
                 <EnumSelect TEnum="TypeConsumable" @bind-Value="Consumable.TypeConsumable" />
-                <ValidationMessage For="() => Consumable.TypeConsumable" class="text-danger" /> 
+                <ValidationMessage For="() => Consumable.TypeConsumable" class="text-danger" />
             </div>
             <div class="mb-3">
                 <label for="effectconsumable" class="form-label">EffectConsumable:</label>
@@ -37,6 +37,7 @@
                 <InputText id="imageconsumable" @bind-Value="Consumable.ImageConsumable" class="form-control" aria-required="true" />
                 <ValidationMessage For="() => Consumable.ImageConsumable" class="text-danger" />
             </div>
+
             @if (Consumable.TypeConsumable == TypeConsumable.Planet)
             {
                 <div class="mb-3">
@@ -68,15 +69,23 @@
             @if (Consumable.TypeConsumable == TypeConsumable.Tarot)
             {
                 <div class="mb-3">
-                    <label for="nameenhanced" class="form-label">NameEnhanced:</label>
+                    <label for="typeenhanced" class="form-label">TypeEnhanced:</label>
                     <InputSelect id="idenhanced" @bind-Value="Consumable.IdEnhancedcard" class="form-control" aria-required="true">
                         <option selected value="">Sélectionnez une amélioration</option>
                         @foreach (var enhanced in _enhanced)
                         {
-                            <option value="@enhanced.Id">@enhanced.NameEnhanced</option>
+                            <option value="@enhanced.Id">@enhanced.TypeEnhanced</option>
                         }
                         <ValidationMessage For="() => Consumable.IdEnhancedcard" class="text-danger" />
                     </InputSelect>
+                </div>
+            }
+            @if (Consumable.TypeConsumable == TypeConsumable.Tarot || Consumable.TypeConsumable == TypeConsumable.Spectral)
+            {
+                <div class="mb-3">
+                    <label for="typeothereffect" class="form-label">TypeOtherEffect:</label>
+                    <EnumSelect TEnum="TypeOtherEffect" @bind-Value="Consumable.TypeOtherEffect" />
+                    <ValidationMessage For="() => Consumable.TypeOtherEffect" class="text-danger" />
                 </div>
             }
             <button type="submit" class="btn btn-primary">Create</button>

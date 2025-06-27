@@ -2,6 +2,7 @@
 @using Microsoft.EntityFrameworkCore
 @using Microsoft.AspNetCore.Components.QuickGrid
 @using BalatroWikiApp.Models
+@using BalatroWikiApp.Enums;
 @using BalatroWikiApp.Data
 @implements IAsyncDisposable
 @inject IDbContextFactory<BalatroDBContext> DbFactory
@@ -19,7 +20,6 @@
     <PropertyColumn Property="consumable => consumable.TypeConsumable" />
     <PropertyColumn Property="consumable => consumable.EffectConsumable" />
     <PropertyColumn Property="consumable => consumable.ImageConsumable" />
-    <PropertyColumn Property="consumable => consumable.Hand" />
     
 
     <TemplateColumn Context="consumable">

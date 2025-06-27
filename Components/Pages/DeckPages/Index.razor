@@ -16,6 +16,7 @@
 <QuickGrid Class="table" Items="context.Decks">
     <PropertyColumn Property="deck => deck.NameDeck" />
     <PropertyColumn Property="deck => deck.DescriptionDeck" />
+    <PropertyColumn Property="deck => deck.ImageDeck" />
 
     <TemplateColumn Context="deck">
         <a href="@($"decks/edit?id={deck.Id}")">Edit</a> |

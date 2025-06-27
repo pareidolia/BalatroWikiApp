@@ -25,6 +25,10 @@
             <dt class="col-sm-2">EffectEdition</dt>
             <dd class="col-sm-10">@edition.EffectEdition</dd>
         </dl>
+        <dl class="row">
+            <dt class="col-sm-2">ImageEdition</dt>
+            <dd class="col-sm-10">@edition.ImageEdition</dd>
+        </dl>
         <EditForm method="post" Model="edition" OnValidSubmit="DeleteEdition" FormName="delete" Enhance>
             <button type="submit" class="btn btn-danger" disabled="@(edition is null)">Delete</button> |
             <a href="/editions">Back to List</a>

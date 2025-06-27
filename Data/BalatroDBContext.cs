@@ -33,8 +33,6 @@ public partial class BalatroDBContext : IdentityDbContext<ApplicationUser>
 
     public virtual DbSet<Joker> Jokers { get; set; }
 
-    public virtual DbSet<OtherEffect> OtherEffects { get; set; }
-
     public virtual DbSet<Seal> Seals { get; set; }
 
     public virtual DbSet<Sticker> Stickers { get; set; }
@@ -112,11 +110,6 @@ public partial class BalatroDBContext : IdentityDbContext<ApplicationUser>
         });
 
         modelBuilder.Entity<Joker>(entity =>
-        {
-            entity.HasKey(e => e.Id);
-        });
-
-        modelBuilder.Entity<OtherEffect>(entity =>
         {
             entity.HasKey(e => e.Id);
         });

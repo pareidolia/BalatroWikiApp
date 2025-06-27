@@ -16,6 +16,8 @@
 <QuickGrid Class="table" Items="context.Tags">
     <PropertyColumn Property="tag => tag.NameTag" />
     <PropertyColumn Property="tag => tag.EffectTag" />
+    <PropertyColumn Property="tag => tag.ImageTag" />
+
 
     <TemplateColumn Context="tag">
         <a href="@($"tags/edit?id={tag.Id}")">Edit</a> |

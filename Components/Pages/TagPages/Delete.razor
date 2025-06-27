@@ -25,6 +25,10 @@
             <dt class="col-sm-2">EffectTag</dt>
             <dd class="col-sm-10">@tag.EffectTag</dd>
         </dl>
+        <dl class="row">
+            <dt class="col-sm-2">ImageTag</dt>
+            <dd class="col-sm-10">@tag.ImageTag</dd>
+        </dl>
         <EditForm method="post" Model="tag" OnValidSubmit="DeleteTag" FormName="delete" Enhance>
             <button type="submit" class="btn btn-danger" disabled="@(tag is null)">Delete</button> |
             <a href="/tags">Back to List</a>
