@@ -37,6 +37,11 @@ else
                     <InputText id="effectsticker" @bind-Value="Sticker.EffectSticker" class="form-control" aria-required="true"/>
                     <ValidationMessage For="() => Sticker.EffectSticker" class="text-danger" />
                 </div>
+                <div class="mb-3">
+                    <label for="imagesticker" class="form-label">ImageSticker:</label>
+                    <InputText id="imagesticker" @bind-Value="Sticker.ImageSticker" class="form-control" aria-required="true" />
+                    <ValidationMessage For="() => Sticker.ImageSticker" class="text-danger" />
+                </div>
                 <button type="submit" class="btn btn-primary">Save</button>
             </EditForm>
         </div>

@@ -37,6 +37,10 @@
             <dt class="col-sm-2">RewardBlind</dt>
             <dd class="col-sm-10">@blind.RewardBlind</dd>
         </dl>
+        <dl class="row">
+            <dt class="col-sm-2">ImageBlind</dt>
+            <dd class="col-sm-10">@blind.ImageBlind</dd>
+        </dl>
         <EditForm method="post" Model="blind" OnValidSubmit="DeleteBlind" FormName="delete" Enhance>
             <button type="submit" class="btn btn-danger" disabled="@(blind is null)">Delete</button> |
             <a href="/blinds">Back to List</a>

@@ -39,7 +39,12 @@
                 <label for="rewardblind" class="form-label">RewardBlind:</label> 
                 <InputNumber id="rewardblind" @bind-Value="Blind.RewardBlind" class="form-control" /> 
                 <ValidationMessage For="() => Blind.RewardBlind" class="text-danger" /> 
-            </div>        
+            </div>  
+            <div class="mb-3">
+                <label for="imageblind" class="form-label">ImageBlind:</label>
+                <InputText id="imageblind" @bind-Value="Blind.ImageBlind" class="form-control" aria-required="false" />
+                <ValidationMessage For="() => Blind.ImageBlind" class="text-danger" />
+            </div>
             <button type="submit" class="btn btn-primary">Create</button>
         </EditForm>
     </div>

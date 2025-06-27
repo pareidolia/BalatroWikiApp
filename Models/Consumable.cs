@@ -31,6 +31,9 @@ namespace BalatroWikiApp.Models
         public TypeConsumable TypeConsumable {  get; set; }
 
         [Required]
+        public TypeOtherEffect TypeOtherEffect { get; set; }
+
+        [Required]
         [Column("effectConsumable")]
         [StringLength(200)]
         public string EffectConsumable { get; set; }

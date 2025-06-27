@@ -29,6 +29,10 @@
             <dt class="col-sm-2">EffectSticker</dt>
             <dd class="col-sm-10">@sticker.EffectSticker</dd>
         </dl>
+        <dl class="row">
+            <dt class="col-sm-2">ImageSticker</dt>
+            <dd class="col-sm-10">@sticker.ImageSticker</dd>
+        </dl>
         <EditForm method="post" Model="sticker" OnValidSubmit="DeleteSticker" FormName="delete" Enhance>
             <button type="submit" class="btn btn-danger" disabled="@(sticker is null)">Delete</button> |
             <a href="/stickers">Back to List</a>

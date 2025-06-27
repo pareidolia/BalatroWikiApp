@@ -5,11 +5,12 @@ using System.Text;
 
 namespace BalatroWikiApp.Enums
 {
-    public enum TypeConsumable
+    public enum TypeSeal
     {
         None = 0,
-        Tarot,
-        Spectral,
-        Planet,
+        Red,
+        Purple,
+        Blue,
+        Gold,
     }
 }

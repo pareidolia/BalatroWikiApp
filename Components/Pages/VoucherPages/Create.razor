@@ -34,7 +34,12 @@
                 <label for="statevoucher" class="form-label">StateVoucher:</label> 
                 <InputCheckbox id="statevoucher" @bind-Value="Voucher.StateVoucher" class="form-check-input" /> 
                 <ValidationMessage For="() => Voucher.StateVoucher" class="text-danger" /> 
-            </div>        
+            </div>
+            <div class="mb-3">
+                <label for="imagevoucher" class="form-label">ImageVoucher:</label>
+                <InputText id="imagevoucher" @bind-Value="Voucher.ImageVoucher" class="form-control" aria-required="true" />
+                <ValidationMessage For="() => Voucher.ImageVoucher" class="text-danger" />
+            </div>
             <button type="submit" class="btn btn-primary">Create</button>
         </EditForm>
     </div>

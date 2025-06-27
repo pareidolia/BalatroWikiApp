@@ -47,6 +47,11 @@ else
                     <InputNumber id="rewardblind" @bind-Value="Blind.RewardBlind" class="form-control" />
                     <ValidationMessage For="() => Blind.RewardBlind" class="text-danger" />
                 </div>
+                <div class="mb-3">
+                    <label for="imageblind" class="form-label">ImageBlind:</label>
+                    <InputNumber id="imageblind" @bind-Value="Blind.ImageBlind" class="form-control" />
+                    <ValidationMessage For="() => Blind.ImageBlind" class="text-danger" />
+                </div>
                 <button type="submit" class="btn btn-primary">Save</button>
             </EditForm>
         </div>

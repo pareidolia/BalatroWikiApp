@@ -1,6 +1,8 @@
 ﻿@page "/seals/edit"
 @using Microsoft.EntityFrameworkCore
 @using BalatroWikiApp.Models
+@using BalatroWikiApp.Enums;
+@using AntDesign
 @inject IDbContextFactory<BalatroWikiApp.Models.BalatroDBContext> DbFactory
 @inject NavigationManager NavigationManager
 
@@ -34,8 +36,13 @@ else
                 </div>
                 <div class="mb-3">
                     <label for="typeseal" class="form-label">TypeSeal:</label>
-                    <InputText id="typeseal" @bind-Value="Seal.TypeSeal" class="form-control" aria-required="true"/>
+                    <EnumSelect TEnum="TypeSeal" @bind-Value="Seal.TypeSeal" />
                     <ValidationMessage For="() => Seal.TypeSeal" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="imageseal" class="form-label">ImageSeal:</label>
+                    <InputText id="imageseal" @bind-Value="Seal.ImageSeal" class="form-control" aria-required="true" />
+                    <ValidationMessage For="() => Seal.ImageSeal" class="text-danger" />
                 </div>
                 <button type="submit" class="btn btn-primary">Save</button>
             </EditForm>

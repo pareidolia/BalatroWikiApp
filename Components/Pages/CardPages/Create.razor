@@ -43,6 +43,11 @@
                     </InputSelect>
                 </div>
             }
+            <div class="mb-3">
+                <label for="imagecard" class="form-label">ImageCard:</label>
+                <InputText id="imagecard" @bind-Value="Card.ImageCard" class="form-control" aria-required="true" />
+                <ValidationMessage For="() => Card.ImageCard" class="text-danger" />
+            </div>
             <button type="submit" class="btn btn-primary">Create</button>
         </EditForm>
     </div>

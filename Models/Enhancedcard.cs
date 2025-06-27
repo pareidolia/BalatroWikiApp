@@ -18,7 +18,7 @@ public partial class Enhancedcard : Entity
 
     [Required]
     [Column("effectEnhanced")]
-    [StringLength(50)]
+    [StringLength(100)]
     public string EffectEnhanced { get; set; }
 
     [Required]

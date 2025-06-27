@@ -24,7 +24,7 @@ public partial class Blind : Entity
 
     [Required]
     [Column("effectBlind")]
-    [StringLength(50)]
+    [StringLength(100)]
     public string EffectBlind { get; set; }
 
     [Column("rewardBlind")]

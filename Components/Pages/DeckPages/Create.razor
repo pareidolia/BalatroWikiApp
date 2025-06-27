@@ -24,7 +24,12 @@
                 <label for="descriptiondeck" class="form-label">DescriptionDeck:</label> 
                 <InputText id="descriptiondeck" @bind-Value="Deck.DescriptionDeck" class="form-control" aria-required="true"/> 
                 <ValidationMessage For="() => Deck.DescriptionDeck" class="text-danger" /> 
-            </div>        
+            </div>
+            <div class="mb-3">
+                <label for="imagedeck" class="form-label">ImageDeck:</label>
+                <InputText id="imagedeck" @bind-Value="Deck.ImageDeck" class="form-control" aria-required="true" />
+                <ValidationMessage For="() => Deck.ImageDeck" class="text-danger" />
+            </div>
             <button type="submit" class="btn btn-primary">Create</button>
         </EditForm>
     </div>

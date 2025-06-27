@@ -24,7 +24,12 @@
                 <label for="effecttag" class="form-label">EffectTag:</label> 
                 <InputText id="effecttag" @bind-Value="Tag.EffectTag" class="form-control" aria-required="true"/> 
                 <ValidationMessage For="() => Tag.EffectTag" class="text-danger" /> 
-            </div>        
+            </div>
+            <div class="mb-3">
+                <label for="imagetag" class="form-label">ImageTag:</label>
+                <InputText id="imagetag" @bind-Value="Tag.ImageTag" class="form-control" aria-required="true" />
+                <ValidationMessage For="() => Tag.ImageTag" class="text-danger" />
+            </div>
             <button type="submit" class="btn btn-primary">Create</button>
         </EditForm>
     </div>
