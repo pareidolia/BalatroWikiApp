@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BalatroWikiApp.Migrations
 {
     [DbContext(typeof(BalatroDBContext))]
-    [Migration("20250627090548_Add-Migration InitialCreate")]
-    partial class AddMigrationInitialCreate
+    [Migration("20250627125446_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
