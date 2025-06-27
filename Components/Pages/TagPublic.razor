@@ -1,0 +1,48 @@
+﻿@page "/tag"
+@using AntDesign.TableModels;
+@using System.Text.Json;
+@using BalatroWikiApp.Models;
+@using AntDesign;
+@using Microsoft.EntityFrameworkCore
+@inject IDbContextFactory<BalatroWikiApp.Models.BalatroDBContext> DbFactory;
+@inject NavigationManager NavigationManager;
+
+<Table DataSource="tags" OnRowClick="OnRowClick" TItem="Models.Tag">
+    <TitleTemplate>
+
+        <Title Level="3">Tags</Title>
+    </TitleTemplate>
+    <ColumnDefinitions>
+        <PropertyColumn Property="c => c.NameTag"
+                        Title="Name"
+                        Sortable Filterable />
+        <PropertyColumn Property="c => c.EffectTag"
+                        Title="Effect"
+                        Sortable Filterable />
+        <PropertyColumn Property="c => c.ImageTag"
+                        Title="Image" />
+
+    </ColumnDefinitions>
+</Table>
+
+
+@code {
+    ITable _table;
+    List<Models.Tag> tags = new List<Models.Tag>();
+
+    private BalatroDBContext context = default!;
+
+    protected override async Task OnInitializedAsync()
+    {
+        context = DbFactory.CreateDbContext();
+        tags = await context.Tags.ToListAsync();
+    }
+
+    public async ValueTask DisposeAsync() => await context.DisposeAsync();
+
+
+    void OnRowClick(RowData<Models.Tag> row)
+    {
+        Console.WriteLine($"row {row.Data.NameTag} was clicked");
+    }
+}

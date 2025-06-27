@@ -1,0 +1,51 @@
+﻿@page "/enhanced"
+@using AntDesign.TableModels;
+@using System.Text.Json;
+@using BalatroWikiApp.Models;
+@using AntDesign;
+@using Microsoft.EntityFrameworkCore
+@inject IDbContextFactory<BalatroWikiApp.Models.BalatroDBContext> DbFactory;
+@inject NavigationManager NavigationManager;
+
+<Table DataSource="enhanced" OnRowClick="OnRowClick" TItem="Enhancedcard">
+    <TitleTemplate>
+
+        <Title Level="3">Enhanced</Title>
+    </TitleTemplate>
+    <ColumnDefinitions>
+        <PropertyColumn Property="c => c.NameEnhanced"
+                        Title="Name"
+                        Sortable Filterable />
+        <PropertyColumn Property="c => c.EffectEnhanced"
+                        Title="Effect"
+                        Sortable Filterable />
+        <PropertyColumn Property="c => c.TypeEnhanced"
+                        Title="Type"
+                        Sortable Filterable />
+        <PropertyColumn Property="c => c.ImageEnhancedcard"
+                        Title="Image" />
+
+    </ColumnDefinitions>
+</Table>
+
+
+@code {
+    ITable _table;
+    List<Enhancedcard> enhanced = new List<Enhancedcard>();
+
+    private BalatroDBContext context = default!;
+
+    protected override async Task OnInitializedAsync()
+    {
+        context = DbFactory.CreateDbContext();
+        enhanced = await context.Enhancedcards.ToListAsync();
+    }
+
+    public async ValueTask DisposeAsync() => await context.DisposeAsync();
+
+
+    void OnRowClick(RowData<Enhancedcard> row)
+    {
+        Console.WriteLine($"row {row.Data.NameEnhanced} was clicked");
+    }
+}

@@ -1,0 +1,140 @@
+﻿@page "/wikibalatro"
+@using AntDesign
+
+<h2>Wiki Balatro</h2>
+<br />
+
+@if (!string.IsNullOrEmpty(Sections[0]?.SectionName))
+{
+    <br />
+    <div style="grid-column: span 4; width: 100%;">
+        <h4>@Sections[0].SectionName</h4>
+    </div>
+    <br />
+}
+<AntList Grid="grid" DataSource="@Sections[0].Items">
+    <ListItem>
+            <Card Bordered Title="@context.Title" Class="card-avec-image">
+                <Body>
+                <a href="@context.Link" style="color: white">Lien de la page : </a>
+                </Body>
+            </Card>
+    </ListItem>
+</AntList>
+
+@if (!string.IsNullOrEmpty(Sections[1]?.SectionName))
+{
+    <br />
+    <div style="grid-column: span 4; width: 100%;">
+        <h4>@Sections[1].SectionName</h4>
+    </div>
+    <br />
+}
+<AntList Grid="grid" DataSource="@Sections[1].Items">
+    <HeadContent>
+
+    </HeadContent>
+
+    <ListItem>
+            <Card Bordered Title="@context.Title" Class="card-avec-image">
+                <Body>
+                <a href="@context.Link" style="color: white">Lien de la page : </a>
+                </Body>
+            </Card>
+    </ListItem>
+</AntList>
+@if (!string.IsNullOrEmpty(Sections[2]?.SectionName))
+{
+    <br />
+    <div style="grid-column: span 4; width: 100%;">
+        <h4>@Sections[2].SectionName</h4>
+    </div>
+    <br />
+}
+<AntList Grid="grid" DataSource="@Sections[2].Items">
+    <HeadContent>
+    </HeadContent>
+    <ListItem>
+            <Card Bordered Title="@context.Title" Class="card-avec-image">
+                <Body>
+                <a href="@context.Link" style="color: white">Lien de la page : </a>
+                </Body>
+            </Card>
+    </ListItem>
+</AntList>
+<style>
+.card-avec-image {
+        background-image: url('/Images/fond_balatro.jpg');
+        background-size: cover;
+        height: 180px;
+        color: white;
+        border: 2px solid black;
+    }
+
+.card-avec-image .ant-card-head-title {
+    font-weight: bold;
+    text-align: center;
+    color: white;
+}
+</style>
+
+@code{
+
+    public ListGridType grid = new ListGridType { Gutter = 16, Column = 4 };
+
+    public class Section
+    {
+        public string SectionName { get; set; }
+        public List<BasicItem> Items { get; set; }
+    }
+
+    public List<Section> Sections = new List<Section>
+    {
+
+        new Section
+        {
+            SectionName = "Game concepts",
+            Items =  new List<BasicItem>
+        {
+            new BasicItem { Title = "Hand", Link = "/hand" },
+            new BasicItem { Title = "Deck", Link = "/deck" },
+            new BasicItem { Title = "Card", Link = "/card" },
+            new BasicItem { Title = "Joker", Link = "/joker" },
+            new BasicItem { Title = "Blind", Link = "/blind" },
+            new BasicItem { Title = "Tag", Link = "/tag" },
+        }
+        },
+
+        new Section
+        {
+            SectionName = "Consumable",
+            Items = new List<BasicItem>
+            {
+                new BasicItem { Title = "Booster Pack", Link = ""},
+                new BasicItem { Title = "Consumable Cards", Link = "/consumable"},
+                new BasicItem { Title = "Seal", Link = "/seal"},
+                new BasicItem { Title = "Sticker", Link = "/sticker"},
+                new BasicItem { Title = "Voucher", Link = "/voucher"},
+            }
+        },
+
+        new Section
+        {
+            SectionName = "Special effects",
+            Items = new List<BasicItem>
+            {
+                new BasicItem { Title = "Edition", Link = "/edition"},
+                new BasicItem { Title = "Enhanced", Link = "/enhanced"},
+                new BasicItem { Title = "Other Effect", Link = "/othereffect"}
+            }
+        },
+    };
+
+    public class BasicItem
+    {
+        public string Title { get; set; }
+        public string Link { get; set; }
+        
+    }
+
+}
