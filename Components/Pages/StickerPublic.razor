@@ -1,0 +1,51 @@
+﻿@page "/sticker"
+@using AntDesign.TableModels;
+@using System.Text.Json;
+@using BalatroWikiApp.Models;
+@using AntDesign;
+@using Microsoft.EntityFrameworkCore
+@inject IDbContextFactory<BalatroWikiApp.Models.BalatroDBContext> DbFactory;
+@inject NavigationManager NavigationManager;
+
+<Table DataSource="stickers" OnRowClick="OnRowClick" TItem="Sticker">
+    <TitleTemplate>
+
+        <Title Level="3">Stickers</Title>
+    </TitleTemplate>
+    <ColumnDefinitions>
+        <PropertyColumn Property="c => c.NameSticker"
+                        Title="Name"
+                        Sortable Filterable />
+        <PropertyColumn Property="c => c.DescriptionSticker"
+                        Title="Description"
+                        Sortable Filterable />
+        <PropertyColumn Property="c => c.EffectSticker"
+                        Title="Effect"
+                        Sortable Filterable />
+        <PropertyColumn Property="c => c.ImageSticker"
+                        Title="Image" />
+
+    </ColumnDefinitions>
+</Table>
+
+
+@code {
+    ITable _table;
+    List<Sticker> stickers = new List<Sticker>();
+
+    private BalatroDBContext context = default!;
+
+    protected override async Task OnInitializedAsync()
+    {
+        context = DbFactory.CreateDbContext();
+        stickers = await context.Stickers.ToListAsync();
+    }
+
+    public async ValueTask DisposeAsync() => await context.DisposeAsync();
+
+
+    void OnRowClick(RowData<Sticker> row)
+    {
+        Console.WriteLine($"row {row.Data.NameSticker} was clicked");
+    }
+}

@@ -1,0 +1,60 @@
+﻿@page "/boosterpack"
+@using AntDesign.TableModels;
+@using System.Text.Json;
+@using BalatroWikiApp.Models;
+@using AntDesign;
+@using Microsoft.EntityFrameworkCore
+@inject IDbContextFactory<BalatroWikiApp.Models.BalatroDBContext> DbFactory;
+@inject NavigationManager NavigationManager;
+
+<Table DataSource="boosterpacks" OnRowClick="OnRowClick" TItem="Boosterpack">
+    <TitleTemplate>
+
+        <Title Level="3">Booster packs</Title>
+    </TitleTemplate>
+    <ColumnDefinitions>
+        <PropertyColumn Property="c => c.NamePack"
+                        Title="Name"
+                        Sortable Filterable />
+        <PropertyColumn Property="c => c.Type"
+                        Title="Type"
+                        Sortable Filterable />
+        <PropertyColumn Property="c => c.NumberPack"
+                        Title="Number Pack"
+                        Sortable Filterable />
+        <PropertyColumn Property="c => c.NumberChoices"
+                        Title="Number Choices"
+                        Sortable Filterable />
+        <PropertyColumn Property="c => c.NumberProposition"
+                        Title="Number Propositions"
+                        Sortable Filterable />
+        <PropertyColumn Property="c => c.DescriptionPack"
+                        Title="Description"
+                        Sortable Filterable />
+        <PropertyColumn Property="c => c.ImageBoosterpack"
+                        Title="Image" />
+
+    </ColumnDefinitions>
+</Table>
+
+
+@code {
+    ITable _table;
+    List<Boosterpack> boosterpacks = new List<Boosterpack>();
+
+    private BalatroDBContext context = default!;
+
+    protected override async Task OnInitializedAsync()
+    {
+        context = DbFactory.CreateDbContext();
+        boosterpacks = await context.Boosterpacks.ToListAsync();
+    }
+
+    public async ValueTask DisposeAsync() => await context.DisposeAsync();
+
+
+    void OnRowClick(RowData<Boosterpack> row)
+    {
+        Console.WriteLine($"row {row.Data.NamePack} was clicked");
+    }
+}

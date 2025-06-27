@@ -1,0 +1,51 @@
+﻿@page "/hand"
+@using AntDesign.TableModels;
+@using System.Text.Json;
+@using BalatroWikiApp.Models;
+@using AntDesign;
+@using Microsoft.EntityFrameworkCore
+@inject IDbContextFactory<BalatroWikiApp.Models.BalatroDBContext> DbFactory;
+@inject NavigationManager NavigationManager;
+
+<Table DataSource="hands" OnRowClick="OnRowClick" TItem="Hand">
+    <TitleTemplate>
+
+        <Title Level="3">Hands</Title>
+    </TitleTemplate>
+    <ColumnDefinitions>
+        <PropertyColumn Property="c => c.NameHand"
+                        Title="Name"
+                        Sortable Filterable />
+        <PropertyColumn Property="c => c.BaseChips"
+                        Title="Base Chips"
+                        Sortable Filterable />
+        <PropertyColumn Property="c => c.BaseMult"
+                        Title="Base Mult"
+                        Sortable Filterable />
+        <PropertyColumn Property="c => c.ImageHand"
+                        Title="Image" />
+
+    </ColumnDefinitions>
+</Table>
+
+
+@code {
+    ITable _table;
+    List<Hand> hands = new List<Hand>();
+
+    private BalatroDBContext context = default!;
+
+    protected override async Task OnInitializedAsync()
+    {
+        context = DbFactory.CreateDbContext();
+        hands = await context.Hands.ToListAsync();
+    }
+
+    public async ValueTask DisposeAsync() => await context.DisposeAsync();
+
+
+    void OnRowClick(RowData<Hand> row)
+    {
+        Console.WriteLine($"row {row.Data.NameHand} was clicked");
+    }
+}

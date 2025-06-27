@@ -1,0 +1,48 @@
+﻿@page "/deck"
+@using AntDesign.TableModels;
+@using System.Text.Json;
+@using BalatroWikiApp.Models;
+@using AntDesign;
+@using Microsoft.EntityFrameworkCore
+@inject IDbContextFactory<BalatroWikiApp.Models.BalatroDBContext> DbFactory;
+@inject NavigationManager NavigationManager;
+
+<Table DataSource="decks" OnRowClick="OnRowClick" TItem="Deck">
+    <TitleTemplate>
+
+        <Title Level="3">Decks</Title>
+    </TitleTemplate>
+    <ColumnDefinitions>
+        <PropertyColumn Property="c => c.NameDeck"
+                        Title="Name"
+                        Sortable Filterable />
+        <PropertyColumn Property="c => c.DescriptionDeck"
+                        Title="Description"
+                        Sortable Filterable />
+        <PropertyColumn Property="c => c.ImageDeck"
+                        Title="Image" />
+
+    </ColumnDefinitions>
+</Table>
+
+
+@code {
+    ITable _table;
+    List<Deck> decks = new List<Deck>();
+
+    private BalatroDBContext context = default!;
+
+    protected override async Task OnInitializedAsync()
+    {
+        context = DbFactory.CreateDbContext();
+        decks = await context.Decks.ToListAsync(); 
+    }
+
+    public async ValueTask DisposeAsync() => await context.DisposeAsync();
+
+
+    void OnRowClick(RowData<Deck> row)
+    {
+        Console.WriteLine($"row {row.Data.NameDeck} was clicked");
+    }
+}

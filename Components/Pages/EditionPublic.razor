@@ -1,0 +1,48 @@
+﻿@page "/edition"
+@using AntDesign.TableModels;
+@using System.Text.Json;
+@using BalatroWikiApp.Models;
+@using AntDesign;
+@using Microsoft.EntityFrameworkCore
+@inject IDbContextFactory<BalatroWikiApp.Models.BalatroDBContext> DbFactory;
+@inject NavigationManager NavigationManager;
+
+<Table DataSource="editions" OnRowClick="OnRowClick" TItem="Edition">
+    <TitleTemplate>
+
+        <Title Level="3">Editions</Title>
+    </TitleTemplate>
+    <ColumnDefinitions>
+        <PropertyColumn Property="c => c.NameEdition"
+                        Title="Name"
+                        Sortable Filterable />
+        <PropertyColumn Property="c => c.EffectEdition"
+                        Title="Effect"
+                        Sortable Filterable />
+        <PropertyColumn Property="c => c.ImageEdition"
+                        Title="Image" />
+
+    </ColumnDefinitions>
+</Table>
+
+
+@code {
+    ITable _table;
+    List<Edition> editions = new List<Edition>();
+
+    private BalatroDBContext context = default!;
+
+    protected override async Task OnInitializedAsync()
+    {
+        context = DbFactory.CreateDbContext();
+        editions = await context.Editions.ToListAsync();
+    }
+
+    public async ValueTask DisposeAsync() => await context.DisposeAsync();
+
+
+    void OnRowClick(RowData<Edition> row)
+    {
+        Console.WriteLine($"row {row.Data.NameEdition} was clicked");
+    }
+}

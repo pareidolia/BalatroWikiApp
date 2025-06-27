@@ -1,0 +1,54 @@
+﻿@page "/voucher"
+@using AntDesign.TableModels;
+@using System.Text.Json;
+@using BalatroWikiApp.Models;
+@using AntDesign;
+@using Microsoft.EntityFrameworkCore
+@inject IDbContextFactory<BalatroWikiApp.Models.BalatroDBContext> DbFactory;
+@inject NavigationManager NavigationManager;
+
+<Table DataSource="vouchers" OnRowClick="OnRowClick" TItem="Voucher">
+    <TitleTemplate>
+
+        <Title Level="3">Vouchers</Title>
+    </TitleTemplate>
+    <ColumnDefinitions>
+        <PropertyColumn Property="c => c.NameVoucher"
+                        Title="Name"
+                        Sortable Filterable />
+        <PropertyColumn Property="c => c.DescriptionVoucher"
+                        Title="Description"
+                        Sortable Filterable />
+        <PropertyColumn Property="c => c.PriceVoucher"
+                        Title="Price"
+                        Sortable Filterable />
+        <PropertyColumn Property="c => c.StateVoucher"
+                        Title="State"
+                        Sortable Filterable />
+        <PropertyColumn Property="c => c.ImageVoucher"
+                        Title="Image" />
+
+    </ColumnDefinitions>
+</Table>
+
+
+@code {
+    ITable _table;
+    List<Voucher> vouchers = new List<Voucher>();
+
+    private BalatroDBContext context = default!;
+
+    protected override async Task OnInitializedAsync()
+    {
+        context = DbFactory.CreateDbContext();
+        vouchers = await context.Vouchers.ToListAsync();
+    }
+
+    public async ValueTask DisposeAsync() => await context.DisposeAsync();
+
+
+    void OnRowClick(RowData<Voucher> row)
+    {
+        Console.WriteLine($"row {row.Data.NameVoucher} was clicked");
+    }
+}
