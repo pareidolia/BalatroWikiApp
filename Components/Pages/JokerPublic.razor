@@ -7,10 +7,11 @@
 @inject IDbContextFactory<BalatroWikiApp.Models.BalatroDBContext> DbFactory;
 @inject NavigationManager NavigationManager;
 
-<Table DataSource="jokers" OnRowClick="OnRowClick" TItem="Joker">
-    <TitleTemplate>
-
-        <Title Level="3">Jokers</Title>
+<Table DataSource="jokers" OnRowClick="OnRowClick" TItem="Joker" Class="bg-transparent" PageSize=6>
+    <TitleTemplate >
+        <div class="bg-transparent">
+            <Title Class="title" Level="3">Jokers</Title>
+        </div>
     </TitleTemplate>
     <ColumnDefinitions>
         <PropertyColumn Property="c => c.NameJoker"
@@ -42,6 +43,28 @@
 
     </ColumnDefinitions>
 </Table>
+
+<style>
+    h3.title {
+        color: white;
+    }
+
+    .ant-table-container {
+        
+        background-color: white;
+    }
+
+    .ant-table-wrapper {
+        margin-top: 40px;
+    }
+    body {
+        background-image: url('/Images/fond_balatro.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-attachment: fixed;
+    }
+</style>
 
 
 @code {

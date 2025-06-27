@@ -7,10 +7,11 @@
 @inject IDbContextFactory<BalatroWikiApp.Models.BalatroDBContext> DbFactory;
 @inject NavigationManager NavigationManager;
 
-<Table DataSource="seals" OnRowClick="OnRowClick" TItem="Seal">
+<Table DataSource="seals" OnRowClick="OnRowClick" TItem="Seal" Class="bg-transparent" PageSize=6>
     <TitleTemplate>
-
-        <Title Level="3">Seals</Title>
+        <div class="bg-transparent">
+            <Title Class="title" Level="3">Seals</Title>
+        </div>
     </TitleTemplate>
     <ColumnDefinitions>
         <PropertyColumn Property="c => c.NameSeal"
@@ -27,6 +28,28 @@
 
     </ColumnDefinitions>
 </Table>
+
+<style>
+    h3.title {
+        color: white;
+    }
+
+    .ant-table-container {
+        background-color: white;
+    }
+
+    .ant-table-wrapper {
+        margin-top: 40px;
+    }
+
+    body {
+        background-image: url('/Images/fond_balatro.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-attachment: fixed;
+    }
+</style>
 
 
 @code {
