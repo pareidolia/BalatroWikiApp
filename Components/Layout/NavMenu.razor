@@ -1,5 +1,4 @@
 ﻿@implements IDisposable
-
 @inject NavigationManager NavigationManager
 
 <div class="top-row ps-3 navbar navbar-dark">
@@ -23,6 +22,7 @@
             </NavLink>
         </div>
         
+
         <AuthorizeView>
             <Authorized>
                 <div class="nav-item px-3">
@@ -64,7 +64,7 @@
             </NotAuthorized>
         </AuthorizeView>
 
-        <AuthorizeView>
+        <AuthorizeView Roles="Admin">
             <Authorized>
                 <div class="nav-item px-3">
                     <NavLink class="nav-link" href="blinds">
@@ -74,7 +74,7 @@
             </Authorized>
         </AuthorizeView>
 
-        <AuthorizeView>
+        <AuthorizeView Roles="Admin">
             <Authorized>
                 <div class="nav-item px-3">
                     <NavLink class="nav-link" href="boosterpacks">
@@ -84,7 +84,7 @@
             </Authorized>
         </AuthorizeView>
 
-        <AuthorizeView>
+        <AuthorizeView Roles="Admin">
             <Authorized>
                 <div class="nav-item px-3">
                     <NavLink class="nav-link" href="cards">
@@ -94,7 +94,7 @@
             </Authorized>
         </AuthorizeView>
 
-        <AuthorizeView>
+        <AuthorizeView Roles="Admin">
             <Authorized>
                 <div class="nav-item px-3">
                     <NavLink class="nav-link" href="consumables">
@@ -104,7 +104,7 @@
             </Authorized>
         </AuthorizeView>
 
-        <AuthorizeView>
+        <AuthorizeView Roles="Admin">
             <Authorized>
                 <div class="nav-item px-3">
                     <NavLink class="nav-link" href="decks">
@@ -114,7 +114,7 @@
             </Authorized>
         </AuthorizeView>
 
-        <AuthorizeView>
+        <AuthorizeView Roles="Admin">
             <Authorized>
                 <div class="nav-item px-3">
                     <NavLink class="nav-link" href="editions">
@@ -124,7 +124,7 @@
             </Authorized>
         </AuthorizeView>
 
-        <AuthorizeView>
+        <AuthorizeView Roles="Admin">
             <Authorized>
                 <div class="nav-item px-3">
                     <NavLink class="nav-link" href="enhancedcards">
@@ -134,7 +134,7 @@
             </Authorized>
         </AuthorizeView>
 
-        <AuthorizeView>
+        <AuthorizeView Roles="Admin">
             <Authorized>
                 <div class="nav-item px-3">
                     <NavLink class="nav-link" href="hands">
@@ -144,7 +144,7 @@
             </Authorized>
         </AuthorizeView>
 
-        <AuthorizeView>
+        <AuthorizeView Roles="Admin">
             <Authorized>
                 <div class="nav-item px-3">
                     <NavLink class="nav-link" href="jokers">
@@ -154,7 +154,7 @@
             </Authorized>
         </AuthorizeView>
 
-        <AuthorizeView>
+        <AuthorizeView Roles="Admin">
             <Authorized>
                 <div class="nav-item px-3">
                     <NavLink class="nav-link" href="seals">
@@ -164,7 +164,7 @@
             </Authorized>
         </AuthorizeView>
 
-        <AuthorizeView>
+        <AuthorizeView Roles="Admin">
             <Authorized>
                 <div class="nav-item px-3">
                     <NavLink class="nav-link" href="stickers">
@@ -174,7 +174,7 @@
             </Authorized>
         </AuthorizeView>
 
-        <AuthorizeView>
+        <AuthorizeView Roles="Admin">
             <Authorized>
                 <div class="nav-item px-3">
                     <NavLink class="nav-link" href="tags">
@@ -184,7 +184,7 @@
             </Authorized>
         </AuthorizeView>
 
-        <AuthorizeView>
+        <AuthorizeView Roles="Admin">
             <Authorized>
                 <div class="nav-item px-3">
                     <NavLink class="nav-link" href="vouchers">

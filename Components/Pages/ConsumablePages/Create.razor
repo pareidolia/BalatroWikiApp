@@ -52,7 +52,7 @@
                     </InputSelect>
                 </div>
             }
-            @if (Consumable.TypeConsumable == TypeConsumable.Spectral)
+            @if (Consumable.TypeConsumable == TypeConsumable.Spectral && Consumable.TypeOtherEffect == TypeOtherEffect.None)
             {
                 <div class="mb-3">
                     <label for="nameseal" class="form-label">NameSeal:</label>
@@ -66,7 +66,7 @@
                     </InputSelect>
                 </div>
             }
-            @if (Consumable.TypeConsumable == TypeConsumable.Tarot)
+            @if (Consumable.TypeConsumable == TypeConsumable.Tarot && Consumable.TypeOtherEffect == TypeOtherEffect.None)
             {
                 <div class="mb-3">
                     <label for="typeenhanced" class="form-label">TypeEnhanced:</label>
