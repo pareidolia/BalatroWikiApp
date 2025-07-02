@@ -1,7 +1,35 @@
-﻿@page "/"
+﻿@using AntDesign;
+@using Microsoft.EntityFrameworkCore
+@page "/"
 
 <PageTitle>Home</PageTitle>
 
-<h1>Hello, world!</h1>
+<div class="title">
+    <h1>Hello, user!</h1>
 
-Welcome to your new app, you need to <a href="Account/Login">login</a> if you want to access to administrator content.
+    Welcome to your new app, you need to <a href="Account/Login">login</a> if you want to access to administrator content.
+
+</div>
+
+<style>
+    .title {
+        color: white;
+        font-weight: bold;
+    }
+
+    .ant-table-container {
+        background-color: white;
+    }
+
+    .ant-table-wrapper {
+        margin-top: 40px;
+    }
+
+    body {
+        background-image: url('/Images/Background/fond_balatro.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-attachment: fixed;
+    }
+</style>

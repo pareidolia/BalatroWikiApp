@@ -3,6 +3,8 @@
 @using BalatroWikiApp.Models
 @using BalatroWikiApp.Enums;
 @using AntDesign
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize(Roles = "Admin")]
 @inject IDbContextFactory<BalatroWikiApp.Models.BalatroDBContext> DbFactory
 @inject NavigationManager NavigationManager
 
