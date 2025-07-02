@@ -1,6 +1,8 @@
 ﻿@page "/jokers/create"
 @using Microsoft.EntityFrameworkCore
 @using BalatroWikiApp.Models
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize(Roles = "Admin")]
 @inject IDbContextFactory<BalatroWikiApp.Models.BalatroDBContext> DbFactory
 @inject NavigationManager NavigationManager
 
@@ -57,7 +59,10 @@
             </div>     
             <div class="mb-3">
                 <label for="imagejoker" class="form-label">ImageJoker:</label>
-                <InputText id="imagejoker" @bind-Value="Joker.ImageJoker" class="form-control" aria-required="true" />
+                <InputText id="imagejoker" @bind-Value="Joker.ImageJoker" placeholder="images/Jokers" class="form-control" aria-required="true" />
+                <div>
+                    <img src="@Joker.ImageJoker" alt="Preview" width="50" />
+                </div>
                 <ValidationMessage For="() => Joker.ImageJoker" class="text-danger" />
             </div>
             <button type="submit" class="btn btn-primary">Create</button>

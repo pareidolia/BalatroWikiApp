@@ -16,7 +16,44 @@
     <ListItem>
             <Card Bordered Title="@context.Title" Class="card-avec-image">
                 <Body>
-                <a href="@context.Link" style="color: white">Lien de la page : </a>
+                @switch (context.Title)
+                {
+                    case "Hand":
+                        <a href="@context.Link" style="color: white">
+                            <Image Width="60px" Src="images/ConceptImages/Hand.png" />
+                        </a>
+                        break;
+
+                    case "Deck":
+                        <a href="@context.Link" style="color: white">
+                            <Image Width="60px" Src="images/ConceptImages/Deck.png" />
+                        </a>
+                        break;
+
+                    case "Card":
+                        <a href="@context.Link" style="color: white">
+                            <Image Width="60px" Src="images/ConceptImages/Card.png" />
+                        </a>
+                        break;
+
+                    case "Joker":
+                        <a href="@context.Link" style="color: white">
+                            <Image Width="60px" Src="images/ConceptImages/Joker.png" />
+                        </a>
+                        break;
+
+                    case "Blind":
+                        <a href="@context.Link" style="color: white">
+                            <Image Width="60px" Src="images/ConceptImages/Blind.jfif" />
+                        </a>
+                        break;
+
+                    case "Tag":
+                        <a href="@context.Link" style="color: white">
+                            <Image Width="60px" Src="images/ConceptImages/Tag.jfif" />
+                        </a>
+                        break;
+                }
                 </Body>
             </Card>
     </ListItem>
@@ -38,8 +75,33 @@
     <ListItem>
             <Card Bordered Title="@context.Title" Class="card-avec-image">
                 <Body>
-                <a href="@context.Link" style="color: white">Lien de la page : </a>
-                </Body>
+                @switch (context.Title)
+                {
+                    case "Booster Pack":
+                        <a href="@context.Link" style="color: white">
+                            <Image Width="55px" Src="images/ConceptImages/Boosterpack.jfif" />
+                        </a>
+                        break;
+
+                    case "Consumable Cards":
+                        <a href="@context.Link" style="color: white">
+                            <Image Width="60px" Src="images/ConceptImages/Tarot.png" />
+                        </a>
+                        break;
+
+                    case "Seal":
+                        <a href="@context.Link" style="color: white">
+                            <Image Width="60px" Src="images/ConceptImages/Seal.png" />
+                        </a>
+                        break;
+
+                    case "Voucher":
+                        <a href="@context.Link" style="color: white">
+                            <Image Width="55px" Src="images/ConceptImages/Voucher.png" />
+                        </a>
+                        break;
+                }
+            </Body>
             </Card>
     </ListItem>
 </AntList>
@@ -57,14 +119,33 @@
     <ListItem>
             <Card Bordered Title="@context.Title" Class="card-avec-image">
                 <Body>
-                <a href="@context.Link" style="color: white">Lien de la page : </a>
-                </Body>
+                @switch (context.Title)
+                {
+                    case "Edition":
+                        <a href="@context.Link" style="color: white">
+                            <Image Width="60px" Src="images/ConceptImages/Edition.jfif" />
+                        </a>
+                        break;
+
+                    case "Enhanced":
+                        <a href="@context.Link" style="color: white">
+                            <Image Width="60px" Src="images/ConceptImages/Enhanced.jfif" />
+                        </a>
+                        break;
+
+                    case "Sticker":
+                        <a href="@context.Link" style="color: white">
+                            <Image Width="60px" Src="images/ConceptImages/Sticker.png" />
+                        </a>
+                        break;
+                }
+            </Body>
             </Card>
     </ListItem>
 </AntList>
 <style>
 .card-avec-image {
-        background-image: url('/Images/fond_balatro.jpg');
+        background-image: url('/Images/Background/fond_balatro.jpg');
         background-size: cover;
         height: 180px;
         color: white;

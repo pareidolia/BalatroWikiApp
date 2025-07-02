@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BalatroWikiApp.Migrations
 {
     [DbContext(typeof(BalatroDBContext))]
-    [Migration("20250627125446_InitialCreate")]
+    [Migration("20250627162431_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />

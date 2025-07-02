@@ -43,7 +43,8 @@ public partial class Joker : Entity
     [Column("hasFaceJoker")]
     public bool HasFaceJoker { get; set; }
 
+    [NotMapped]
     [Column("imageJoker")]
     [StringLength(100)]
-    public string? ImageJoker { get; set; }
+    public string? ImageJoker { get; set;}
 }

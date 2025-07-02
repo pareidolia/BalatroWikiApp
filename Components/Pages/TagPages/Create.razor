@@ -1,6 +1,8 @@
 ﻿@page "/tags/create"
 @using Microsoft.EntityFrameworkCore
 @using BalatroWikiApp.Models
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize(Roles = "Admin")]
 @inject IDbContextFactory<BalatroWikiApp.Models.BalatroDBContext> DbFactory
 @inject NavigationManager NavigationManager
 
