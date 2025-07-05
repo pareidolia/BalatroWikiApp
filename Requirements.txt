@@ -1,7 +1,0 @@
-Requirements to use the Balatro Wiki :
-
-- Having PostgreSQL installed on the device
-- PgAdmin4 installed 
-- Check the appsettings.json
-- Create a user in pgAdmin which is named "user" with the password "balatro", with "Superuser?" and "Can login?" checked.
-- Create a database named "BalatroDB" (just follow the appsettings.json)
