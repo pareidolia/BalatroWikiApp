@@ -25,6 +25,7 @@
   <ItemGroup>
     <Folder Include="Migrations\" />
     <Folder Include="wwwroot\images\ConceptImages\" />
+    <Folder Include="wwwroot\images\Blinds\" />
   </ItemGroup>
 
 </Project>

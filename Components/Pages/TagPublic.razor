@@ -11,7 +11,7 @@
     <TitleTemplate>
         <div class="bg-transparent">
             <Title Class="title" Level="3">Tags</Title>
-        </div>>
+        </div>
     </TitleTemplate>
     <ColumnDefinitions>
         <PropertyColumn Property="c => c.NameTag"
@@ -20,8 +20,18 @@
         <PropertyColumn Property="c => c.EffectTag"
                         Title="Effect"
                         Sortable Filterable />
-        <PropertyColumn Property="c => c.ImageTag"
-                        Title="Image" />
+        
+        <ActionColumn Title="Image" Width="120">
+            <Space>
+                @{
+                    var tagImg = context as Models.Tag;
+                    if (tagImg != null && !string.IsNullOrEmpty(tagImg.ImageTag))
+                    {
+                        <img src="@($"/images/Tags/{tagImg.ImageTag}")" alt="@tagImg.NameTag" style="max-width:100px; max-height:80px; object-fit:contain;" />
+                    }
+                }
+            </Space>
+        </ActionColumn>
 
     </ColumnDefinitions>
 </Table>
@@ -62,7 +72,6 @@
     }
 
     public async ValueTask DisposeAsync() => await context.DisposeAsync();
-
 
     void OnRowClick(RowData<Models.Tag> row)
     {

@@ -32,8 +32,18 @@
         <PropertyColumn Property="c => c.DescriptionPack"
                         Title="Description"
                         Sortable Filterable />
-        <PropertyColumn Property="c => c.ImageBoosterpack"
-                        Title="Image" />
+        
+        <ActionColumn Title="Image" Width="120">
+            <Space>
+                @{
+                    var packImg = context as Boosterpack;
+                    if (packImg != null && !string.IsNullOrEmpty(packImg.ImageBoosterpack))
+                    {
+                        <img src="@($"/images/Boosterpacks/{packImg.ImageBoosterpack}")" alt="@packImg.NamePack" style="max-width:100px; max-height:80px; object-fit:contain;" />
+                    }
+                }
+            </Space>
+        </ActionColumn>
 
     </ColumnDefinitions>
 </Table>
@@ -74,7 +84,6 @@
     }
 
     public async ValueTask DisposeAsync() => await context.DisposeAsync();
-
 
     void OnRowClick(RowData<Boosterpack> row)
     {

@@ -23,8 +23,18 @@
         <PropertyColumn Property="c => c.EffectSticker"
                         Title="Effect"
                         Sortable Filterable />
-        <PropertyColumn Property="c => c.ImageSticker"
-                        Title="Image" />
+        
+        <ActionColumn Title="Image" Width="120">
+            <Space>
+                @{
+                    var stickerImg = context as Sticker;
+                    if (stickerImg != null && !string.IsNullOrEmpty(stickerImg.ImageSticker))
+                    {
+                        <img src="@($"/images/Stickers/{stickerImg.ImageSticker}")" alt="@stickerImg.NameSticker" style="max-width:100px; max-height:80px; object-fit:contain;" />
+                    }
+                }
+            </Space>
+        </ActionColumn>
 
     </ColumnDefinitions>
 </Table>
@@ -65,7 +75,6 @@
     }
 
     public async ValueTask DisposeAsync() => await context.DisposeAsync();
-
 
     void OnRowClick(RowData<Sticker> row)
     {

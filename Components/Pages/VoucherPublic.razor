@@ -26,8 +26,18 @@
         <PropertyColumn Property="c => c.StateVoucher"
                         Title="State"
                         Sortable Filterable />
-        <PropertyColumn Property="c => c.ImageVoucher"
-                        Title="Image" />
+        
+        <ActionColumn Title="Image" Width="120">
+            <Space>
+                @{
+                    var voucherImg = context as Voucher;
+                    if (voucherImg != null && !string.IsNullOrEmpty(voucherImg.ImageVoucher))
+                    {
+                        <img src="@($"/images/Vouchers/{voucherImg.ImageVoucher}")" alt="@voucherImg.NameVoucher" style="max-width:100px; max-height:80px; object-fit:contain;" />
+                    }
+                }
+            </Space>
+        </ActionColumn>
 
     </ColumnDefinitions>
 </Table>
@@ -68,7 +78,6 @@
     }
 
     public async ValueTask DisposeAsync() => await context.DisposeAsync();
-
 
     void OnRowClick(RowData<Voucher> row)
     {

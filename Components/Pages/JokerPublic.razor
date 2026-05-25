@@ -35,12 +35,25 @@
         <PropertyColumn Property="c => c.SizeJoker"
                         Title="Size"
                         Sortable Filterable />
-        <PropertyColumn Property="@(c => (c.HasFaceJoker ? "Yes" : "No"))"
-                        Title="Face Joker"
-                        Sortable Filterable />
-        <PropertyColumn Property="c => c.ImageJoker"
-                        Title="Image"/>
-
+        <ActionColumn Title="Face Joker" Width="100">
+            <Space>
+                @{
+                    var joker = context as Joker;
+                    @((joker?.HasFaceJoker ?? false) ? "Yes" : "No")
+                }
+            </Space>
+        </ActionColumn>
+        <ActionColumn Title="Image" Width="120">
+            <Space>
+                @{
+                    var jokerImg = context as Joker;
+                    if (jokerImg != null && !string.IsNullOrEmpty(jokerImg.ImageJoker))
+                    {
+                        <img src="@($"/images/Jokers/{jokerImg.ImageJoker}")" alt="@jokerImg.NameJoker" style="max-width:100px;max-height:80px" />
+                    }
+                }
+            </Space>
+        </ActionColumn>
     </ColumnDefinitions>
 </Table>
 

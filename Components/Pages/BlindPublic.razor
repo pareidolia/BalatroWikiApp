@@ -29,8 +29,18 @@
         <PropertyColumn Property="c => c.RewardBlind"
                         Title="Reward"
                         Sortable Filterable />
-        <PropertyColumn Property="c => c.ImageBlind"
-                        Title="Image" />
+        
+        <ActionColumn Title="Image" Width="120">
+            <Space>
+                @{
+                    var blindImg = context as Blind;
+                    if (blindImg != null && !string.IsNullOrEmpty(blindImg.ImageBlind))
+                    {
+                        <img src="@($"/images/Blinds/{blindImg.ImageBlind}")" alt="@blindImg.NameBlind" style="max-width:100px; max-height:80px; object-fit:contain;" />
+                    }
+                }
+            </Space>
+        </ActionColumn>
 
     </ColumnDefinitions>
 </Table>
@@ -57,7 +67,6 @@
     }
 </style>
 
-
 @code {
     ITable _table;
     List<Blind> blinds = new List<Blind>();
@@ -71,7 +80,6 @@
     }
 
     public async ValueTask DisposeAsync() => await context.DisposeAsync();
-
 
     void OnRowClick(RowData<Blind> row)
     {

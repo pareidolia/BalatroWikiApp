@@ -23,8 +23,18 @@
         <PropertyColumn Property="c => c.TypeSeal"
                         Title="Type"
                         Sortable Filterable />
-        <PropertyColumn Property="c => c.ImageSeal"
-                        Title="Image" />
+        
+        <ActionColumn Title="Image" Width="120">
+            <Space>
+                @{
+                    var sealImg = context as Seal;
+                    if (sealImg != null && !string.IsNullOrEmpty(sealImg.ImageSeal))
+                    {
+                        <img src="@($"/images/Seals/{sealImg.ImageSeal}")" alt="@sealImg.NameSeal" style="max-width:100px; max-height:80px; object-fit:contain;" />
+                    }
+                }
+            </Space>
+        </ActionColumn>
 
     </ColumnDefinitions>
 </Table>
@@ -65,7 +75,6 @@
     }
 
     public async ValueTask DisposeAsync() => await context.DisposeAsync();
-
 
     void OnRowClick(RowData<Seal> row)
     {

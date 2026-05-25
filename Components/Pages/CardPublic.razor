@@ -7,8 +7,6 @@
 @inject IDbContextFactory<BalatroWikiApp.Models.BalatroDBContext> DbFactory;
 @inject NavigationManager NavigationManager;
 
-
-
 <Table DataSource="cards" OnRowClick="OnRowClick" TItem="Models.Card" Class="bg-transparent" PageSize=6>
     <TitleTemplate>
         <div class="bg-transparent">
@@ -25,8 +23,18 @@
         <PropertyColumn Property="@(c => (c.IsEnhanced ? "Yes" : "No"))"
                         Title="Enhanced"
                         Sortable Filterable />
-        <PropertyColumn Property="c => c.ImageCard"
-                        Title="Image" />
+        
+        <ActionColumn Title="Image" Width="120">
+            <Space>
+                @{
+                    var cardImg = context as Models.Card;
+                    if (cardImg != null && !string.IsNullOrEmpty(cardImg.ImageCard))
+                    {
+                        <img src="@($"/images/Cards/{cardImg.ImageCard}")" alt="@cardImg.NameCard" style="max-width:100px; max-height:80px; object-fit:contain;" />
+                    }
+                }
+            </Space>
+        </ActionColumn>
 
     </ColumnDefinitions>
 </Table>
@@ -66,7 +74,6 @@
     }
 
     public async ValueTask DisposeAsync() => await context.DisposeAsync();
-
 
     void OnRowClick(RowData<Models.Card> row)
     {

@@ -1,7 +1,20 @@
-Requirements to use the Balatro Wiki :
+Pré-requis pour pouvoir utiliser l'application Wiki de Balatro :
 
-- Having PostgreSQL installed on the device
-- PgAdmin4 installed 
-- Check the appsettings.json
-- Create a user in pgAdmin which is named "user" with the password "balatro", with "Superuser?" and "Can login?" checked.
-- Create a database named "BalatroDB" (just follow the appsettings.json)
+- Avoir Visual Studio 2022 ou 2026 installé sur votre appareil cette charge de travail
+
+- Avoir PostgreSQL 17 installé sur votre appareil, lien du site officiel : edbcreative.com/products/postgresql/download, lors du setup de l'installation de PostgreSQL.
+Il vous sera demandé d'installer PgAdmin4, acceptez l'installation de ce dernier, fournissez un mot de passe pour l'utilisateur "postgres", dans ce cas précis UTILISEZ le mot de passe "Balatr0Examen2026_#",
+(ce mot de passe vous sera demandé plus tard pour la connexion à la base de données), et laissez les autres paramètres par défaut (port 5432, locale "DEFAULT", etc.)
+Ensuite, à la fin de l'installation, vous pouvez décocher "Launch Stack Builder" ou fermer tout simplement la fenêtre et cliquer sur "Finish", vous n'en aurez pas besoin pour le projet Balatro Wiki
+
+- Avoir donc PgAdmin4 v9.15 installé sur votre appareil, installé directement lors de l'installation de PostgreSQL
+
+- Créer une base de données nommée "BalatroDB" (juste suivez les instructions dans le fichier appsettings.json), en utilisant l'utilisateur "postgres"
+
+- Avoir .NET 9.0 installé sur votre appareil, lien du site officiel : dotnet.microsoft.com/en-us/download/dotnet/9.0
+
+- Insérer le script SQL dans la base de données "BalatroDB" pour créer les tables nécessaires au projet, le script SQL se trouve directement à la racine du projet, nommé WikiBalatro.sql
+
+- Ouvrir le projet dans Visual Studio et installer toutes les dépendances nécessaires, les packages NuGet sont déjà référencés dans le projet, il suffit de faire un clic droit sur la solution et de cliquer sur "Restore NuGet Packages" pour les installer automatiquement
+
+- Ensuite l'application sera prête au démarrage.

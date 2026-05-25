@@ -23,8 +23,18 @@
         <PropertyColumn Property="c => c.TypeEnhanced"
                         Title="Type"
                         Sortable Filterable />
-        <PropertyColumn Property="c => c.ImageEnhancedcard"
-                        Title="Image" />
+        
+        <ActionColumn Title="Image" Width="120">
+            <Space>
+                @{
+                    var enhancedImg = context as Enhancedcard;
+                    if (enhancedImg != null && !string.IsNullOrEmpty(enhancedImg.ImageEnhancedcard))
+                    {
+                        <img src="@($"/images/Enhanced/{enhancedImg.ImageEnhancedcard}")" alt="@enhancedImg.NameEnhanced" style="max-width:100px; max-height:80px; object-fit:contain;" />
+                    }
+                }
+            </Space>
+        </ActionColumn>
 
     </ColumnDefinitions>
 </Table>
@@ -65,7 +75,6 @@
     }
 
     public async ValueTask DisposeAsync() => await context.DisposeAsync();
-
 
     void OnRowClick(RowData<Enhancedcard> row)
     {

@@ -20,8 +20,18 @@
         <PropertyColumn Property="c => c.EffectEdition"
                         Title="Effect"
                         Sortable Filterable />
-        <PropertyColumn Property="c => c.ImageEdition"
-                        Title="Image" />
+        
+        <ActionColumn Title="Image" Width="120">
+            <Space>
+                @{
+                    var editionImg = context as Edition;
+                    if (editionImg != null && !string.IsNullOrEmpty(editionImg.ImageEdition))
+                    {
+                        <img src="@($"/images/Editions/{editionImg.ImageEdition}")" alt="@editionImg.NameEdition" style="max-width:100px; max-height:80px; object-fit:contain;" />
+                    }
+                }
+            </Space>
+        </ActionColumn>
 
     </ColumnDefinitions>
 </Table>
@@ -62,7 +72,6 @@
     }
 
     public async ValueTask DisposeAsync() => await context.DisposeAsync();
-
 
     void OnRowClick(RowData<Edition> row)
     {

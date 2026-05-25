@@ -23,8 +23,18 @@
         <PropertyColumn Property="c => c.EffectConsumable"
                         Title="Effect"
                         Sortable Filterable />
-        <PropertyColumn Property="c => c.ImageConsumable"
-                        Title="Image" />
+        
+        <ActionColumn Title="Image" Width="120">
+            <Space>
+                @{
+                    var consumableImg = context as Consumable;
+                    if (consumableImg != null && !string.IsNullOrEmpty(consumableImg.ImageConsumable))
+                    {
+                        <img src="@($"/images/Consumables/{consumableImg.ImageConsumable}")" alt="@consumableImg.NameConsumable" style="max-width:100px; max-height:80px; object-fit:contain;" />
+                    }
+                }
+            </Space>
+        </ActionColumn>
 
     </ColumnDefinitions>
 </Table>
@@ -65,7 +75,6 @@
     }
 
     public async ValueTask DisposeAsync() => await context.DisposeAsync();
-
 
     void OnRowClick(RowData<Consumable> row)
     {

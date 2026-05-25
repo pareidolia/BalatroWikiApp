@@ -23,8 +23,18 @@
         <PropertyColumn Property="c => c.BaseMult"
                         Title="Base Mult"
                         Sortable Filterable />
-        <PropertyColumn Property="c => c.ImageHand"
-                        Title="Image" />
+        
+        <ActionColumn Title="Image" Width="120">
+            <Space>
+                @{
+                    var handImg = context as Hand;
+                    if (handImg != null && !string.IsNullOrEmpty(handImg.ImageHand))
+                    {
+                        <img src="@($"/images/Hands/{handImg.ImageHand}")" alt="@handImg.NameHand" style="max-width:100px; max-height:80px; object-fit:contain;" />
+                    }
+                }
+            </Space>
+        </ActionColumn>
 
     </ColumnDefinitions>
 </Table>
@@ -65,7 +75,6 @@
     }
 
     public async ValueTask DisposeAsync() => await context.DisposeAsync();
-
 
     void OnRowClick(RowData<Hand> row)
     {

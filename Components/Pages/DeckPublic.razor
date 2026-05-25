@@ -20,8 +20,18 @@
         <PropertyColumn Property="c => c.DescriptionDeck"
                         Title="Description"
                         Sortable Filterable />
-        <PropertyColumn Property="c => c.ImageDeck"
-                        Title="Image" />
+        
+        <ActionColumn Title="Image" Width="120">
+            <Space>
+                @{
+                    var deckImg = context as Deck;
+                    if (deckImg != null && !string.IsNullOrEmpty(deckImg.ImageDeck))
+                    {
+                        <img src="@($"/images/Decks/{deckImg.ImageDeck}")" alt="@deckImg.NameDeck" style="max-width:100px; max-height:80px; object-fit:contain;" />
+                    }
+                }
+            </Space>
+        </ActionColumn>
 
     </ColumnDefinitions>
 </Table>
@@ -58,14 +68,13 @@
     protected override async Task OnInitializedAsync()
     {
         context = DbFactory.CreateDbContext();
-        decks = await context.Decks.ToListAsync(); 
+        decks = await context.Decks.ToListAsync();
     }
 
     public async ValueTask DisposeAsync() => await context.DisposeAsync();
-
 
     void OnRowClick(RowData<Deck> row)
     {
         Console.WriteLine($"row {row.Data.NameDeck} was clicked");
     }
-}
+}   
