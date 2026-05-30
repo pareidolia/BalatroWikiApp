@@ -1,2 +1,102 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ClassDiagram /> 
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="BalatroWikiApp.Models.Blind">
+    <Position X="10.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAIAQAAAAQAIAAAACAAAA=</HashCode>
+      <FileName>Models\Blind.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BalatroWikiApp.Models.Boosterpack">
+    <Position X="8.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIBAANAAAAAAAAABAAAAAAAAAAAAAAAQIAAAACAAA=</HashCode>
+      <FileName>Models\Boosterpack.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BalatroWikiApp.Models.Card">
+    <Position X="10.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>wAAAAAAAAAAEAAAAAAAAAAAAAAAAACAAIAAAACAAAAA=</HashCode>
+      <FileName>Models\Card.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BalatroWikiApp.Models.Consumable">
+    <Position X="16.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAACAAAIAAQACAAQAAABAgAAAAIAAAAACAAAA=</HashCode>
+      <FileName>Models\Consumable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BalatroWikiApp.Models.Deck">
+    <Position X="6" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAEBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Deck.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BalatroWikiApp.Models.Edition">
+    <Position X="10.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAAAAAAAAAAAAAAACAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>Models\Edition.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BalatroWikiApp.Models.Enhancedcard">
+    <Position X="12.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAEAAAEAAABAAQIAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Models\Enhancedcard.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BalatroWikiApp.Models.Entity">
+    <Position X="11.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Entity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BalatroWikiApp.Models.Hand">
+    <Position X="6" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAIAAAAAEAAAAAAAAAAAAAAAAAAAAAgQAAAE=</HashCode>
+      <FileName>Models\Hand.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BalatroWikiApp.Models.Joker">
+    <Position X="12.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EBAAAADABEAAAIACAAAAAAAAAAAAAAABAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Joker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BalatroWikiApp.Models.Seal">
+    <Position X="14.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BCAAAAAAAAAQAAAEAAQAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Seal.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BalatroWikiApp.Models.Sticker">
+    <Position X="16.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAAAAABAQAAAAAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Sticker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BalatroWikiApp.Models.Tag">
+    <Position X="8" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAEAAAAAAEAAAAAAAAAAAAAgAAAAA=</HashCode>
+      <FileName>Models\Tag.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BalatroWikiApp.Models.Voucher">
+    <Position X="14.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAAAACCCAAAAAAAAAAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>Models\Voucher.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
